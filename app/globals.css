@@ -178,7 +178,7 @@ body { overflow-x: hidden !important; }
     grid-template-columns: 1fr !important;
   }
   .hero-bg { padding: 48px 16px 56px !important; }
-  nav { display: none !important; }
+ 
   h1 { font-size: 32px !important; }
   .btn-primary, .btn-ghost, .btn-cta-main, .btn-cta-wa {
     width: 100% !important;
