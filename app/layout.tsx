@@ -45,7 +45,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
-       <meta name="google-site-verification" content="P0uLNuEyq8DvkIqkDbpSsTt9J1tv7_aaHt7Fqkne9AI" /> <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+       <meta name="google-site-verification" content="P0uLNuEyq8DvkIqkDbpSsTt9J1tv7_aaHt7Fqkne9AI" />
+<meta name="google-site-verification" content="qjP0D2GXN2yWTVqKzx-vhEJmeT1L-mIYeDoXQ1m4Teg" />
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body>{children}</body>
     </html>
