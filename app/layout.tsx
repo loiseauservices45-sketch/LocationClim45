@@ -3,7 +3,12 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.locationclim45.fr"),
-  title: {
+ icons: {
+  icon: "/favicon.svg",
+  shortcut: "/favicon.svg",
+  apple: "/favicon.svg",
+},
+ title: {
     default: "Location Climatiseur Orléans & Loiret (45) — Livraison 24h | LocationClim45",
     template: "%s | LocationClim45",
   },
