@@ -9,7 +9,7 @@ export default function Footer() {
             LocationClim<em style={{ fontStyle: "normal", color: "#38BDF8" }}>45</em>
           </div>
           <p style={{ fontSize: 13, lineHeight: 1.75, marginBottom: 16 }}>
-            Location de climatiseurs mobiles à Orléans et dans le Loiret. Livraison, installation et récupération incluses. Disponible 7j/7 de 8h à 20h.
+            Location de climatiseurs mobiles à Orléans et dans le Loiret. Installation et mise en service incluses, livraison selon la distance. Disponible 7j/7 de 8h à 20h.
           </p>
           <a href="tel:0783800070" style={{ fontSize: 17, fontWeight: 700, color: "#fff" }}>📞 07 83 80 00 70</a>
         </div>
@@ -31,7 +31,7 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <h4 style={{ color: "rgba(255,255,255,0.8)", fontSize: 12, fontWeight: 700, marginBottom: 14, textTransform: "uppercase", letterSpacing: 1 }}>Zone centrale</h4>
+          <h4 style={{ color: "rgba(255,255,255,0.8)", fontSize: 12, fontWeight: 700, marginBottom: 14, textTransform: "uppercase", letterSpacing: 1 }}>Zone principale</h4>
           <ul style={{ listStyle: "none" }}>
             {["La Ferté-Saint-Aubin", "Orléans (45000)", "La Source", "Ardon", "Saint-Jean-le-Blanc", "Marcilly-en-Villette"].map(v => (
               <li key={v} style={{ marginBottom: 9, fontSize: 13 }}>{v}</li>
@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
       </div>
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 18, display: "flex", justifyContent: "space-between", fontSize: 11, flexWrap: "wrap", gap: 6 }}>
-        <span>© 2025 LocationClim45 — Tous droits réservés</span>
+        <span>© {new Date().getFullYear()} LocationClim45 — Tous droits réservés</span>
         <span>Mentions légales · CGV · Confidentialité</span>
       </div>
     </footer>

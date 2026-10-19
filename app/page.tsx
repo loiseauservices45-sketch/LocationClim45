@@ -3,10 +3,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Banner from "@/components/Banner";
 import FloatCTA from "@/components/FloatCTA";
+import AvisClients from "@/components/AvisClients";
+import { TEXTES } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Location Climatiseur Orléans & Loiret — Livraison 24h",
-  description: "Location de climatiseur mobile à Orléans et dans le Loiret. Livraison, installation et récupération incluses. Disponible sous 24h.",
+  title: "Location Climatiseur Orléans & Loiret — Installation incluse",
+  description: "Location de climatiseur mobile à Orléans et dans le Loiret, pour particuliers et professionnels. Installation et mise en service incluses, livraison sur devis.",
 };
 
 export default function Home() {
@@ -34,14 +36,14 @@ export default function Home() {
                 </em>{" "}en 24h.
               </h1>
               <p style={{ fontSize: 17, color: "rgba(200,220,255,0.6)", marginBottom: 36, lineHeight: 1.75, maxWidth: 500 }}>
-                Location de climatiseur mobile avec livraison, installation et récupération incluses — pour particuliers et professionnels.
+                Location de climatiseur mobile livré, installé et récupéré chez vous — pour particuliers et professionnels. Installation toujours incluse, livraison selon la distance.
               </p>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 40 }}>
                 <a href="tel:0783800070" className="btn-primary">📞 Appeler maintenant</a>
                 <a href="#tarifs" className="btn-ghost">Voir les forfaits →</a>
               </div>
               <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
-                {["🚚 Livraison 24h", "🔧 Installation comprise", "🔒 Caution Stripe sécurisée"].map(t => (
+                {["🚚 Livraison 24h", "🔧 Installation comprise", "📄 Contrat de location écrit"].map(t => (
                   <span key={t} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: "rgba(180,210,255,0.55)" }}>{t}</span>
                 ))}
               </div>
@@ -49,11 +51,11 @@ export default function Home() {
             {/* Hero card */}
             <div style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 24, padding: 28, backdropFilter: "blur(12px)", position: "relative" }}>
               <span style={{ position: "absolute", top: -12, right: 20, background: "linear-gradient(135deg,#059669,#10B981)", color: "#fff", padding: "5px 14px", borderRadius: 50, fontSize: 12, fontWeight: 700, boxShadow: "0 4px 12px rgba(5,150,105,0.4)" }}>● Disponible maintenant</span>
-              <div style={{ borderRadius: 16, height: 200, background: "linear-gradient(160deg,#0d1e3d,#1a3566)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, border: "1px solid rgba(255,255,255,0.08)", overflow: "hidden", position: "relative" }}>
-                <span style={{ fontSize: 80 }}>❄️</span>
+              <div style={{ borderRadius: 16, height: 380, background: "#ECE9E6", marginBottom: 20, border: "1px solid rgba(255,255,255,0.08)", overflow: "hidden", position: "relative" }}>
+                <img src="/images/climatiseur-carrera-tristar.webp" alt="Climatiseur mobile blanc avec sa télécommande, proposé à la location par LocationClim45" width={900} height={1368} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 62%" }} />
               </div>
               <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "1.5px", color: "#7DD3FC", marginBottom: 6 }}>Modèle standard</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: "#F0F6FF", marginBottom: 14 }}>Climatiseur mobile 2000W</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "#F0F6FF", marginBottom: 14 }}>Climatiseur mobile</div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {["Silencieux", "Jusqu'à 25m²", "Sans travaux"].map(t => (
                   <span key={t} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)", color: "rgba(200,220,255,0.7)", padding: "4px 12px", borderRadius: 50, fontSize: 12, fontWeight: 600 }}>{t}</span>
@@ -69,10 +71,10 @@ export default function Home() {
           <h2 style={{ textAlign: "center", fontSize: "clamp(28px,4vw,40px)", fontWeight: 800, color: "#1E293B", letterSpacing: "-1.2px", marginBottom: 52 }}>Simple. Rapide. Fiable.</h2>
           <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }}>
             {[
-              { icon: "🚚", title: "Livraison sous 24h", desc: "Nous livrons sur Orléans et tout le Loiret. Vous choisissez le créneau, on s'occupe du reste." },
-              { icon: "🔧", title: "Installation incluse", desc: "Notre équipe installe l'appareil chez vous en quelques minutes. Pas besoin de bricoler." },
+              { icon: "🚚", title: "Livraison sous 24h", desc: "Nous livrons sur Orléans et tout le Loiret, au tarif indiqué dans votre devis. Vous choisissez le créneau, on s'occupe du reste." },
+              { icon: "🔧", title: "Installation incluse", desc: "Nous installons et mettons en service l'appareil chez vous, sans travaux. Pas besoin de bricoler." },
               { icon: "❄️", title: "Appareils récents", desc: "Nos climatiseurs sont régulièrement entretenus, testés et nettoyés entre chaque location." },
-              { icon: "↩️", title: "Récupération comprise", desc: "En fin de location, on vient récupérer l'appareil. Aucune contrainte pour vous." },
+              { icon: "↩️", title: "Récupération à domicile", desc: "En fin de location, on vient récupérer l'appareil chez vous. Aucune contrainte." },
             ].map(({ icon, title, desc }) => (
               <div key={title} className="dark-card" style={{ padding: "32px 24px" }}>
                 <div style={{ width: 52, height: 52, background: "rgba(56,189,248,0.12)", border: "1px solid rgba(56,189,248,0.2)", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, marginBottom: 18 }}>{icon}</div>
@@ -83,15 +85,18 @@ export default function Home() {
           </div>
         </section>
 
+        {/* AVIS (2 premiers) */}
+        <AvisClients debut={0} fin={2} titre="Ce que nos clients en disent" fond="#fff" />
+
         {/* PRICING */}
         <section id="tarifs" style={{ background: "linear-gradient(160deg,#07111F,#0F1F4A 60%,#1E3A8A 100%)", padding: "80px 24px" }}>
-          <p className="section-label section-label-light">Forfaits tout compris</p>
+          <p className="section-label section-label-light">Nos forfaits</p>
           <h2 style={{ textAlign: "center", fontSize: "clamp(28px,4vw,40px)", fontWeight: 800, color: "#F0F6FF", letterSpacing: "-1.2px", marginBottom: 52 }}>Des tarifs clairs, sans surprise</h2>
           <div style={{ maxWidth: 980, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {[
-              { name: "Week-end", price: "74€", period: "3 jours minimum", feats: ["Livraison incluse","Installation incluse","Récupération incluse","Climatiseur 2000W"], featured: false },
-              { name: "Semaine Fraîcheur", price: "134€", period: "7 jours", feats: ["Livraison incluse","Installation incluse","Récupération incluse","Climatiseur 2000W","Support 7j/7"], featured: true },
-              { name: "Mois Sérénité", price: "384€", period: "30 jours", feats: ["Livraison incluse","Installation incluse","Récupération incluse","Climatiseur 2000W","Support 7j/7"], featured: false },
+              { name: "Week-end", price: "74€", period: "3 jours minimum", feats: [TEXTES.installation, TEXTES.livraisonCourt, "Climatiseur 7 000 BTU"], featured: false },
+              { name: "Semaine Fraîcheur", price: "134€", period: "7 jours", feats: [TEXTES.installation, TEXTES.livraisonCourt, "Climatiseur 7 000 BTU", "Support 7j/7"], featured: true },
+              { name: "Mois Sérénité", price: "384€", period: "30 jours", feats: [TEXTES.installation, TEXTES.livraisonCourt, "Climatiseur 7 000 BTU", "Support 7j/7"], featured: false },
             ].map(({ name, price, period, feats, featured }) => (
               <div key={name} className="price-card" style={featured ? { background: "#fff", border: "none", boxShadow: "0 12px 48px rgba(0,0,0,0.4)" } : {}}>
                 {featured && <span style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "linear-gradient(135deg,#0EA5E9,#38BDF8)", color: "#0F172A", padding: "5px 16px", borderRadius: 50, fontSize: 11, fontWeight: 800, whiteSpace: "nowrap" }}>⭐ Le plus choisi</span>}
@@ -109,7 +114,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p style={{ textAlign: "center", marginTop: 28, fontSize: 14, color: "rgba(255,255,255,0.4)" }}>💼 Tarifs professionnels sur devis à partir de 18€/jour · Caution 150€ remboursable par Stripe</p>
+          <p style={{ textAlign: "center", marginTop: 28, fontSize: 14, color: "rgba(255,255,255,0.75)", lineHeight: 1.7 }}>🚚 {TEXTES.livraison} — précisée dans votre devis<br/>🔒 {TEXTES.caution} · 💼 Tarifs professionnels sur devis</p>
         </section>
 
         {/* HOW */}
@@ -120,9 +125,9 @@ export default function Home() {
           <div style={{ maxWidth: 980, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 4, position: "relative", zIndex: 1 }}>
             {[
               { n: 1, title: "Vous nous appelez", desc: "Un appel pour vérifier la disponibilité et choisir votre forfait." },
-              { n: 2, title: "On confirme", desc: "Créneau fixé sous 1h, confirmation par SMS avec récapitulatif." },
+              { n: 2, title: "On confirme", desc: "Créneau et tarif de livraison fixés, confirmation par SMS avec récapitulatif." },
               { n: 3, title: "Livraison & install", desc: "On arrive chez vous sous 24h et on installe l'appareil." },
-              { n: 4, title: "Récupération", desc: "En fin de location, on vient reprendre. Caution remboursée." },
+              { n: 4, title: "Récupération", desc: "En fin de location, on vient reprendre l'appareil. Caution restituée." },
             ].map(({ n, title, desc }) => (
               <div key={n} style={{ textAlign: "center", padding: "0 12px" }}>
                 <div style={{ width: 68, height: 68, background: "linear-gradient(135deg,#2563EB,#1E40AF)", color: "#fff", borderRadius: "50%", fontSize: 22, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px", boxShadow: "0 0 0 6px rgba(37,99,235,0.10),0 4px 20px rgba(37,99,235,0.3)" }}>{n}</div>
@@ -141,7 +146,7 @@ export default function Home() {
             <div style={{ borderRadius: 20, overflow: "hidden", height: 340, marginBottom: 40, position: "relative", boxShadow: "0 8px 40px rgba(37,99,235,0.12)", border: "1px solid rgba(37,99,235,0.08)" }}>
               <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Orleans_-_cathedrale_Saint-Croix.jpg/1280px-Orleans_-_cathedrale_Saint-Croix.jpg" alt="Orléans — cathédrale Sainte-Croix" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,transparent 40%,rgba(20,35,65,0.72))", display: "flex", alignItems: "flex-end", padding: 28 }}>
-                <div><div style={{ color: "#fff", fontSize: 20, fontWeight: 800, letterSpacing: "-0.5px" }}>Orléans &amp; alentours</div><div style={{ color: "rgba(255,255,255,0.65)", fontSize: 14, marginTop: 4 }}>Livraison comprise dans chaque forfait</div></div>
+                <div><div style={{ color: "#fff", fontSize: 20, fontWeight: 800, letterSpacing: "-0.5px" }}>Orléans &amp; alentours</div><div style={{ color: "rgba(255,255,255,0.85)", fontSize: 14, marginTop: 4 }}>Livraison sur Orléans et tout le Loiret — tarif selon la distance</div></div>
               </div>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -160,27 +165,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* REVIEWS */}
-        <section style={{ padding: "80px 24px", background: "#F1F5F9" }}>
-          <p className="section-label">Avis clients</p>
-          <h2 style={{ textAlign: "center", fontSize: "clamp(28px,4vw,40px)", fontWeight: 800, color: "#1E293B", letterSpacing: "-1.2px", marginBottom: 52 }}>Ils nous font confiance</h2>
-          <div style={{ maxWidth: 980, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
-            {[
-              { init: "S", name: "Sophie M.", meta: "Olivet · Particulier", text: '"Livré le lendemain matin comme promis, installé en 20 minutes. Appareil nickel et très efficace. Je recommande sans hésiter."' },
-              { init: "T", name: "Thierry B.", meta: "Orléans · Professionnel", text: '"Très professionnel, ponctuel et sympathique. Le climatiseur a parfaitement tenu toute la semaine. Idéal pour notre bureau."' },
-              { init: "N", name: "Nathalie R.", meta: "Saran · Particulier", text: '"Rapide à joindre, bon conseil sur le modèle selon la surface. Très satisfaite, je reprendrai l\'été prochain sans hésitation."' },
-            ].map(({ init, name, meta, text }) => (
-              <div key={name} style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.07)", borderRadius: 20, padding: 28, transition: "all .2s" }}>
-                <div style={{ color: "#F59E0B", fontSize: 15, marginBottom: 14, letterSpacing: 1 }}>★★★★★</div>
-                <p style={{ fontSize: 14, color: "#475569", lineHeight: 1.75, marginBottom: 18, fontStyle: "italic" }}>{text}</p>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: "linear-gradient(135deg,#2563EB,#38BDF8)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 700, color: "#fff", flexShrink: 0 }}>{init}</div>
-                  <div><div style={{ fontSize: 14, fontWeight: 700, color: "#1E293B" }}>{name}</div><div style={{ fontSize: 12, color: "#94A3B8" }}>{meta}</div></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* AVIS (2 derniers) */}
+        <AvisClients debut={2} fin={4} titre="Ils nous font confiance" />
 
         {/* FAQ */}
         <FAQSection />
@@ -189,7 +175,7 @@ export default function Home() {
         <section style={{ background: "#0D1117", padding: "80px 24px", textAlign: "center", position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center,rgba(37,99,235,0.18),transparent 65%)", pointerEvents: "none" }} />
           <h2 style={{ color: "#F0F6FF", fontSize: "clamp(28px,4vw,40px)", fontWeight: 800, letterSpacing: "-1.2px", marginBottom: 12, position: "relative", zIndex: 1 }}>Besoin d'un climatiseur rapidement ?</h2>
-          <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 17, marginBottom: 40, position: "relative", zIndex: 1, fontStyle: "italic" }}>Réponse immédiate — livraison sous 24h sur Orléans et ses alentours.</p>
+          <p style={{ color: "rgba(255,255,255,0.75)", fontSize: 17, marginBottom: 40, position: "relative", zIndex: 1 }}>Réponse immédiate — livraison sous 24h sur Orléans et ses alentours.</p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap", position: "relative", zIndex: 1 }}>
             <a href="tel:0783800070" className="btn-cta-main">📞 07 83 80 00 70</a>
             <a href="https://wa.me/33783800070" className="btn-cta-wa" target="_blank" rel="noopener">💬 WhatsApp</a>
@@ -204,11 +190,12 @@ export default function Home() {
 
 function FAQSection() {
   const items = [
-    { q: "Quelle surface peut refroidir un climatiseur mobile de 2000W ?", a: "Un modèle 2000W est adapté pour des pièces de 15 à 25m². Pour de plus grandes surfaces, nous proposons des modèles plus puissants. Appelez-nous pour être conseillé." },
-    { q: "Comment fonctionne la caution ?", a: "Une caution de 150€ est prélevée via Stripe lors de la confirmation. Elle est intégralement remboursée dans les 48h après récupération de l'appareil en bon état." },
+    { q: "Quelle surface peut refroidir un climatiseur mobile ?", a: "Un modèle 7 000 BTU convient aux pièces de 15 à 25 m². Pour les pièces de 20 à 30 m², nous proposons des modèles 9 000 BTU, selon les disponibilités. Appelez-nous pour être conseillé." },
+    { q: "Comment fonctionne la caution ?", a: TEXTES.cautionDetail },
+    { q: "Combien coûte la livraison ?", a: TEXTES.livraisonDetail },
     { q: "Livrez-vous en dehors d'Orléans ?", a: "Oui — nous desservons l'ensemble du Loiret : Olivet, Saran, Meung-sur-Loire, La Ferté-Saint-Aubin, Lamotte-Beuvron, Saint-Ay, Saint-Jean-le-Blanc, Ardon et bien d'autres communes." },
     { q: "Faut-il faire des travaux pour installer un climatiseur mobile ?", a: "Non. Il suffit d'une fenêtre pour évacuer l'air chaud via le tuyau fourni. Notre technicien s'en charge lors de la livraison." },
-    { q: "Proposez-vous des tarifs pour les professionnels ?", a: "Oui. Tarifs professionnels à partir de 18€/jour pour entreprises, chantiers, événements et longue durée. Demandez un devis par téléphone." },
+    { q: "Proposez-vous des tarifs pour les professionnels ?", a: "Oui. Nous établissons des devis sur mesure pour les entreprises, chantiers, événements et locations longue durée, avec facture professionnelle. Demandez un devis par téléphone ou via le formulaire." },
   ];
   return (
     <section style={{ padding: "80px 24px", background: "linear-gradient(160deg,#1a2744,#1e3055 60%,#162240 100%)", position: "relative", overflow: "hidden" }}>

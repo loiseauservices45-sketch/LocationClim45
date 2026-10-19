@@ -11,11 +11,9 @@ export default function Banner({ text }: { text?: string }) {
       <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#38BDF8", display: "inline-block", animation: "pulse 2s infinite" }} />
       {text ?? (
         <>
-          Vague de chaleur en cours
-          <span style={{ color: "rgba(255,255,255,0.2)", margin: "0 4px" }}>—</span>
-          <strong>Livraison sous 24h</strong> sur Orléans et ses alentours
-          <span style={{ color: "rgba(255,255,255,0.2)", margin: "0 4px" }}>·</span>
-          Stock limité, réservez maintenant
+          <strong>Location de climatiseurs</strong> sur Orléans et tout le Loiret
+          <span style={{ color: "rgba(255,255,255,0.35)", margin: "0 4px" }}>·</span>
+          Installation incluse — réservez tôt pour l'été
         </>
       )}
     </div>

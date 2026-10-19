@@ -3,27 +3,28 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Banner from "@/components/Banner";
 import FloatCTA from "@/components/FloatCTA";
+import { TEXTES } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Zone de Livraison Climatiseur — Orléans, La Ferté-Saint-Aubin & Loiret",
-  description: "Livraison climatiseur mobile à Orléans, La Ferté-Saint-Aubin, Meung-sur-Loire, Saint-Ay, Ardon, La Source et alentours. Zone centrale gratuite.",
+  description: "Livraison climatiseur mobile à Orléans, La Ferté-Saint-Aubin, Meung-sur-Loire, Saint-Ay, Ardon, La Source et tout le Loiret. Installation incluse, livraison selon la distance.",
 };
 
 const zones = [
   {
-    color:"#10B981", dotClass:"green", name:"Zone centrale", badge:"Livraison gratuite", badgeBg:"rgba(16,185,129,0.1)", badgeColor:"#059669",
-    desc:"Livraison, installation et récupération entièrement gratuites, comprises dans chaque forfait. Délai sous 24h.",
+    color:"#10B981", dotClass:"green", name:"Zone principale", badge:"Intervention rapide", badgeBg:"rgba(16,185,129,0.1)", badgeColor:"#059669",
+    desc:"Autour de notre base de La Ferté-Saint-Aubin et d'Orléans : intervention la plus rapide, livraison possible sous 24h selon disponibilité.",
     cities:["📍 La Ferté-Saint-Aubin","Orléans","La Source","Saint-Jean-le-Blanc","Ardon","Marcilly-en-Villette"],
     cityStyle:{background:"rgba(16,185,129,0.08)",color:"#047857",border:"1px solid rgba(16,185,129,0.15)"},
   },
   {
-    color:"#F59E0B", dotClass:"amber", name:"Zone étendue", badge:"Supplément possible", badgeBg:"rgba(245,158,11,0.1)", badgeColor:"#B45309",
-    desc:"Livraison disponible avec un petit supplément selon la distance. Appelez-nous pour un devis rapide et précis.",
+    color:"#F59E0B", dotClass:"amber", name:"Zone étendue", badge:"Sur devis", badgeBg:"rgba(245,158,11,0.1)", badgeColor:"#B45309",
+    desc:"Métropole orléanaise et communes voisines : livraison sur rendez-vous, au tarif indiqué dans votre devis.",
     cities:["Meung-sur-Loire","Saint-Ay","Saran","Olivet","Saint-Jean-de-la-Ruelle","Lamotte-Beuvron"],
     cityStyle:{background:"rgba(245,158,11,0.08)",color:"#92400E",border:"1px solid rgba(245,158,11,0.15)"},
   },
   {
-    color:"#F97316", dotClass:"orange", name:"Hors zone", badge:"Sur devis", badgeBg:"rgba(249,115,22,0.1)", badgeColor:"#C2410C",
+    color:"#F97316", dotClass:"orange", name:"Reste du Loiret", badge:"Sur devis", badgeBg:"rgba(249,115,22,0.1)", badgeColor:"#C2410C",
     desc:"Pour Montargis, Pithiviers, Blois et communes plus éloignées — intervention possible sur devis.",
     cities:["Montargis","Pithiviers","Blois","Autres communes du 45"],
     cityStyle:{background:"rgba(249,115,22,0.08)",color:"#9A3412",border:"1px solid rgba(249,115,22,0.15)"},
@@ -33,7 +34,7 @@ const zones = [
 export default function ZoneLivraison() {
   return (
     <>
-      <Banner text="Basé à La Ferté-Saint-Aubin — Livraison gratuite zone centrale · Supplément zone étendue" />
+      <Banner text="Basé à La Ferté-Saint-Aubin — Livraison sur Orléans et tout le Loiret · Installation incluse" />
       <Header />
       <main>
         {/* HERO */}
@@ -46,14 +47,14 @@ export default function ZoneLivraison() {
               <em style={{fontStyle:"normal",background:"linear-gradient(135deg,#7DD3FC,#38BDF8)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>jusqu'à votre porte.</em>
             </h1>
             <p style={{fontSize:17,color:"rgba(200,220,255,0.6)",lineHeight:1.75,maxWidth:560,margin:"0 auto 32px"}}>
-              Zone centrale gratuite, zone étendue avec supplément selon la distance. Transparent et sans surprise.
+              L'installation est toujours incluse. La livraison et la récupération sont facturées selon la distance et la durée de location : le montant exact figure dans votre devis, sans surprise.
             </p>
             <div style={{display:"flex",gap:12,flexWrap:"wrap",justifyContent:"center",marginBottom:36}}>
               <a href="#zones" className="btn-primary">Voir ma zone ↓</a>
               <a href="tel:0783800070" className="btn-ghost">📞 Vérifier la disponibilité</a>
             </div>
             <div style={{display:"flex",gap:0,justifyContent:"center",flexWrap:"wrap",background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.09)",borderRadius:18,padding:4,maxWidth:520,margin:"0 auto"}}>
-              {[{num:"24h",label:"Délai de livraison"},{num:"0€",label:"Livraison zone centrale"},{num:"7j/7",label:"Disponibilité"}].map(({num,label})=>(
+              {[{num:"24h",label:"Délai de livraison"},{num:"Inclus",label:"Installation & mise en service"},{num:"7j/7",label:"Disponibilité"}].map(({num,label})=>(
                 <div key={num} style={{flex:1,minWidth:130,textAlign:"center" as const,padding:"16px 12px",borderRight:"1px solid rgba(255,255,255,0.07)"}}>
                   <div style={{fontSize:24,fontWeight:800,color:"#F0F6FF",letterSpacing:"-1px",lineHeight:1}}>{num}</div>
                   <div style={{fontSize:12,color:"rgba(180,210,255,0.5)",marginTop:4}}>{label}</div>
@@ -67,7 +68,7 @@ export default function ZoneLivraison() {
         <section id="zones" style={{padding:"80px 24px",background:"linear-gradient(180deg,#EFF6FF,#F8FAFC)"}}>
           <p className="section-label">Zones de livraison</p>
           <h2 style={{textAlign:"center",fontSize:"clamp(26px,4vw,38px)",fontWeight:800,color:"#1E293B",letterSpacing:"-1.2px",marginBottom:16}}>Où livrons-nous ?</h2>
-          <p style={{textAlign:"center",fontSize:16,color:"#64748B",maxWidth:520,margin:"0 auto 52px",lineHeight:1.7}}>Trois zones clairement définies pour une totale transparence sur les conditions de livraison.</p>
+          <p style={{textAlign:"center",fontSize:16,color:"#64748B",maxWidth:520,margin:"0 auto 52px",lineHeight:1.7}}>Trois zones pour vous situer — le tarif de livraison exact vous est donné avec le devis.</p>
           <div style={{maxWidth:1080,margin:"0 auto",display:"grid",gridTemplateColumns:"1fr 400px",gap:48,alignItems:"start"}}>
             {/* SVG MAP */}
             <div style={{background:"linear-gradient(160deg,#1a2744,#1e3055)",borderRadius:24,padding:32,border:"1px solid rgba(37,99,235,0.2)",boxShadow:"0 12px 48px rgba(37,99,235,0.12)",position:"relative",overflow:"hidden"}}>
@@ -113,7 +114,7 @@ export default function ZoneLivraison() {
                 <circle cx="72" cy="270" r="7" fill="#F97316" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"/>
                 <text x="82" y="268" fontFamily="sans-serif" fontSize="10" fill="rgba(253,186,116,0.8)">Blois</text>
                 <rect x="12" y="360" width="436" height="52" rx="10" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.07)" strokeWidth="1"/>
-                <circle cx="36" cy="386" r="6" fill="#10B981"/><text x="48" y="390" fontFamily="sans-serif" fontSize="11" fill="rgba(255,255,255,0.7)">Zone gratuite</text>
+                <circle cx="36" cy="386" r="6" fill="#10B981"/><text x="48" y="390" fontFamily="sans-serif" fontSize="11" fill="rgba(255,255,255,0.7)">Zone principale</text>
                 <circle cx="150" cy="386" r="6" fill="#F59E0B"/><text x="162" y="390" fontFamily="sans-serif" fontSize="11" fill="rgba(255,255,255,0.7)">Zone étendue</text>
                 <circle cx="268" cy="386" r="6" fill="#F97316"/><text x="280" y="390" fontFamily="sans-serif" fontSize="11" fill="rgba(255,255,255,0.7)">Sur devis</text>
                 <circle cx="368" cy="386" r="5" fill="#2563EB"/><circle cx="368" cy="386" r="2" fill="white"/><text x="380" y="390" fontFamily="sans-serif" fontSize="11" fill="rgba(255,255,255,0.7)">Notre base</text>
@@ -173,7 +174,7 @@ export default function ZoneLivraison() {
         <section style={{background:"#0D1117",padding:"72px 24px",textAlign:"center" as const,position:"relative",overflow:"hidden"}}>
           <div style={{position:"absolute",inset:0,background:"radial-gradient(ellipse at center,rgba(37,99,235,0.18),transparent 65%)",pointerEvents:"none"}}/>
           <h2 style={{color:"#F0F6FF",fontSize:"clamp(26px,4vw,38px)",fontWeight:800,letterSpacing:"-1.2px",marginBottom:12,position:"relative",zIndex:1}}>Votre commune est dans notre zone ?</h2>
-          <p style={{color:"rgba(255,255,255,0.45)",fontSize:16,marginBottom:36,position:"relative",zIndex:1,fontStyle:"italic"}}>Réservez maintenant — livraison sous 24h, installation comprise.</p>
+          <p style={{color:"rgba(255,255,255,0.45)",fontSize:16,marginBottom:36,position:"relative",zIndex:1,fontStyle:"italic"}}>Réservez maintenant — installation comprise, tarif de livraison dans votre devis.</p>
           <div style={{display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap",position:"relative",zIndex:1}}>
             <a href="tel:0783800070" className="btn-cta-main">📞 07 83 80 00 70</a>
             <a href="https://wa.me/33783800070" className="btn-cta-wa" target="_blank" rel="noopener">💬 WhatsApp</a>

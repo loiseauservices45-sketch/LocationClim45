@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Banner from "@/components/Banner";
 import FloatCTA from "@/components/FloatCTA";
+import { TEXTES } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Location Climatiseur Particuliers — Orléans & Loiret",
@@ -15,9 +16,9 @@ const S = {
 };
 
 const prices = [
-  { name:"Week-end", price:"74€", period:"3 jours minimum", feats:["Livraison incluse","Installation incluse","Récupération incluse","Climatiseur 2000W"], featured:false },
-  { name:"Semaine Fraîcheur", price:"134€", period:"7 jours", feats:["Livraison incluse","Installation incluse","Récupération incluse","Climatiseur 2000W","Support 7j/7"], featured:true },
-  { name:"Mois Sérénité", price:"384€", period:"30 jours", feats:["Livraison incluse","Installation incluse","Récupération incluse","Climatiseur 2000W","Support 7j/7"], featured:false },
+  { name:"Week-end", price:"74€", period:"3 jours minimum", feats:[TEXTES.installation,TEXTES.livraisonCourt,"Climatiseur 7 000 BTU"], featured:false },
+  { name:"Semaine Fraîcheur", price:"134€", period:"7 jours", feats:[TEXTES.installation,TEXTES.livraisonCourt,"Climatiseur 7 000 BTU","Support 7j/7"], featured:true },
+  { name:"Mois Sérénité", price:"384€", period:"30 jours", feats:[TEXTES.installation,TEXTES.livraisonCourt,"Climatiseur 7 000 BTU","Support 7j/7"], featured:false },
 ];
 
 export default function Particuliers() {
@@ -110,9 +111,9 @@ export default function Particuliers() {
           <div style={{maxWidth:980,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:4,position:"relative",zIndex:1}}>
             {[
               {n:1,title:"Vous appelez",desc:"On vérifie la dispo et on choisit ensemble votre forfait."},
-              {n:2,title:"On confirme",desc:"Créneau fixé sous 1h, confirmation SMS avec le prix."},
+              {n:2,title:"On confirme",desc:"Créneau et tarif de livraison fixés, confirmation SMS avec le prix."},
               {n:3,title:"Livraison & install",desc:"On arrive sous 24h et installe l'appareil en quelques minutes."},
-              {n:4,title:"Récupération",desc:"On vient reprendre l'appareil. Caution remboursée sous 48h."},
+              {n:4,title:"Récupération",desc:"On vient reprendre l'appareil. Caution restituée."},
             ].map(({n,title,desc})=>(
               <div key={n} style={{textAlign:"center" as const,padding:"0 12px"}}>
                 <div style={{width:68,height:68,background:"linear-gradient(135deg,#2563EB,#1E40AF)",color:"#fff",borderRadius:"50%",fontSize:22,fontWeight:800,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px",boxShadow:"0 0 0 6px rgba(37,99,235,0.12),0 4px 20px rgba(37,99,235,0.4)"}}>{n}</div>
@@ -125,7 +126,7 @@ export default function Particuliers() {
 
         {/* PRICING */}
         <section id="tarifs" style={{background:"linear-gradient(160deg,#07111F,#0F1F4A 60%,#1E3A8A 100%)",padding:"80px 24px"}}>
-          <p className="section-label section-label-light">Tarifs tout compris</p>
+          <p className="section-label section-label-light">Nos tarifs</p>
           <h2 style={{textAlign:"center",fontSize:"clamp(26px,4vw,38px)",fontWeight:800,color:"#F0F6FF",letterSpacing:"-1.2px",marginBottom:52}}>Des forfaits simples et transparents</h2>
           <div style={{maxWidth:980,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20}}>
             {prices.map(({name,price,period,feats,featured})=>(
@@ -139,7 +140,7 @@ export default function Particuliers() {
               </div>
             ))}
           </div>
-          <p style={{textAlign:"center",marginTop:28,fontSize:14,color:"rgba(255,255,255,0.4)"}}>🔒 Caution 150€ remboursable · Paiement sécurisé par Stripe</p>
+          <p style={{textAlign:"center",marginTop:28,fontSize:14,color:"rgba(255,255,255,0.75)",lineHeight:1.7}}>🚚 {TEXTES.livraison} — précisée dans votre devis<br/>🔒 {TEXTES.caution}</p>
         </section>
 
         {/* CTA FINAL */}

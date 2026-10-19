@@ -3,16 +3,20 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.locationclim45.fr"),
- icons: {
-  icon: "/favicon.svg",
-  shortcut: "/favicon.svg",
-  apple: "/favicon.svg",
-},
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
  title: {
     default: "Location Climatiseur Orléans & Loiret (45) — Livraison 24h | LocationClim45",
     template: "%s | LocationClim45",
   },
-  description: "Location de climatiseur mobile à Orléans et dans le Loiret. Livraison, installation et récupération incluses. Particuliers et professionnels. Disponible sous 24h.",
+  description: "Location de climatiseur mobile à Orléans et dans le Loiret. Particuliers et professionnels. Installation et mise en service incluses, livraison sur devis.",
   keywords: ["location climatiseur Orléans", "clim mobile Orléans", "location climatisation mobile 45", "climatiseur mobile Loiret", "location clim La Ferté-Saint-Aubin"],
   openGraph: {
     type: "website",
@@ -20,7 +24,7 @@ export const metadata: Metadata = {
     url: "https://www.locationclim45.fr",
     siteName: "LocationClim45",
     title: "Location Climatiseur Orléans — Livraison 24h | LocationClim45",
-    description: "Location clim mobile à Orléans et Loiret. Livraison + installation incluses. Dispo 24h.",
+    description: "Location clim mobile à Orléans et dans le Loiret. Installation incluse, livraison sur devis.",
   },
   robots: { index: true, follow: true },
 };
@@ -29,7 +33,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "LocationClim45",
-  "description": "Location de climatiseurs mobiles à Orléans et dans le Loiret. Livraison, installation et récupération incluses.",
+  "description": "Location de climatiseurs mobiles à Orléans et dans le Loiret. Installation et mise en service incluses.",
   "telephone": "+33783800070",
   "email": "loiseau.services45@gmail.com",
   "address": {

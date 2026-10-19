@@ -3,16 +3,17 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Banner from "@/components/Banner";
 import FloatCTA from "@/components/FloatCTA";
+import { TEXTES } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Location Climatiseur Professionnel — Bureaux, Commerces, Événements Orléans",
-  description: "Location climatiseur mobile pour professionnels à Orléans. Bureaux, commerces, restaurants, événements. Livraison 24h, facture pro, tarifs dès 18€/j.",
+  description: "Location climatiseur mobile pour professionnels à Orléans. Bureaux, commerces, restaurants, événements. Installation incluse, facture professionnelle, devis sur mesure.",
 };
 
 const prices = [
-  { name:"Courts séjours", price:"74€", period:"3 jours minimum", feats:["Livraison incluse","Installation incluse","Récupération incluse","Facture professionnelle"], featured:false },
-  { name:"Semaine pro", price:"134€", period:"7 jours", feats:["Livraison incluse","Installation incluse","Récupération incluse","Facture professionnelle","Support 7j/7"], featured:true },
-  { name:"Sur devis", price:"18€", period:"par jour — longue durée", feats:["À partir de 5 jours","Livraison incluse","Multi-appareils possible","Facture professionnelle","Tarif dégressif"], featured:false },
+  { name:"Courts séjours", price:"74€", period:"3 jours minimum", feats:[TEXTES.installation,TEXTES.livraisonCourt,"Facture professionnelle"], featured:false },
+  { name:"Semaine pro", price:"134€", period:"7 jours", feats:[TEXTES.installation,TEXTES.livraisonCourt,"Facture professionnelle","Support 7j/7"], featured:true },
+  { name:"Longue durée", price:"Sur devis", period:"multi-appareils ou plusieurs semaines", feats:[TEXTES.installation,"Plusieurs appareils possibles","Facture professionnelle","Tarif adapté à la durée"], featured:false },
 ];
 
 export default function Professionnels() {
@@ -32,7 +33,7 @@ export default function Professionnels() {
                 <em style={{fontStyle:"normal",background:"linear-gradient(135deg,#7DD3FC,#38BDF8)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>votre business.</em>
               </h1>
               <p style={{fontSize:17,color:"rgba(200,220,255,0.6)",marginBottom:32,lineHeight:1.75,maxWidth:520}}>
-                Gardez vos équipes productives, vos clients confortables et votre activité sereine — même en pleine canicule. Livraison 24h, installation comprise.
+                Gardez vos équipes productives, vos clients confortables et votre activité sereine — même en pleine canicule. Installation et mise en service comprises.
               </p>
               <div style={{display:"flex",gap:12,flexWrap:"wrap",marginBottom:36}}>
                 <a href="tel:0783800070" className="btn-primary">📞 Demander un devis pro</a>
@@ -49,8 +50,8 @@ export default function Professionnels() {
               <span style={{display:"inline-flex",alignItems:"center",gap:6,background:"linear-gradient(135deg,#059669,#10B981)",color:"#fff",padding:"5px 14px",borderRadius:50,fontSize:12,fontWeight:700,boxShadow:"0 4px 12px rgba(5,150,105,0.3)"}}>● Disponible maintenant sur Orléans</span>
               {[
                 {icon:"⏱️",num:"24h",label:"Délai d'intervention maximum"},
-                {icon:"💶",num:"18€/j",label:"Tarif pro à partir de"},
-                {icon:"🔧",num:"0€",label:"Installation & récupération incluses"},
+                {icon:"💶",num:"Devis",label:"Tarif adapté à votre besoin"},
+                {icon:"🔧",num:"Incluse",label:"Installation & mise en service"},
                 {icon:"📄",num:"100%",label:"Facturation professionnelle fournie"},
               ].map(({icon,num,label})=>(
                 <div key={num} style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.10)",borderRadius:18,padding:"22px 26px",backdropFilter:"blur(12px)",display:"flex",alignItems:"center",gap:20}}>
@@ -108,7 +109,7 @@ export default function Professionnels() {
               <span style={{display:"inline-flex",alignItems:"center",gap:6,background:"rgba(56,189,248,0.15)",color:"#7DD3FC",border:"1px solid rgba(56,189,248,0.2)",padding:"6px 14px",borderRadius:50,fontSize:12,fontWeight:700,marginBottom:20}}>✓ Location LocationClim45</span>
               <h3 style={{fontSize:20,fontWeight:800,color:"#F0F6FF",marginBottom:20}}>Flexible, simple, rentable</h3>
               <ul style={{listStyle:"none",display:"flex",flexDirection:"column" as const,gap:12}}>
-                {["Aucun investissement initial","Installation et récupération incluses","Durée sur mesure : 3 jours à plusieurs mois","Appareil entretenu et garanti","Charge déductible en frais pro","Aucun souci de stockage hors saison","Facturation professionnelle fournie"].map(f=>(
+                {["Aucun investissement initial","Installation et mise en service incluses","Durée sur mesure : 3 jours à plusieurs mois","Appareil entretenu et garanti","Charge déductible en frais pro","Aucun souci de stockage hors saison","Facturation professionnelle fournie"].map(f=>(
                   <li key={f} style={{display:"flex",alignItems:"flex-start",gap:10,fontSize:14,color:"rgba(180,210,255,0.75)",lineHeight:1.5}}><span style={{color:"#38BDF8",fontWeight:800,flexShrink:0}}>✓</span>{f}</li>
                 ))}
               </ul>
@@ -141,7 +142,7 @@ export default function Professionnels() {
               </div>
             ))}
           </div>
-          <p style={{textAlign:"center",marginTop:28,fontSize:14,color:"rgba(255,255,255,0.4)"}}>💼 Caution 150€ remboursable · Paiement sécurisé par Stripe · Plusieurs appareils sur devis</p>
+          <p style={{textAlign:"center",marginTop:28,fontSize:14,color:"rgba(255,255,255,0.75)",lineHeight:1.7}}>🚚 {TEXTES.livraison} — précisée dans votre devis<br/>🔒 {TEXTES.caution} · Plusieurs appareils sur devis</p>
         </section>
 
         {/* CTA FINAL */}
