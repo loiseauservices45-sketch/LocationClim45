@@ -18,7 +18,7 @@ export const SITE = {
   // visible dans le code sans risque.
   // Tant qu'elle est vide, le formulaire garde l'ancien fonctionnement
   // (ouverture de la messagerie du visiteur).
-  web3formsCle: "",
+  web3formsCle: "cf05833a-62d3-4e90-8d7b-2ed38fe40f47",
 
   // Lien vers la fiche Google (bouton « Voir tous nos avis sur Google »).
   // Laisser vide pour masquer le bouton.
