@@ -91,7 +91,7 @@ function CarteModele({ m, inverse }: { m: Modele; inverse: boolean }) {
   const sombre = m.style === "sombre";
   const visuel = m.photo ? (
     <div style={{background:"#ECE9E6",position:"relative",overflow:"hidden",minHeight:460}}>
-      <img src={m.photo.src} alt={m.photo.alt} width={m.photo.largeur} height={m.photo.hauteur} loading="lazy" decoding="async" style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 40%"}}/>
+      <img src={m.photo.src} alt={m.photo.alt} width={m.photo.largeur} height={m.photo.hauteur} loading="lazy" decoding="async" style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 80%"}}/>
       <span style={{position:"absolute",top:20,right:20,zIndex:2,background:"rgba(9,14,26,0.75)",color:"#fff",padding:"5px 13px",borderRadius:50,fontSize:11,fontWeight:700}}>{m.gamme}</span>
     </div>
   ) : (

@@ -68,7 +68,12 @@ export const CLIMATISEURS: Modele[] = [
     prixAPartirDe: "74 €",
     prixPeriode: "pour 3 jours",
     etiquetteVisuel: "CONFORT",
-    // photo: { src: "/images/climatiseur-garvee.webp", alt: "…", largeur: 900, hauteur: 1200 },
+    photo: {
+      src: "/images/climatiseur-garvee-9000btu.webp",
+      alt: "Climatiseur mobile Garvee 9 000 BTU blanc avec sa télécommande, en location à Orléans",
+      largeur: 900,
+      hauteur: 1343,
+    },
     style: "sombre",
   },
 ];
