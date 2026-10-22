@@ -41,7 +41,11 @@ export default function Footer() {
       </div>
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 18, display: "flex", justifyContent: "space-between", fontSize: 11, flexWrap: "wrap", gap: 6 }}>
         <span>© {new Date().getFullYear()} LocationClim45 — Tous droits réservés</span>
-        <span>Mentions légales · CGV · Confidentialité</span>
+        <span style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+          <Link href="/mentions-legales">Mentions légales</Link>
+          <Link href="/cgv">CGV</Link>
+          <Link href="/confidentialite">Confidentialité</Link>
+        </span>
       </div>
     </footer>
   );

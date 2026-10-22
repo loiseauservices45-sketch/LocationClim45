@@ -5,6 +5,19 @@
 
 export const SITE = {
   nom: "LocationClim45",
+
+  // Identité légale (mentions légales, CGV, contrat)
+  exploitant: "Tom Loiseau",
+  statut: "Entrepreneur individuel (EI) — micro-entreprise",
+  siret: "953 928 884 00014",
+  siren: "953 928 884",
+  ville: "La Ferté-Saint-Aubin (45240)",
+  tva: "TVA non applicable, article 293 B du Code général des impôts",
+
+  // Médiateur de la consommation (obligatoire pour vendre aux particuliers).
+  // À compléter après adhésion : nom, site internet et adresse postale.
+  mediateur: { nom: "", site: "", adresse: "" },
+
   url: "https://www.locationclim45.fr",
 
   telephoneAffiche: "07 83 80 00 70",

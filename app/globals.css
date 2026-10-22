@@ -191,3 +191,21 @@ body { overflow-x: hidden !important; }
   }
   main { overflow-x: hidden !important; }
 }
+/* ── Pages légales ─────────────────────────────── */
+.texte-legal { color: #334155; font-size: 15.5px; line-height: 1.8; }
+.texte-legal h2 { font-size: 20px; font-weight: 800; color: #0F172A; letter-spacing: -0.4px; margin: 40px 0 12px; padding-top: 8px; border-top: 1px solid #E2E8F0; }
+.texte-legal h2:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+.texte-legal h3 { font-size: 16px; font-weight: 700; color: #0F172A; margin: 22px 0 6px; }
+.texte-legal p { margin: 0 0 12px; }
+.texte-legal ul { margin: 0 0 14px 20px; list-style: disc; }
+.texte-legal li { margin-bottom: 6px; }
+.texte-legal a { color: #1D4ED8; text-decoration: underline; }
+.texte-legal strong { color: #0F172A; }
+.texte-legal .encadre { background: #F1F5F9; border-left: 4px solid #38BDF8; border-radius: 8px; padding: 14px 18px; margin: 14px 0 18px; }
+.texte-legal table { width: 100%; border-collapse: collapse; margin: 8px 0 18px; font-size: 14.5px; }
+.texte-legal th, .texte-legal td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #E2E8F0; vertical-align: top; }
+.texte-legal th { background: #F8FAFC; color: #0F172A; font-weight: 700; }
+@media (max-width: 640px) {
+  .texte-legal table { display: block; overflow-x: auto; white-space: normal; }
+  .texte-legal th, .texte-legal td { min-width: 150px; }
+}

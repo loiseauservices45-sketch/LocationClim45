@@ -8,5 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: 'https://locationclim45.fr/climatiseurs', priority: 0.8 },
     { url: 'https://locationclim45.fr/zone-livraison', priority: 0.8 },
     { url: 'https://locationclim45.fr/contact', priority: 0.8 },
+    { url: 'https://locationclim45.fr/cgv', priority: 0.3 },
+    { url: 'https://locationclim45.fr/mentions-legales', priority: 0.2 },
+    { url: 'https://locationclim45.fr/confidentialite', priority: 0.2 },
   ]
 }
