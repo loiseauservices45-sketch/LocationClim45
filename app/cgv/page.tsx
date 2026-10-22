@@ -68,6 +68,7 @@ export default function ConditionsGeneralesDeVente() {
         <li>La durée court du jour de la livraison au jour de la récupération. <strong>Toute journée commencée est due.</strong></li>
         <li>Si la récupération est retardée du fait du loueur, les jours supplémentaires ne sont pas facturés.</li>
         <li>Une prolongation est possible avec l&apos;accord du loueur, au tarif en vigueur.</li>
+        <li>En cas de restitution anticipée à la demande du client, les jours non utilisés du forfait choisi ne sont pas remboursés, sauf accord du loueur.</li>
       </ul>
 
       <h2>6. Tarifs</h2>
@@ -142,6 +143,7 @@ export default function ConditionsGeneralesDeVente() {
         <li>ne pas le déplacer hors de l&apos;adresse de livraison, ne pas le prêter ni le sous-louer ;</li>
         <li>ne pas l&apos;ouvrir, le démonter, le modifier ou tenter de le réparer ;</li>
         <li>le maintenir debout, ne pas obstruer ses grilles et le débrancher en cas d&apos;anomalie, puis prévenir le loueur.</li>
+        <li>La consommation électrique de l&apos;appareil est à la charge du client.</li>
       </ul>
 
       <h2>13. Panne</h2>
