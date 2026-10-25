@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Plus_Jakarta_Sans } from "next/font/google";
+
+// Police hébergée avec le site (plus rapide, aucune requête vers Google)
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-jakarta",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.locationclim45.fr"),
@@ -25,6 +35,13 @@ export const metadata: Metadata = {
     siteName: "LocationClim45",
     title: "Location Climatiseur Orléans — Livraison 24h | LocationClim45",
     description: "Location clim mobile à Orléans et dans le Loiret. Installation incluse, livraison sur devis.",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "LocationClim45 — location de climatiseurs à Orléans et dans le Loiret" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Location Climatiseur Orléans & Loiret | LocationClim45",
+    description: "Location clim mobile à Orléans et dans le Loiret. Installation incluse, livraison sur devis.",
+    images: ["/og-image.jpg"],
   },
   robots: { index: true, follow: true },
 };
@@ -50,15 +67,18 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
+    <html lang="fr" className={jakarta.variable}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
        <meta name="google-site-verification" content="P0uLNuEyq8DvkIqkDbpSsTt9J1tv7_aaHt7Fqkne9AI" />
 <meta name="google-site-verification" content="qjP0D2GXN2yWTVqKzx-vhEJmeT1L-mIYeDoXQ1m4Teg" />
 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* Statistiques de visite Vercel : anonymes, sans cookie (à activer dans Vercel > Analytics) */}
+        <script dangerouslySetInnerHTML={{ __html: "window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };" }} />
+        <script defer src="/_vercel/insights/script.js" />
+      </body>
     </html>
   );
 }

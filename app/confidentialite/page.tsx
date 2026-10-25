@@ -68,6 +68,10 @@ export default function Confidentialite() {
       <p>
         Ce site n&apos;utilise <strong>aucun cookie publicitaire ni cookie de suivi</strong>. C&apos;est pourquoi aucun bandeau de consentement ne vous est demandé.
       </p>
+      <p>
+        Pour mesurer la fréquentation, nous utilisons <strong>Vercel Web Analytics</strong>, qui produit des statistiques anonymes et agrégées
+        (nombre de visites, pages consultées, type d&apos;appareil) sans cookie et sans permettre de vous identifier.
+      </p>
 
       <h2>Vos droits</h2>
       <p>
