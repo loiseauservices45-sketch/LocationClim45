@@ -16,6 +16,7 @@ export const ZONES = [
 const zoneDe = (km: number) => ZONES.find(z => km <= z.max) ?? ZONES[2];
 
 const VILLES_AFFICHEES = ["Orléans", "Meung-sur-Loire", "Jargeau", "Lamotte-Beuvron", "Pithiviers", "Montargis", "Gien", "Sully-sur-Loire"];
+const VILLES_SECONDAIRES = ["Meung-sur-Loire", "Jargeau", "Sully-sur-Loire"]; // masquées sur téléphone
 
 const normaliser = (s: string) =>
   s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/['’-]/g, " ").replace(/^(la|le|les|l) /, "").replace(/\bst\b/g, "saint").replace(/\s+/g, " ").trim();
@@ -86,7 +87,7 @@ export default function ZoneLivraison({ fond = "#090E1A" }: { fond?: string }) {
               {villes.map(c => (
                 <g key={c[0]}>
                   <circle cx={c[3]} cy={c[4]} r="3.4" fill="#E2E8F0" />
-                  <text className="etiquette" x={c[3] + 7} y={c[4] + 4} fontSize="13" fontWeight="700" fill="#E2E8F0" style={{ paintOrder: "stroke" }} stroke="#0B1222" strokeWidth="3">{c[0]}</text>
+                  <text className={VILLES_SECONDAIRES.includes(c[0]) ? "etiquette etiquette-secondaire" : "etiquette"} x={c[3] + 7} y={c[4] + 4} fontSize="13" fontWeight="700" fill="#E2E8F0" style={{ paintOrder: "stroke" }} stroke="#0B1222" strokeWidth="3">{c[0]}</text>
                 </g>
               ))}
 

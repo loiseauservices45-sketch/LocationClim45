@@ -223,4 +223,5 @@ body { overflow-x: hidden !important; }
   .zone-carte { order: 2; }
   .zone-carte .etiquette { font-size: 19px; }
   .zone-carte .etiquette-forte { font-size: 21px; }
+  .zone-carte .etiquette-secondaire { display: none; }
 }
