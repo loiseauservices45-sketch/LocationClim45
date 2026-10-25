@@ -1,22 +1,23 @@
 "use client";
 import { useMemo, useState } from "react";
-import { CARTE, COMMUNES } from "@/lib/carte";
+import { CARTE, COMMUNES, DEPARTEMENTS } from "@/lib/carte";
 import { SITE } from "@/lib/site";
 
 // ─────────────────────────────────────────────────────────────
-// ZONE DE LIVRAISON — carte réelle du Loiret + vérificateur de commune
+// ZONE DE LIVRAISON — carte réelle du Loiret et des départements voisins
+// + vérificateur de commune
 // Distances à vol d'oiseau depuis La Ferté-Saint-Aubin.
 // ─────────────────────────────────────────────────────────────
 
 export const ZONES = [
   { id: 1, max: 20, nom: "Zone 1 — À proximité", couleur: "#38BDF8", texte: "Notre secteur le plus proche : livraison possible sous 24 h selon disponibilités." },
   { id: 2, max: 35, nom: "Zone 2 — Agglomération et alentours", couleur: "#818CF8", texte: "Métropole orléanaise et communes voisines : livraison sur rendez-vous." },
-  { id: 3, max: Infinity, nom: "Zone 3 — Tout le Loiret", couleur: "#94A3B8", texte: "Reste du département : intervention sur devis." },
+  { id: 3, max: Infinity, nom: "Zone 3 — Loiret et départements voisins", couleur: "#94A3B8", texte: "Reste du Loiret, Loir-et-Cher, Cher, Eure-et-Loir… : intervention sur devis." },
 ];
 const zoneDe = (km: number) => ZONES.find(z => km <= z.max) ?? ZONES[2];
 
-const VILLES_AFFICHEES = ["Orléans", "Meung-sur-Loire", "Jargeau", "Lamotte-Beuvron", "Pithiviers", "Montargis", "Gien", "Sully-sur-Loire"];
-const VILLES_SECONDAIRES = ["Meung-sur-Loire", "Jargeau", "Sully-sur-Loire"]; // masquées sur téléphone
+const VILLES_AFFICHEES = ["Orléans", "Lamotte-Beuvron", "Pithiviers", "Montargis", "Gien", "Sully-sur-Loire"];
+const VILLES_SECONDAIRES = ["Sully-sur-Loire"]; // masquées sur téléphone
 
 const normaliser = (s: string) =>
   s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/['’-]/g, " ").replace(/^(la|le|les|l) /, "").replace(/\bst\b/g, "saint").replace(/\s+/g, " ").trim();
@@ -49,7 +50,7 @@ export default function ZoneLivraison({ fond = "#090E1A" }: { fond?: string }) {
       <div style={{ maxWidth: 1160, margin: "0 auto", position: "relative", zIndex: 1 }}>
         <p className="section-label section-label-light">Zone d&apos;intervention</p>
         <h2 style={{ textAlign: "center", fontSize: "clamp(28px,4.2vw,44px)", fontWeight: 800, color: "#F0F6FF", letterSpacing: "-1.4px", lineHeight: 1.1, marginBottom: 14 }}>
-          Tout le Loiret, depuis{" "}
+          Le Loiret et ses alentours, depuis{" "}
           <span style={{ background: "linear-gradient(135deg,#7DD3FC,#38BDF8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>La Ferté-Saint-Aubin.</span>
         </h2>
         <p style={{ textAlign: "center", color: "rgba(203,213,225,0.9)", fontSize: 16.5, maxWidth: 620, margin: "0 auto 48px", lineHeight: 1.7 }}>
@@ -59,29 +60,29 @@ export default function ZoneLivraison({ fond = "#090E1A" }: { fond?: string }) {
         <div className="zone-grid" style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr", gap: 32, alignItems: "center" }}>
           {/* ── CARTE */}
           <div className="zone-carte" style={{ background: "linear-gradient(160deg,rgba(30,41,59,0.65),rgba(15,23,42,0.85))", border: "1px solid rgba(148,163,184,0.16)", borderRadius: 28, padding: "18px 14px 10px", boxShadow: "0 30px 80px rgba(0,0,0,0.35)" }}>
-            <svg viewBox={`0 0 ${CARTE.largeur} ${CARTE.hauteur}`} role="img" aria-label="Carte du Loiret avec les zones de livraison autour de La Ferté-Saint-Aubin" style={{ width: "100%", height: "auto", display: "block" }}>
+            <svg viewBox={`0 0 ${CARTE.largeur} ${CARTE.hauteur}`} role="img" aria-label="Carte du Loiret et des départements voisins avec les zones de livraison autour de La Ferté-Saint-Aubin" style={{ width: "100%", height: "auto", display: "block" }}>
               <defs>
-                <clipPath id="clip-loiret">{CARTE.contour.map((d, i) => <path key={i} d={d} />)}</clipPath>
                 <radialGradient id="grad-z1"><stop offset="0%" stopColor="#38BDF8" stopOpacity="0.42" /><stop offset="100%" stopColor="#38BDF8" stopOpacity="0.16" /></radialGradient>
               </defs>
 
-              {/* Département */}
-              {CARTE.contour.map((d, i) => <path key={i} d={d} fill="rgba(148,163,184,0.07)" stroke="rgba(148,163,184,0.45)" strokeWidth="1.2" strokeLinejoin="round" />)}
+              {/* Départements voisins (en partie) */}
+              {CARTE.voisins.map(v => (
+                <path key={v.code} d={v.d} fill={v.code === "41" ? "rgba(148,163,184,0.06)" : "rgba(148,163,184,0.03)"} stroke="rgba(148,163,184,0.24)" strokeWidth="1" strokeLinejoin="round" />
+              ))}
+              {/* Loiret */}
+              <path d={CARTE.loiret} fill="rgba(148,163,184,0.09)" stroke="rgba(203,213,225,0.6)" strokeWidth="1.4" strokeLinejoin="round" />
 
               {/* Zones */}
-              <g clipPath="url(#clip-loiret)">
-                <circle cx={bx} cy={by} r={r2} fill="rgba(129,140,248,0.16)" stroke="rgba(129,140,248,0.55)" strokeWidth="1.2" strokeDasharray="5 5" />
-                <circle cx={bx} cy={by} r={r1} fill="url(#grad-z1)" stroke="rgba(56,189,248,0.75)" strokeWidth="1.4" />
-              </g>
-              {/* Partie hors Loiret de la zone 1 (Sologne, Loir-et-Cher) */}
-              <circle cx={bx} cy={by} r={r1} fill="none" stroke="rgba(56,189,248,0.35)" strokeWidth="1" strokeDasharray="3 4" />
+              <circle cx={bx} cy={by} r={r2} fill="rgba(129,140,248,0.13)" stroke="rgba(129,140,248,0.55)" strokeWidth="1.2" strokeDasharray="5 5" />
+              <circle cx={bx} cy={by} r={r1} fill="url(#grad-z1)" stroke="rgba(56,189,248,0.75)" strokeWidth="1.4" />
 
               {/* Communes (texture) */}
-              <g fill="#CBD5E1">{COMMUNES.filter(c => c[1] === "45").map(c => <circle key={c[0] + c[3]} cx={c[3]} cy={c[4]} r="1.1" opacity="0.28" />)}</g>
+              <g fill="#CBD5E1">{COMMUNES.map(c => <circle key={c[0] + c[3]} cx={c[3]} cy={c[4]} r="1.1" opacity={c[1] === "45" ? 0.28 : 0.16} />)}</g>
 
-              {/* La Loire, avec un léger flux animé */}
-              <path d={CARTE.loire} fill="none" stroke="#38BDF8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" opacity="0.35" />
-              <path className="loire-flux" d={CARTE.loire} fill="none" stroke="#7DD3FC" strokeWidth="1.6" strokeLinecap="round" strokeDasharray="6 14" opacity="0.9" />
+              {/* Noms des départements */}
+              {CARTE.voisins.map(v => (
+                <text key={v.code} x={v.lx} y={v.ly} textAnchor="middle" fontSize="11" fontWeight="700" letterSpacing="1.5" fill="rgba(203,213,225,0.45)">{v.nom.toUpperCase()}</text>
+              ))}
 
               {/* Villes repères */}
               {villes.map(c => (
@@ -103,11 +104,11 @@ export default function ZoneLivraison({ fond = "#090E1A" }: { fond?: string }) {
               {/* Base */}
               <circle className="base-pulse" cx={bx} cy={by} r="10" fill="none" stroke="#38BDF8" strokeWidth="2" />
               <circle cx={bx} cy={by} r="7.5" fill="#38BDF8" stroke="#fff" strokeWidth="2.5" />
-              <text className="etiquette" x={bx + 12} y={by + 19} fontSize="13" fontWeight="800" fill="#7DD3FC" style={{ paintOrder: "stroke" }} stroke="#0B1222" strokeWidth="3">Notre base</text>
+              <text className="etiquette" textAnchor="end" x={bx - 13} y={by + 5} fontSize="13" fontWeight="800" fill="#7DD3FC" style={{ paintOrder: "stroke" }} stroke="#0B1222" strokeWidth="3">Notre base</text>
             </svg>
             <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 8, padding: "6px 8px 4px", fontSize: 12, color: "rgba(203,213,225,0.75)" }}>
               <span>Distances à vol d&apos;oiseau depuis La Ferté-Saint-Aubin</span>
-              <span>Loiret (45) · Sologne</span>
+              <span>Loiret (45) et départements voisins</span>
             </div>
           </div>
 
@@ -135,7 +136,7 @@ export default function ZoneLivraison({ fond = "#090E1A" }: { fond?: string }) {
                       <li key={c[0] + c[1]} role="option" aria-selected="false">
                         <button type="button" onClick={() => choisir(c)} style={{ width: "100%", textAlign: "left", padding: "12px 16px", background: "none", border: "none", borderBottom: "1px solid #F1F5F9", fontSize: 15, fontFamily: "inherit", color: "#0F172A", cursor: "pointer", display: "flex", justifyContent: "space-between" }}>
                           <span style={{ fontWeight: 600 }}>{c[0]}</span>
-                          <span style={{ color: "#64748B", fontSize: 13 }}>{c[1] === "41" ? "Loir-et-Cher" : "Loiret"}</span>
+                          <span style={{ color: "#64748B", fontSize: 13 }}>{DEPARTEMENTS[c[1]] ?? ""} ({c[1]})</span>
                         </button>
                       </li>
                     ))}
