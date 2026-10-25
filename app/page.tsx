@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Banner from "@/components/Banner";
 import FloatCTA from "@/components/FloatCTA";
 import AvisClients from "@/components/AvisClients";
+import ZoneLivraison from "@/components/ZoneLivraison";
 import { TEXTES } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -138,32 +139,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ZONE */}
-        <section style={{ padding: "80px 24px", background: "linear-gradient(160deg,#F0F7FF,#EAF3FF 50%,#F5F9FF 100%)" }}>
-          <div style={{ maxWidth: 1000, margin: "0 auto", textAlign: "center" }}>
-            <p className="section-label">Zone de livraison</p>
-            <h2 style={{ textAlign: "center", fontSize: "clamp(28px,4vw,40px)", fontWeight: 800, color: "#1E293B", letterSpacing: "-1.2px", marginBottom: 28 }}>Orléans &amp; ses alentours</h2>
-            <div style={{ borderRadius: 20, overflow: "hidden", height: 340, marginBottom: 40, position: "relative", boxShadow: "0 8px 40px rgba(37,99,235,0.12)", border: "1px solid rgba(37,99,235,0.08)" }}>
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Orleans_-_cathedrale_Saint-Croix.jpg/1280px-Orleans_-_cathedrale_Saint-Croix.jpg" alt="Orléans — cathédrale Sainte-Croix" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,transparent 40%,rgba(20,35,65,0.72))", display: "flex", alignItems: "flex-end", padding: 28 }}>
-                <div><div style={{ color: "#fff", fontSize: 20, fontWeight: 800, letterSpacing: "-0.5px" }}>Orléans &amp; alentours</div><div style={{ color: "rgba(255,255,255,0.85)", fontSize: 14, marginTop: 4 }}>Livraison sur Orléans et tout le Loiret — tarif selon la distance</div></div>
-              </div>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {[
-                ["📍 Orléans", "Olivet", "Saran", "Saint-Jean-le-Blanc"],
-                ["Saint-Jean-de-la-Ruelle", "Meung-sur-Loire", "Saint-Ay"],
-                ["Ardon", "La Ferté-Saint-Aubin", "Lamotte-Beuvron"],
-              ].map((row, i) => (
-                <div key={i} style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
-                  {row.map((city, j) => (
-                    <span key={city} style={{ background: i === 0 && j === 0 ? "linear-gradient(135deg,#2563EB,#1E40AF)" : "#fff", color: i === 0 && j === 0 ? "#fff" : "#1E293B", padding: "11px 22px", borderRadius: 50, fontSize: 14, fontWeight: 600, border: i === 0 && j === 0 ? "none" : "1px solid rgba(37,99,235,0.15)", boxShadow: i === 0 && j === 0 ? "0 4px 16px rgba(37,99,235,0.3)" : "0 2px 8px rgba(37,99,235,0.06)", transition: "all .2s" }}>{city}</span>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* ZONE DE LIVRAISON */}
+        <ZoneLivraison />
 
         {/* AVIS (2 derniers) */}
         <AvisClients debut={2} fin={4} titre="Ils nous font confiance" />

@@ -208,3 +208,19 @@ body { overflow-x: hidden !important; }
   .texte-legal table { display: block; overflow-x: auto; white-space: normal; }
   .texte-legal th, .texte-legal td { min-width: 150px; }
 }
+
+/* ── Zone de livraison (carte) ─────────────────── */
+.zone-grille { position: absolute; inset: 0; background-image: linear-gradient(rgba(148,163,184,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.05) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%); pointer-events: none; }
+.zone-section::before { content: ""; position: absolute; width: 760px; height: 760px; left: -220px; top: -260px; background: radial-gradient(circle, rgba(56,189,248,0.14), transparent 62%); pointer-events: none; }
+.loire-flux { animation: loireFlux 3.2s linear infinite; }
+@keyframes loireFlux { to { stroke-dashoffset: -40; } }
+.base-pulse { transform-box: fill-box; transform-origin: center; animation: basePulse 2.4s ease-out infinite; }
+@keyframes basePulse { 0% { transform: scale(0.8); opacity: 0.9; } 100% { transform: scale(3.2); opacity: 0; } }
+.trajet { animation: trajet 1.2s ease-out both; }
+@keyframes trajet { from { stroke-dashoffset: 200; opacity: 0; } to { stroke-dashoffset: 0; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .loire-flux, .base-pulse, .trajet { animation: none; } }
+@media (max-width: 768px) {
+  .zone-carte { order: 2; }
+  .zone-carte .etiquette { font-size: 19px; }
+  .zone-carte .etiquette-forte { font-size: 21px; }
+}
