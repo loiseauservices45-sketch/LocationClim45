@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 // Retire l'émoji placé devant les pastilles du catalogue.
-const sansEmoji = (s: string) => s.replace(/^[^\p{L}\p{N}]+/u, "");
+const sansEmoji = (s: string) => s.replace(/^\S+\s+/, "");
 
 function FicheModele({ m, inverse }: { m: Modele; inverse: boolean }) {
   const p = infoModele(m.id);
