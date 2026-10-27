@@ -1,163 +1,122 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Banner from "@/components/Banner";
-import FloatCTA from "@/components/FloatCTA";
-import { TEXTES } from "@/lib/site";
+import Link from "next/link";
+import Icone from "@/components/Icones";
+import { PageGivre, TitreSection, CartesIcones, CartesModeles, Forfaits, type Forfait, Etapes, FAQ, AppelFinal } from "@/components/Sections";
+import { SITE, TEXTES } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Location Climatiseur Professionnel — Bureaux, Commerces, Événements Orléans",
   description: "Location climatiseur mobile pour professionnels à Orléans. Bureaux, commerces, restaurants, événements. Installation incluse, facture professionnelle, devis sur mesure.",
 };
 
-const prices = [
-  { name:"Courts séjours", price:"74€", period:"3 jours minimum", feats:[TEXTES.installation,TEXTES.livraisonCourt,"Facture professionnelle"], featured:false },
-  { name:"Semaine pro", price:"134€", period:"7 jours", feats:[TEXTES.installation,TEXTES.livraisonCourt,"Facture professionnelle","Support 7j/7"], featured:true },
-  { name:"Longue durée", price:"Sur devis", period:"multi-appareils ou plusieurs semaines", feats:[TEXTES.installation,"Plusieurs appareils possibles","Facture professionnelle","Tarif adapté à la durée"], featured:false },
+const FORFAITS_PRO: Forfait[] = [
+  { nom: "Courte durée", prix: "74 €", duree: "3 jours minimum, par appareil", bouton: "Nous appeler", inclus: [TEXTES.installation, TEXTES.livraisonCourt, "Facture professionnelle"] },
+  { nom: "Semaine pro", prix: "134 €", duree: "7 jours, par appareil", bouton: "Nous appeler", vedette: true, badge: "Le plus demandé", inclus: [TEXTES.installation, TEXTES.livraisonCourt, "Facture professionnelle", "Support 7j/7"] },
+  { nom: "Longue durée", prix: "Sur devis", duree: "plusieurs appareils ou plusieurs semaines", bouton: "Demander un devis", lien: "/contact", inclus: [TEXTES.installation, "Plusieurs appareils possibles", "Facture professionnelle", "Tarif adapté à la durée"] },
 ];
+
+const SECTEURS = ["Bureaux", "Commerces", "Laboratoires", "Ateliers", "Événements", "Chantiers"];
 
 export default function Professionnels() {
   return (
-    <>
-      <Banner text="Solutions pro disponibles sous 24h — Devis gratuit · Orléans & Loiret" />
-      <Header />
-      <main>
-        {/* HERO */}
-        <section className="hero-bg" style={{padding:"80px 24px 88px"}}>
-          <div className="hero-grid"/><div className="hero-glow-1"/><div className="hero-glow-2"/><div className="hero-streak"/>
-          <div style={{maxWidth:1100,margin:"0 auto",display:"grid",gridTemplateColumns:"1fr 420px",gap:72,alignItems:"center",position:"relative",zIndex:1}}>
-            <div>
-              <div className="hero-badge" style={{marginBottom:24,display:"inline-flex"}}><span className="badge-dot"/> Solution professionnelle — Orléans &amp; Loiret</div>
-              <h1 style={{fontSize:"clamp(32px,4.2vw,52px)",fontWeight:800,color:"#F0F6FF",lineHeight:1.08,letterSpacing:"-2px",marginBottom:22}}>
-                La chaleur coûte de l'argent<br/>à{" "}
-                <em style={{fontStyle:"normal",background:"linear-gradient(135deg,#7DD3FC,#38BDF8)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>votre business.</em>
-              </h1>
-              <p style={{fontSize:17,color:"rgba(200,220,255,0.6)",marginBottom:32,lineHeight:1.75,maxWidth:520}}>
-                Gardez vos équipes productives, vos clients confortables et votre activité sereine — même en pleine canicule. Installation et mise en service comprises.
-              </p>
-              <div style={{display:"flex",gap:12,flexWrap:"wrap",marginBottom:36}}>
-                <a href="tel:0783800070" className="btn-primary">📞 Demander un devis pro</a>
-                <a href="#tarifs" className="btn-ghost">Voir les tarifs →</a>
-              </div>
-              <div style={{display:"flex",gap:24,flexWrap:"wrap"}}>
-                {["💼 Bureaux & commerces","🎪 Événements","🚚 Livraison 24h","📄 Facture pro"].map(t=>(
-                  <span key={t} style={{fontSize:13,fontWeight:600,color:"rgba(180,210,255,0.55)"}}>{t}</span>
-                ))}
-              </div>
-            </div>
-            {/* Stats */}
-            <div style={{display:"flex",flexDirection:"column" as const,gap:16}}>
-              <span style={{display:"inline-flex",alignItems:"center",gap:6,background:"linear-gradient(135deg,#059669,#10B981)",color:"#fff",padding:"5px 14px",borderRadius:50,fontSize:12,fontWeight:700,boxShadow:"0 4px 12px rgba(5,150,105,0.3)"}}>● Disponible maintenant sur Orléans</span>
-              {[
-                {icon:"⏱️",num:"24h",label:"Délai d'intervention maximum"},
-                {icon:"💶",num:"Devis",label:"Tarif adapté à votre besoin"},
-                {icon:"🔧",num:"Incluse",label:"Installation & mise en service"},
-                {icon:"📄",num:"100%",label:"Facturation professionnelle fournie"},
-              ].map(({icon,num,label})=>(
-                <div key={num} style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.10)",borderRadius:18,padding:"22px 26px",backdropFilter:"blur(12px)",display:"flex",alignItems:"center",gap:20}}>
-                  <div style={{width:48,height:48,borderRadius:14,display:"flex",alignItems:"center",justifyContent:"center",font:"22px",background:"rgba(255,255,255,0.08)",flexShrink:0,fontSize:22}}>{icon}</div>
-                  <div>
-                    <div style={{fontSize:26,fontWeight:800,color:"#F0F6FF",letterSpacing:"-1px",lineHeight:1}}>{num}</div>
-                    <div style={{fontSize:13,color:"rgba(180,210,255,0.6)",marginTop:3}}>{label}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+    <PageGivre bandeau="Professionnels · Devis gratuit · Orléans & Loiret">
+      {/* HAUT DE PAGE : le bloc professionnel complet */}
+      <section className="lc-section lc-hero lc-hero-centre">
+        <div className="lc-conteneur lc-etroit" style={{ textAlign: "center" }}>
+          <p className="lc-pastille-lieu"><span />Professionnels · Orléans &amp; Loiret</p>
+          <h1 className="lc-h1 lc-h1-page">La climatisation temporaire<br /><span style={{ color: "#BAE6FD" }}>pour vos locaux.</span></h1>
+          <p className="lc-intro" style={{ margin: "0 auto 40px", maxWidth: 640 }}>Un seul interlocuteur, du devis à la récupération. Nous livrons, installons et reprenons le matériel.</p>
 
-        {/* USE CASES */}
-        <section style={{padding:"80px 24px",background:"linear-gradient(180deg,#EFF6FF,#F8FAFC)"}}>
-          <p className="section-label">Nos clients professionnels</p>
-          <h2 style={{textAlign:"center",fontSize:"clamp(26px,4vw,38px)",fontWeight:800,color:"#1E293B",letterSpacing:"-1.2px",marginBottom:16}}>Un besoin de fraîcheur ? On a la solution.</h2>
-          <p style={{textAlign:"center",fontSize:16,color:"#64748B",maxWidth:540,margin:"0 auto 52px",lineHeight:1.7}}>Quelle que soit votre activité, on s'adapte à vos contraintes et à votre planning.</p>
-          <div style={{maxWidth:1100,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20}}>
+          <div className="lc-g3 lc-g3-cartes" style={{ textAlign: "left", marginBottom: 30 }}>
             {[
-              {icon:"🏢",title:"Bureaux & open-spaces",desc:"Des équipes qui transpirent, c'est de la productivité en moins. On installe rapidement, sans perturber votre activité."},
-              {icon:"🍽️",title:"Restaurants & commerces",desc:"Vos clients restent plus longtemps dans un espace frais. Gardez votre réputation et votre chiffre d'affaires."},
-              {icon:"🎪",title:"Événements & salons",desc:"Chapiteau, salle de réception, stand pro — on livre et récupère selon votre planning exact."},
-              {icon:"🏗️",title:"Chantiers & entrepôts",desc:"Postes de travail, locaux de chantier, ateliers — on s'adapte à des environnements exigeants."},
-              {icon:"🏫",title:"Écoles & collectivités",desc:"Salles de classe, réfectoires, bureaux administratifs — des solutions temporaires sans engagement long terme."},
-              {icon:"🏥",title:"Santé & bien-être",desc:"Cabinets médicaux, salons, studios — le confort thermique de vos patients n'est pas négociable."},
-            ].map(({icon,title,desc})=>(
-              <div key={title} style={{background:"linear-gradient(160deg,#1a2744,#1e3055)",border:"1px solid rgba(37,99,235,0.2)",borderRadius:20,padding:"32px 26px",transition:"all .25s"}}>
-                <div style={{width:52,height:52,background:"rgba(56,189,248,0.12)",border:"1px solid rgba(56,189,248,0.2)",borderRadius:14,display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,marginBottom:18}}>{icon}</div>
-                <div style={{fontSize:17,fontWeight:700,color:"#F0F6FF",marginBottom:10}}>{title}</div>
-                <p style={{fontSize:14,color:"rgba(180,210,255,0.55)",lineHeight:1.65}}>{desc}</p>
+              { icone: "appareils" as const, titre: "Plusieurs appareils", texte: "Pour équiper plusieurs pièces ou tout un site, avec un seul devis et une seule livraison." },
+              { icone: "document" as const, titre: "Facture professionnelle", texte: "Devis et facture au nom de votre entreprise, contrat de location écrit." },
+              { icone: "calendrier" as const, titre: "Courte ou longue durée", texte: "De quelques jours à plusieurs mois, avec un tarif adapté à la durée." },
+            ].map(c => (
+              <div key={c.titre} className="lc-glace lc-raison">
+                <div className="lc-rond-icone"><Icone nom={c.icone} taille={28} couleur="#0369A1" /></div>
+                <h3>{c.titre}</h3>
+                <p>{c.texte}</p>
               </div>
             ))}
           </div>
-        </section>
 
-        {/* CTA STRIP */}
-        <div className="cta-strip">
-          <div style={{maxWidth:860,margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",gap:20,flexWrap:"wrap"}}>
-            <div>
-              <div style={{fontSize:17,fontWeight:700,color:"#fff"}}>Besoin d'une solution rapide pour votre activité ?</div>
-              <div style={{fontSize:13,color:"rgba(255,255,255,0.7)",marginTop:3}}>Réponse sous 1h · Devis gratuit sans engagement · Livraison sous 24h</div>
-            </div>
-            <a href="tel:0783800070" style={{background:"#fff",color:"#1D4ED8",padding:"12px 26px",borderRadius:50,fontWeight:800,fontSize:14,whiteSpace:"nowrap" as const}}>📞 07 83 80 00 70</a>
+          <div className="lc-secteurs">{SECTEURS.map(s => <span key={s}>{s}</span>)}</div>
+
+          <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+            <Link href="/contact" className="lc-bouton-glace lc-bouton-grand">Demander un devis professionnel</Link>
+            <a href={SITE.telephoneLien} className="lc-bouton-ciel"><Icone nom="telephone" taille={20} epaisseur={2.2} />&nbsp;{SITE.telephoneAffiche}</a>
           </div>
         </div>
+      </section>
 
-        {/* AVANTAGES LOUER VS ACHETER */}
-        <section style={{padding:"80px 24px",background:"#fff"}}>
-          <p className="section-label">Louer plutôt qu'acheter</p>
-          <h2 style={{textAlign:"center",fontSize:"clamp(26px,4vw,38px)",fontWeight:800,color:"#1E293B",letterSpacing:"-1.2px",marginBottom:52}}>Un choix évident pour les pros</h2>
-          <div style={{maxWidth:1000,margin:"0 auto",display:"grid",gridTemplateColumns:"1fr 1fr",gap:24,alignItems:"start"}}>
-            <div style={{background:"linear-gradient(160deg,#1a2744,#1e3055)",border:"1px solid rgba(37,99,235,0.25)",borderRadius:20,padding:"36px 32px"}}>
-              <span style={{display:"inline-flex",alignItems:"center",gap:6,background:"rgba(56,189,248,0.15)",color:"#7DD3FC",border:"1px solid rgba(56,189,248,0.2)",padding:"6px 14px",borderRadius:50,fontSize:12,fontWeight:700,marginBottom:20}}>✓ Location LocationClim45</span>
-              <h3 style={{fontSize:20,fontWeight:800,color:"#F0F6FF",marginBottom:20}}>Flexible, simple, rentable</h3>
-              <ul style={{listStyle:"none",display:"flex",flexDirection:"column" as const,gap:12}}>
-                {["Aucun investissement initial","Installation et mise en service incluses","Durée sur mesure : 3 jours à plusieurs mois","Appareil entretenu et garanti","Charge déductible en frais pro","Aucun souci de stockage hors saison","Facturation professionnelle fournie"].map(f=>(
-                  <li key={f} style={{display:"flex",alignItems:"flex-start",gap:10,fontSize:14,color:"rgba(180,210,255,0.75)",lineHeight:1.5}}><span style={{color:"#38BDF8",fontWeight:800,flexShrink:0}}>✓</span>{f}</li>
+      {/* POUR QUI */}
+      <section className="lc-section">
+        <div className="lc-conteneur lc-etroit">
+          <TitreSection etiquette="Pour qui ?" titre="On s'adapte à votre activité." chapeau="Quelle que soit votre activité, on s'organise selon vos contraintes et votre planning." />
+          <CartesIcones colonnes={3} cartes={[
+            { icone: "immeuble", titre: "Bureaux & open-spaces", texte: "Des équipes au frais restent concentrées. On installe rapidement, sans perturber votre activité." },
+            { icone: "boutique", titre: "Restaurants & commerces", texte: "Vos clients restent plus longtemps dans un espace agréable." },
+            { icone: "chapiteau", titre: "Événements & salons", texte: "Salle de réception, stand, chapiteau : on livre et on récupère selon votre planning." },
+            { icone: "casque", titre: "Chantiers & ateliers", texte: "Postes de travail, locaux de chantier, ateliers : une solution temporaire et mobile." },
+            { icone: "ecole", titre: "Écoles & collectivités", texte: "Salles de classe, bureaux administratifs : sans engagement de longue durée." },
+            { icone: "coeur", titre: "Santé & bien-être", texte: "Cabinets, salons, studios : le confort de vos patients et clients." },
+          ]} />
+        </div>
+      </section>
+
+      {/* LOUER OU ACHETER */}
+      <section className="lc-section">
+        <div className="lc-conteneur lc-etroit">
+          <TitreSection etiquette="Louer plutôt qu'acheter" titre="Un choix évident pour les pros." />
+          <div className="lc-g2 lc-comparatif">
+            <div className="lc-glace lc-compar">
+              <span className="lc-compar-badge"><Icone nom="coche" taille={16} epaisseur={2.6} /> Location LocationClim45</span>
+              <h3>Flexible et simple</h3>
+              <ul>
+                {["Aucun investissement de départ", "Installation et mise en service incluses", "Durée sur mesure : de 3 jours à plusieurs mois", "Appareils entretenus entre chaque location", "Rien à stocker hors saison", "Facture professionnelle fournie"].map(f => (
+                  <li key={f}><Icone nom="coche" taille={18} couleur="#0284C7" epaisseur={2.6} />{f}</li>
                 ))}
               </ul>
             </div>
-            <div style={{background:"#F8FAFC",border:"1px solid #E2E8F0",borderRadius:20,padding:"36px 32px"}}>
-              <span style={{display:"inline-flex",alignItems:"center",gap:6,background:"#F1F5F9",color:"#94A3B8",padding:"6px 14px",borderRadius:50,fontSize:12,fontWeight:700,marginBottom:20}}>✗ Achat en propre</span>
-              <h3 style={{fontSize:20,fontWeight:800,color:"#94A3B8",marginBottom:20}}>Contraignant et coûteux</h3>
-              <ul style={{listStyle:"none",display:"flex",flexDirection:"column" as const,gap:12}}>
-                {["Investissement de 600€ à 2000€+","Installation à votre charge","Maintenance et pannes à gérer","Appareil inutilisé 9 mois sur 12","Stockage encombrant hors saison","Revente difficile","Amortissement long et incertain"].map(f=>(
-                  <li key={f} style={{display:"flex",alignItems:"flex-start",gap:10,fontSize:14,color:"#94A3B8",lineHeight:1.5}}><span style={{fontWeight:800,flexShrink:0}}>✗</span>{f}</li>
+            <div className="lc-compar lc-compar-sombre">
+              <span className="lc-compar-badge lc-compar-badge-gris"><Icone nom="croix" taille={16} epaisseur={2.4} /> Achat</span>
+              <h3>Contraignant</h3>
+              <ul>
+                {["Achat de l'appareil à prévoir", "Installation à votre charge", "Entretien et pannes à gérer", "Appareil inutilisé la plus grande partie de l'année", "Stockage hors saison", "Revente difficile"].map(f => (
+                  <li key={f}><Icone nom="croix" taille={18} couleur="#94A3B8" epaisseur={2.2} />{f}</li>
                 ))}
               </ul>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* PRICING */}
-        <section id="tarifs" style={{background:"linear-gradient(160deg,#07111F,#0F1F4A 60%,#1E3A8A 100%)",padding:"80px 24px"}}>
-          <p className="section-label section-label-light">Tarifs professionnels</p>
-          <h2 style={{textAlign:"center",fontSize:"clamp(26px,4vw,38px)",fontWeight:800,color:"#F0F6FF",letterSpacing:"-1.2px",marginBottom:52}}>Des forfaits taillés pour les pros</h2>
-          <div style={{maxWidth:980,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20}}>
-            {prices.map(({name,price,period,feats,featured})=>(
-              <div key={name} className="price-card" style={featured?{background:"#fff",border:"none",boxShadow:"0 12px 48px rgba(0,0,0,0.4)"}:{}}>
-                {featured&&<span style={{position:"absolute",top:-13,left:"50%",transform:"translateX(-50%)",background:"linear-gradient(135deg,#0EA5E9,#38BDF8)",color:"#0F172A",padding:"5px 16px",borderRadius:50,fontSize:11,fontWeight:800,whiteSpace:"nowrap" as const}}>⭐ Le plus demandé</span>}
-                <div style={{fontSize:12,fontWeight:700,textTransform:"uppercase" as const,letterSpacing:"1.5px",color:featured?"#2563EB":"rgba(255,255,255,0.45)",marginBottom:10}}>{name}</div>
-                <div style={{fontSize:44,fontWeight:800,lineHeight:1,color:featured?"#1E293B":"#F0F6FF",marginBottom:4,letterSpacing:"-2px"}}>{price}</div>
-                <div style={{fontSize:14,color:featured?"#94A3B8":"rgba(255,255,255,0.4)",marginBottom:24}}>{period}</div>
-                <ul style={{listStyle:"none"}}>{feats.map(f=><li key={f} style={{fontSize:14,padding:"8px 0",borderBottom:featured?"1px solid rgba(0,0,0,0.07)":"1px solid rgba(255,255,255,0.07)",display:"flex",alignItems:"center",gap:9,color:featured?"#475569":"rgba(255,255,255,0.7)"}}><span style={{color:featured?"#2563EB":"#38BDF8",fontWeight:800}}>✓</span> {f}</li>)}</ul>
-                <a href="tel:0783800070" style={{display:"block",width:"100%",textAlign:"center" as const,marginTop:24,padding:"14px",borderRadius:50,fontWeight:700,fontSize:15,background:featured?"#1E293B":"rgba(255,255,255,0.08)",color:"#fff",border:featured?"none":"1px solid rgba(255,255,255,0.15)"}}>Nous appeler</a>
-              </div>
-            ))}
-          </div>
-          <p style={{textAlign:"center",marginTop:28,fontSize:14,color:"rgba(255,255,255,0.75)",lineHeight:1.7}}>🚚 {TEXTES.livraison} — précisée dans votre devis<br/>🔒 {TEXTES.caution} · Plusieurs appareils sur devis</p>
-        </section>
+      {/* TARIFS PROS */}
+      <section id="tarifs" className="lc-section">
+        <div className="lc-conteneur lc-etroit">
+          <TitreSection etiquette="Tarifs professionnels" titre="Des forfaits clairs, des devis sur mesure." chapeau="Prix par appareil. Pour plusieurs appareils ou une longue durée, nous établissons un devis adapté." />
+          <CartesModeles />
+          <Forfaits forfaits={FORFAITS_PRO} />
+          <p className="lc-note">{TEXTES.livraison} — précisée dans votre devis · {TEXTES.caution}</p>
+        </div>
+      </section>
 
-        {/* CTA FINAL */}
-        <section style={{background:"#0D1117",padding:"80px 24px",textAlign:"center" as const,position:"relative",overflow:"hidden"}}>
-          <div style={{position:"absolute",inset:0,background:"radial-gradient(ellipse at center,rgba(37,99,235,0.18),transparent 65%)",pointerEvents:"none"}}/>
-          <h2 style={{color:"#F0F6FF",fontSize:"clamp(26px,4vw,38px)",fontWeight:800,letterSpacing:"-1.2px",marginBottom:12,position:"relative",zIndex:1}}>Votre activité mérite un air frais.</h2>
-          <p style={{color:"rgba(255,255,255,0.45)",fontSize:17,marginBottom:40,position:"relative",zIndex:1,fontStyle:"italic"}}>Devis gratuit sous 1h — livraison sous 24h sur Orléans et ses alentours.</p>
-          <div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap",position:"relative",zIndex:1}}>
-            <a href="tel:0783800070" className="btn-cta-main">📞 07 83 80 00 70</a>
-            <a href="https://wa.me/33783800070" className="btn-cta-wa" target="_blank" rel="noopener">💬 WhatsApp</a>
-          </div>
-        </section>
-      </main>
-      <Footer/>
-      <FloatCTA/>
-    </>
+      <Etapes etapes={[
+        { titre: "Vous nous appelez", texte: "Ou vous remplissez le formulaire : nombre d'appareils, lieu, dates." },
+        { titre: "On vous envoie un devis", texte: "Prix des appareils, de la livraison et durée, noir sur blanc." },
+        { titre: "Livraison et installation", texte: "On installe et on met en service sur votre site." },
+        { titre: "Récupération", texte: "En fin de location, on reprend tout. Facture professionnelle fournie." },
+      ]} />
+
+      <FAQ titre="Questions des professionnels" items={[
+        { q: "Pouvez-vous équiper plusieurs pièces ou plusieurs sites ?", a: "Oui. Indiquez-nous le nombre de pièces et leur surface : nous vous proposons le nombre d'appareils adapté, selon nos disponibilités, dans un seul devis." },
+        { q: "Fournissez-vous une facture ?", a: "Oui, une facture professionnelle au nom de votre entreprise est fournie pour chaque location, avec un contrat de location écrit." },
+        { q: "Combien coûte la livraison ?", a: TEXTES.livraisonDetail },
+        { q: "Faut-il faire des travaux ?", a: "Non. Il suffit d'une fenêtre pour évacuer l'air chaud par la gaine fournie. Nous nous chargeons de l'installation." },
+      ]} />
+
+      <AppelFinal titre="Votre activité mérite un air frais." texte="Devis gratuit, livraison sur Orléans et tout le Loiret." />
+    </PageGivre>
   );
 }

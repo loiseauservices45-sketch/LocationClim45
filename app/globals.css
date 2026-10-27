@@ -237,6 +237,7 @@ body { overflow-x: hidden !important; }
 .lc-fond { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 .lc-lueur { position: absolute; border-radius: 50%; }
 .lc-courant { position: absolute; top: 0; left: 50%; width: 1440px; margin-left: -720px; height: 100%; }
+.lc-courant-large { height: 6700px; }
 .lc-courant-etroit { display: none; left: 0; margin-left: 0; width: 100%; }
 .lc-flux { stroke-dasharray: 3 26; animation: lcCourant 8s linear infinite; }
 .lc-voile-air { filter: blur(14px); animation: lcSouffle 6s ease-in-out infinite; }
@@ -279,7 +280,7 @@ body { overflow-x: hidden !important; }
 .lc-menu-mobile a.actif { color: #7DD3FC; background: rgba(125,211,252,.08); }
 .lc-menu-mobile .lc-menu-appel { margin-top: 10px; text-align: center; background: linear-gradient(135deg,#7DD3FC,#38BDF8); color: #04172E; border-radius: 999px; }
 .lc-menu-mobile .lc-menu-wa { text-align: center; border: 1.5px solid rgba(240,249,255,.45); border-radius: 999px; }
-.lc-pied { position: relative; z-index: 1; background: rgba(6,12,24,.6); color: #CBD5E1; padding: 48px 24px 24px; border-top: 1px solid rgba(186,230,253,.14); }
+.lc-pied { position: relative; z-index: 1; background: #08111F; color: #CBD5E1; padding: 48px 24px 24px; border-top: 1px solid rgba(186,230,253,.14); }
 .lc-pied-grille { max-width: 1160px; margin: 0 auto 32px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; }
 .lc-pied h4 { color: #F1F5F9; font-size: 12px; font-weight: 700; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1px; }
 .lc-pied ul { list-style: none; }
@@ -450,6 +451,87 @@ body { overflow-x: hidden !important; }
   .lc-courant-etroit { display: block; }
   .lc-bouton-ciel, .lc-bouton-contour { width: 100%; justify-content: center; }
 }
+
+/* Pages intérieures */
+.lc-h1-page { font-size: clamp(36px,4.6vw,62px); letter-spacing: -2.2px; line-height: 1.04; }
+.lc-h2-moyen { font-size: clamp(28px,4vw,40px); }
+.lc-h2-grand { font-size: clamp(32px,5vw,58px); }
+.lc-hero-centre { padding-top: 64px; padding-bottom: 70px; }
+.lc-hero-centre .lc-pastille-lieu { margin-left: auto; margin-right: auto; }
+.lc-g3-cartes { align-items: stretch; }
+.lc-bouton-ciel, .lc-bouton-glace, .lc-bouton-contour { gap: 8px; }
+.lc-bouton-grand { display: inline-flex; min-height: 56px; padding: 0 30px; font-size: 17px; }
+.lc-bouton-moyen { min-height: 52px; padding: 0 24px; font-size: 16px; }
+.lc-bouton-sombre { display: inline-flex; align-items: center; min-height: 52px; padding: 0 22px; border-radius: 999px; border: 2px solid #0B3B66; color: #0B3B66; font-weight: 800; font-size: 15.5px; }
+.lc-fiche { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); border-radius: 32px; overflow: hidden; }
+.lc-fiche-inverse .lc-fiche-photo { order: 2; }
+.lc-fiche-photo { position: relative; background: #ECE9E6; min-height: 520px; }
+.lc-fiche-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 70%; }
+.lc-fiche-etiquette { position: absolute; left: 20px; top: 20px; }
+.lc-fiche-texte { padding: 44px 44px 40px; display: flex; flex-direction: column; }
+.lc-fiche-texte h3 { margin: 8px 0 10px; font-size: clamp(26px,3vw,34px); font-weight: 800; letter-spacing: -1px; color: #0B1B33; line-height: 1.1; }
+.lc-fiche-texte h3 span { color: #0369A1; white-space: nowrap; }
+.lc-fiche-accroche { font-size: 16.5px; line-height: 1.6; color: #475569; margin-bottom: 18px; }
+.lc-puces-fiche { margin: 0 0 20px; }
+.lc-coches { list-style: none; display: grid; gap: 10px; margin-bottom: 24px; }
+.lc-coches li { display: flex; gap: 10px; align-items: flex-start; font-size: 15.5px; line-height: 1.5; color: #334155; }
+.lc-fiche-prix { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; padding: 18px 22px; border-radius: 18px; background: #E0F2FE; margin-bottom: 22px; }
+.lc-fiche-prix strong { display: block; font-size: 40px; font-weight: 800; letter-spacing: -1.6px; color: #0B1B33; line-height: 1.05; }
+.lc-fiche-petit { display: block; font-size: 13px; font-weight: 600; color: #475569; }
+.lc-fiche-inclus { font-size: 14.5px; line-height: 1.7; color: #0B3B66; font-weight: 600; }
+.lc-fiche-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.lc-secteurs { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 36px; }
+.lc-secteurs span { padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(186,230,253,.35); color: #E0F2FE; font-size: 14.5px; font-weight: 700; }
+.lc-comparatif { align-items: stretch; }
+.lc-compar { padding: 34px 32px; border-radius: 26px; }
+.lc-compar h3 { font-size: 22px; font-weight: 800; color: #0B1B33; margin: 16px 0 18px; }
+.lc-compar ul { list-style: none; display: grid; gap: 12px; }
+.lc-compar li { display: flex; gap: 10px; align-items: flex-start; font-size: 15.5px; line-height: 1.5; color: #334155; }
+.lc-compar-sombre { background: rgba(6,12,24,.45); border: 1px solid rgba(186,230,253,.18); }
+.lc-compar-sombre h3 { color: #CBD5E1; }
+.lc-compar-sombre li { color: #CBD5E1; }
+.lc-compar-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; background: #E0F2FE; color: #0369A1; font-size: 13px; font-weight: 800; }
+.lc-compar-badge-gris { background: rgba(148,163,184,.18); color: #CBD5E1; }
+.lc-chiffres { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); max-width: 620px; margin: 0 auto; border-radius: 22px; border: 1px solid rgba(186,230,253,.22); background: rgba(240,249,255,.06); }
+.lc-chiffres div { padding: 18px 12px; text-align: center; }
+.lc-chiffres div + div { border-left: 1px solid rgba(186,230,253,.15); }
+.lc-chiffres strong { display: block; font-size: 24px; font-weight: 800; color: #F8FAFC; letter-spacing: -.6px; }
+.lc-chiffres span { font-size: 13.5px; color: #CBD5E1; }
+.lc-contact-grille { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: minmax(0,1fr) 400px; gap: 32px; align-items: start; }
+.lc-contact-form { border-radius: 28px; padding: 44px 40px; }
+.lc-carte-nuit { border-radius: 22px; padding: 28px 26px; background: rgba(6,12,24,.45); border: 1px solid rgba(186,230,253,.2); }
+.lc-moyen { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
+.lc-moyen:last-child { margin-bottom: 0; }
+.lc-moyen-icone { width: 44px; height: 44px; border-radius: 12px; background: rgba(125,211,252,.12); border: 1px solid rgba(125,211,252,.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.lc-moyen-label { font-size: 12px; font-weight: 700; color: #BAE6FD; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+.lc-moyen-valeur { font-size: 16px; font-weight: 800; color: #F8FAFC; word-break: break-word; }
+.lc-moyen-sous { font-size: 13px; color: #CBD5E1; margin-top: 2px; }
+.lc-horaire { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #E2E8F0; font-size: 15px; color: #334155; }
+.lc-horaire:last-child { border-bottom: none; }
+.lc-horaire strong { color: #0369A1; }
+.lc-liste-num { list-style: none; display: grid; gap: 10px; }
+.lc-liste-num li { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; line-height: 1.5; color: #E2E8F0; }
+.lc-liste-num li span { width: 24px; height: 24px; border-radius: 50%; background: #F0F9FF; color: #0B3B66; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.lc-legal { max-width: 880px; margin: 0 auto; border-radius: 28px; padding: 48px 52px; }
+@media (max-width: 860px) {
+  .lc-fiche, .lc-contact-grille, .lc-form-2 { grid-template-columns: minmax(0,1fr) !important; }
+  .lc-fiche-inverse .lc-fiche-photo { order: 0; }
+  .lc-fiche-photo { min-height: 300px; }
+  .lc-fiche-texte { padding: 24px 20px 24px; }
+  .lc-fiche-prix strong { font-size: 34px; }
+  .lc-fiche-actions a { width: 100%; justify-content: center; }
+  .lc-g3-cartes { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  .lc-moyen-valeur { font-size: 14.5px; }
+  .lc-hero-centre { padding-top: 26px; padding-bottom: 36px; }
+  .lc-h1-page { letter-spacing: -1.2px; }
+  .lc-bouton-grand { width: 100%; justify-content: center; }
+  .lc-chiffres strong { font-size: 18px; }
+  .lc-chiffres span { font-size: 12px; }
+  .lc-contact-form { padding: 26px 18px; border-radius: 22px; }
+  .lc-compar { padding: 24px 20px; }
+  .lc-legal { padding: 26px 18px; border-radius: 22px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .lc-flux, .lc-voile-air, .lc-flocon, .lc-reflet::after, .lc-pulse, .lc-tourne, .lc-flotte { animation: none; }
 }
+.lc-page .zone-section::before { display: none; }

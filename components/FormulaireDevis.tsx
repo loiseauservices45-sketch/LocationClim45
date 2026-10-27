@@ -109,7 +109,7 @@ export default function FormulaireDevis() {
   if (etat === "envoye" || etat === "messagerie") {
     return (
       <div style={{ textAlign: "center", padding: "48px 24px" }} aria-live="polite">
-        <div style={{ fontSize: 56, marginBottom: 20 }}>{etat === "envoye" ? "✅" : "✉️"}</div>
+        <div aria-hidden="true" style={{ width: 72, height: 72, margin: "0 auto 20px", borderRadius: "50%", background: "#E0F2FE", color: "#0369A1", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 34, fontWeight: 800 }}>{etat === "envoye" ? "✓" : "@"}</div>
         <div style={{ fontSize: 22, fontWeight: 800, color: "#1E293B", marginBottom: 10 }}>
           {etat === "envoye" ? "Demande envoyée !" : "Votre messagerie s'est ouverte"}
         </div>
@@ -118,7 +118,7 @@ export default function FormulaireDevis() {
             ? <>Nous vous rappelons rapidement pour confirmer votre devis.<br />Besoin d'une réponse immédiate ?</>
             : <>Pensez à appuyer sur <strong>Envoyer</strong> dans votre messagerie pour que votre demande nous parvienne.<br />Le plus simple reste de nous appeler :</>}
         </p>
-        <a href={SITE.telephoneLien} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#2563EB,#1E40AF)", color: "#fff", padding: "14px 28px", borderRadius: 50, fontWeight: 700, fontSize: 15, boxShadow: "0 4px 20px rgba(37,99,235,0.4)" }}>📞 {SITE.telephoneAffiche}</a>
+        <a href={SITE.telephoneLien} style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "linear-gradient(135deg,#2563EB,#1E40AF)", color: "#fff", padding: "14px 28px", borderRadius: 50, fontWeight: 700, fontSize: 15, boxShadow: "0 4px 20px rgba(37,99,235,0.4)" }}>Appeler le {SITE.telephoneAffiche}</a>
       </div>
     );
   }
@@ -131,12 +131,12 @@ export default function FormulaireDevis() {
         {/* Champ piège anti-robots : invisible pour les visiteurs */}
         <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ display: "none" }} />
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+        <div className="lc-form-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
           <div><label style={lbl} htmlFor="nom">Nom complet *</label><input style={inp("nom")} type="text" id="nom" name="nom" autoComplete="name" placeholder="Jean Dupont" {...aria("nom")} />{err("nom")}</div>
           <div><label style={lbl} htmlFor="phone">Téléphone *</label><input style={inp("phone")} type="tel" id="phone" name="phone" autoComplete="tel" inputMode="tel" placeholder="06 00 00 00 00" {...aria("phone")} />{err("phone")}</div>
         </div>
         <div style={{ marginBottom: 16 }}><label style={lbl} htmlFor="email">E-mail</label><input style={inp("email")} type="email" id="email" name="email" autoComplete="email" placeholder="votre@email.fr" {...aria("email")} />{err("email")}</div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+        <div className="lc-form-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
           <div><label style={lbl} htmlFor="commune">Commune *</label><input style={inp("commune")} type="text" id="commune" name="commune" autoComplete="address-level2" placeholder="Ex : Orléans" {...aria("commune")} />{err("commune")}</div>
           <div>
             <label style={lbl} htmlFor="profil">Vous êtes *</label>
@@ -165,11 +165,11 @@ export default function FormulaireDevis() {
           </div>
         )}
 
-        <button type="submit" disabled={etat === "envoi"} style={{ width: "100%", padding: 17, background: "linear-gradient(135deg,#2563EB,#1E40AF)", color: "#fff", border: "none", borderRadius: 50, fontFamily: "inherit", fontSize: 16, fontWeight: 800, cursor: etat === "envoi" ? "wait" : "pointer", opacity: etat === "envoi" ? 0.7 : 1, boxShadow: "0 4px 24px rgba(37,99,235,0.4)", transition: "all .2s", display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
+        <button type="submit" disabled={etat === "envoi"} style={{ width: "100%", padding: 17, background: "linear-gradient(135deg,#0B3B66,#1D4ED8)", color: "#fff", border: "none", borderRadius: 50, fontFamily: "inherit", fontSize: 16, fontWeight: 800, cursor: etat === "envoi" ? "wait" : "pointer", opacity: etat === "envoi" ? 0.7 : 1, boxShadow: "0 4px 24px rgba(37,99,235,0.4)", transition: "all .2s", display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
           <span>{etat === "envoi" ? "Envoi en cours…" : "Envoyer ma demande"}</span>
           {etat !== "envoi" && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg>}
         </button>
-        <p style={{ fontSize: 12, color: "#64748B", textAlign: "center", marginTop: 14, lineHeight: 1.6 }}>🔒 Vos coordonnées servent uniquement à traiter votre demande et ne sont jamais revendues.</p>
+        <p style={{ fontSize: 12, color: "#64748B", textAlign: "center", marginTop: 14, lineHeight: 1.6 }}>Vos coordonnées servent uniquement à traiter votre demande et ne sont jamais revendues.</p>
       </form>
     </>
   );
