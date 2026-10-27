@@ -25,7 +25,8 @@ export default function Professionnels() {
         <div className="lc-conteneur lc-etroit" style={{ textAlign: "center" }}>
           <p className="lc-pastille-lieu"><span />Professionnels · Orléans &amp; Loiret</p>
           <h1 className="lc-h1 lc-h1-page">La climatisation temporaire<br /><span style={{ color: "#BAE6FD" }}>pour vos locaux.</span></h1>
-          <p className="lc-intro" style={{ margin: "0 auto 40px", maxWidth: 640 }}>Un seul interlocuteur, du devis à la récupération. Nous livrons, installons et reprenons le matériel.</p>
+          <p className="lc-intro" style={{ margin: "0 auto 26px", maxWidth: 640 }}>Un seul interlocuteur, du devis à la récupération. Nous livrons, installons et reprenons le matériel.</p>
+          <p className="lc-delai"><Icone nom="horloge" taille={20} couleur="#7DD3FC" epaisseur={2} />Intervention sous 24 h maximum</p>
 
           <div className="lc-g3 lc-g3-cartes" style={{ textAlign: "left", marginBottom: 30 }}>
             {[
@@ -83,7 +84,7 @@ export default function Professionnels() {
               <span className="lc-compar-badge lc-compar-badge-gris"><Icone nom="croix" taille={16} epaisseur={2.4} /> Achat</span>
               <h3>Contraignant</h3>
               <ul>
-                {["Achat de l'appareil à prévoir", "Installation à votre charge", "Entretien et pannes à gérer", "Appareil inutilisé la plus grande partie de l'année", "Stockage hors saison", "Revente difficile"].map(f => (
+                {["Achat d'un appareil : de 600 € à 2 000 € environ", "Installation à votre charge", "Entretien et pannes à gérer", "Appareil inutilisé la plus grande partie de l'année", "Stockage hors saison", "Revente difficile"].map(f => (
                   <li key={f}><Icone nom="croix" taille={18} couleur="#94A3B8" epaisseur={2.2} />{f}</li>
                 ))}
               </ul>

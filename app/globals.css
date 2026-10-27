@@ -480,6 +480,7 @@ body { overflow-x: hidden !important; }
 .lc-fiche-petit { display: block; font-size: 13px; font-weight: 600; color: #475569; }
 .lc-fiche-inclus { font-size: 14.5px; line-height: 1.7; color: #0B3B66; font-weight: 600; }
 .lc-fiche-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.lc-delai { display: inline-flex; align-items: center; gap: 10px; margin: 0 auto 36px; padding: 10px 18px; border-radius: 999px; background: rgba(125,211,252,.12); border: 1px solid rgba(125,211,252,.4); color: #F0F9FF; font-size: 16px; font-weight: 800; }
 .lc-secteurs { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 36px; }
 .lc-secteurs span { padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(186,230,253,.35); color: #E0F2FE; font-size: 14.5px; font-weight: 700; }
 .lc-comparatif { align-items: stretch; }
