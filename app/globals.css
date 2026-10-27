@@ -538,8 +538,8 @@ body { overflow-x: hidden !important; }
 .lc-page .zone-section::before { display: none; }
 
 /* Cases à icône : verre givré bordé de blanc (les avis gardent le fond blanc) */
-.lc-glace.lc-raison { background: linear-gradient(160deg, rgba(255,255,255,.14), rgba(255,255,255,.05)); border: 2px solid rgba(255,255,255,.88); box-shadow: 0 20px 50px rgba(2,8,23,.38), inset 0 1px 0 rgba(255,255,255,.25); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); color: #F8FAFC; }
+.lc-glace.lc-raison { background: linear-gradient(160deg, rgba(20,48,88,.78), rgba(8,22,46,.82)); border: 2px solid #FFFFFF; box-shadow: 0 0 14px rgba(255,255,255,.28), 0 20px 50px rgba(2,8,23,.45), inset 0 1px 0 rgba(255,255,255,.3); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); color: #F8FAFC; }
 .lc-glace.lc-raison h3 { color: #FFFFFF; }
-.lc-glace.lc-raison p { color: #E2ECF6; }
+.lc-glace.lc-raison p { color: #F1F6FB; }
 .lc-glace.lc-raison .lc-rond-icone { background: radial-gradient(circle at 30% 30%, #FFFFFF, #BAE6FD 55%, #7DD3FC); box-shadow: 0 0 0 6px rgba(125,211,252,.14), 0 8px 24px rgba(56,189,248,.35); }
 .lc-glace.lc-raison .lc-rond-icone svg { stroke: #0B3B66; }
