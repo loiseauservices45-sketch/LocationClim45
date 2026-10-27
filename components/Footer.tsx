@@ -1,21 +1,24 @@
 import Link from "next/link";
+import { SITE } from "@/lib/site";
+import { Logo } from "@/components/Header";
 
 export default function Footer() {
   return (
-    <footer style={{ background: "#060A12", color: "rgba(255,255,255,0.5)", padding: "44px 24px 22px" }}>
-      <div style={{ maxWidth: 1140, margin: "0 auto", display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: 48, marginBottom: 32 }}>
+    <footer className="lc-pied">
+      <div className="lc-pied-grille">
         <div>
-          <div style={{ fontSize: 21, fontWeight: 800, color: "#fff", marginBottom: 10 }}>
-            LocationClim<em style={{ fontStyle: "normal", color: "#38BDF8" }}>45</em>
+          <div className="lc-marque" style={{ marginBottom: 12 }}>
+            <Logo taille={40} />
+            <span>Location<span style={{ color: "#7DD3FC" }}>Clim</span><span style={{ color: "#94A3B8" }}>45</span></span>
           </div>
-          <p style={{ fontSize: 13, lineHeight: 1.75, marginBottom: 16 }}>
-            Location de climatiseurs mobiles à Orléans et dans le Loiret. Installation et mise en service incluses, livraison selon la distance. Disponible 7j/7 de 8h à 20h.
+          <p style={{ fontSize: 14, lineHeight: 1.75, marginBottom: 16, maxWidth: 420 }}>
+            Location de climatiseurs mobiles à Orléans et dans le Loiret. Installation et mise en service incluses, livraison selon la distance. Disponible 7j/7 de 8 h à 20 h.
           </p>
-          <a href="tel:0783800070" style={{ fontSize: 17, fontWeight: 700, color: "#fff" }}>📞 07 83 80 00 70</a>
+          <a href={SITE.telephoneLien} style={{ fontSize: 18, fontWeight: 800, color: "#F8FAFC" }}>{SITE.telephoneAffiche}</a>
         </div>
         <div>
-          <h4 style={{ color: "rgba(255,255,255,0.8)", fontSize: 12, fontWeight: 700, marginBottom: 14, textTransform: "uppercase", letterSpacing: 1 }}>Navigation</h4>
-          <ul style={{ listStyle: "none" }}>
+          <h4>Navigation</h4>
+          <ul>
             {[
               ["/", "Accueil"],
               ["/climatiseurs", "Nos climatiseurs"],
@@ -24,24 +27,22 @@ export default function Footer() {
               ["/zone-livraison", "Zone de livraison"],
               ["/contact", "Contact & devis"],
             ].map(([href, label]) => (
-              <li key={href} style={{ marginBottom: 9, fontSize: 13 }}>
-                <Link href={href} style={{ transition: "color .15s" }}>{label}</Link>
-              </li>
+              <li key={href}><Link href={href}>{label}</Link></li>
             ))}
           </ul>
         </div>
         <div>
-          <h4 style={{ color: "rgba(255,255,255,0.8)", fontSize: 12, fontWeight: 700, marginBottom: 14, textTransform: "uppercase", letterSpacing: 1 }}>Zone principale</h4>
-          <ul style={{ listStyle: "none" }}>
+          <h4>Zone principale</h4>
+          <ul>
             {["La Ferté-Saint-Aubin", "Orléans (45000)", "La Source", "Ardon", "Saint-Jean-le-Blanc", "Marcilly-en-Villette"].map(v => (
-              <li key={v} style={{ marginBottom: 9, fontSize: 13 }}>{v}</li>
+              <li key={v}>{v}</li>
             ))}
           </ul>
         </div>
       </div>
-      <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 18, display: "flex", justifyContent: "space-between", fontSize: 11, flexWrap: "wrap", gap: 6 }}>
+      <div className="lc-pied-bas">
         <span>© {new Date().getFullYear()} LocationClim45 — Tous droits réservés</span>
-        <span style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+        <span style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
           <Link href="/mentions-legales">Mentions légales</Link>
           <Link href="/cgv">CGV</Link>
           <Link href="/confidentialite">Confidentialité</Link>

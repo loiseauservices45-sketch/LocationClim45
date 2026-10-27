@@ -1,167 +1,241 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Banner from "@/components/Banner";
 import FloatCTA from "@/components/FloatCTA";
 import AvisClients from "@/components/AvisClients";
 import ZoneLivraison from "@/components/ZoneLivraison";
-import { TEXTES } from "@/lib/site";
+import FondGivre from "@/components/FondGivre";
+import TransitionGivre from "@/components/TransitionGivre";
+import BoutonGivre from "@/components/BoutonGivre";
+import { CLIMATISEURS } from "@/lib/catalogue";
+import { SITE, TEXTES } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Location Climatiseur Orléans & Loiret — Installation incluse",
   description: "Location de climatiseur mobile à Orléans et dans le Loiret, pour particuliers et professionnels. Installation et mise en service incluses, livraison sur devis.",
 };
 
+const ICONE_TEL = "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z";
+
+function Flocon({ couleur = "#0369A1", taille = 22, tourne = true }: { couleur?: string; taille?: number; tourne?: boolean }) {
+  return (
+    <svg className={tourne ? "lc-tourne" : undefined} width={taille} height={taille} viewBox="0 0 24 24" fill="none" stroke={couleur} strokeWidth="2.2" strokeLinecap="round" aria-hidden="true" style={{ flexShrink: 0 }}>
+      <path d="M12 2v20M4.9 6l14.2 12M4.9 18L19.1 6" /><path d="M9.5 3.5L12 6l2.5-2.5M9.5 20.5L12 18l2.5 2.5" />
+    </svg>
+  );
+}
+
+const Coche = () => (
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7DD3FC" strokeWidth="2.4" aria-hidden="true"><path d="M5 12l5 5L20 7" /></svg>
+);
+
+const RAISONS = [
+  { titre: "Livré sous 24 h", texte: "Vous choisissez le créneau, on arrive avec l'appareil.", icone: <><path d="M1 3h15v13H1z" /><path d="M16 8h4l3 3v5h-7z" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></> },
+  { titre: "Installation incluse", texte: "Mise en service et explications, sans aucuns travaux.", icone: <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z" /> },
+  { titre: "Appareils entretenus", texte: "Testés et nettoyés entre chaque location.", icone: <><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z" /><path d="M8.5 12l2.5 2.5 4.5-5" /></> },
+  { titre: "Récupéré chez vous", texte: "En fin de location, on reprend tout. Caution rendue.", icone: <><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /></> },
+];
+
+const INCLUS = [TEXTES.installation, TEXTES.livraisonCourt, "Support 7j/7", "Contrat de location écrit"];
+const FORFAITS = [
+  { nom: "Week-end", prix: "74 €", duree: "3 jours minimum", bouton: "Réserver", vedette: false },
+  { nom: "Semaine Fraîcheur", prix: "134 €", duree: "7 jours", bouton: "Réserver ma semaine", vedette: true },
+  { nom: "Mois Sérénité", prix: "384 €", duree: "30 jours", bouton: "Réserver", vedette: false },
+];
+
+const PASTILLES: Record<string, { etiquette: string; couleur: string; fond: string; surface: string; puces: string[] }> = {
+  essentiel: { etiquette: "MODÈLE STANDARD", couleur: "#0369A1", fond: "#E0F2FE", surface: "pièces de 15 à 25 m²", puces: ["Silencieux", "Prise standard"] },
+  confort: { etiquette: "GRANDES PIÈCES", couleur: "#4338CA", fond: "#EEF2FF", surface: "pièces de 20 à 30 m²", puces: ["Plus puissant", "Prise standard"] },
+};
+
+const ETAPES = [
+  { titre: "Vous nous appelez", texte: "On vérifie la disponibilité et on choisit votre forfait." },
+  { titre: "On confirme", texte: "Créneau et prix de livraison fixés, récapitulatif par SMS." },
+  { titre: "Livraison et installation", texte: "On installe l'appareil chez vous, prêt à souffler." },
+  { titre: "Récupération", texte: "On reprend l'appareil, votre caution vous est rendue." },
+];
+
 export default function Home() {
   return (
-    <>
-      <Banner />
-      <Header />
-      <main>
-        {/* HERO */}
-        <section className="hero-bg" style={{ padding: "80px 24px 88px" }}>
-          <div className="hero-grid" />
-          <div className="hero-glow-1" />
-          <div className="hero-glow-2" />
-          <div className="hero-streak" />
-          <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 420px", gap: 72, alignItems: "center", position: "relative", zIndex: 1 }}>
-            <div>
-              <div className="hero-badge" style={{ marginBottom: 24 }}>
-                <span className="badge-dot" />
-                Orléans &amp; Loiret (45)
+    <div className="lc-page">
+      <FondGivre />
+      <TransitionGivre />
+      <div className="lc-contenu">
+        <Banner />
+        <Header />
+        <main>
+          {/* ===== 1. ACCUEIL ===== */}
+          <section className="lc-section lc-hero">
+            <div className="lc-hero-grille">
+              <div>
+                <p className="lc-pastille-lieu"><span />Orléans &amp; Loiret (45)</p>
+                <h1 className="lc-h1">La fraîcheur,<br /><span style={{ color: "#BAE6FD" }}>livrée chez vous</span><br />en 24 h.</h1>
+                <p className="lc-intro">Location de climatiseurs mobiles, livrés, installés et récupérés chez vous. Pour les particuliers et les professionnels.</p>
+                <div className="lc-g2 lc-duo">
+                  <a href={SITE.telephoneLien} className="lc-gros-bouton lc-gros-appel">
+                    <span className="lc-gros-titre"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={ICONE_TEL} /></svg>Nous appeler</span>
+                    <span className="lc-gros-sous">{SITE.telephoneAffiche}</span>
+                  </a>
+                  <BoutonGivre className="lc-gros-bouton lc-gros-fraicheur lc-reflet lc-pulse">
+                    <span className="lc-gros-titre"><Flocon />Je veux de la fraîcheur</span>
+                    <span className="lc-gros-sous" style={{ color: "#0369A1" }}>Voir les prix →</span>
+                  </BoutonGivre>
+                </div>
+                <div className="lc-confiance">
+                  <span><span style={{ color: "#FBBF24", letterSpacing: 2 }}>★★★★★</span> 5/5 sur Google</span>
+                  <span><Coche /> Installation incluse</span>
+                  <span><Coche /> Contrat de location écrit</span>
+                </div>
               </div>
-              <h1 style={{ fontSize: "clamp(36px,4.5vw,58px)", fontWeight: 800, color: "#F0F6FF", lineHeight: 1.08, letterSpacing: "-2px", marginBottom: 22 }}>
-                La fraîcheur,{" "}
-                <em style={{ fontStyle: "normal", background: "linear-gradient(135deg,#7DD3FC,#38BDF8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                  livrée chez vous
-                </em>{" "}en 24h.
-              </h1>
-              <p style={{ fontSize: 17, color: "rgba(200,220,255,0.6)", marginBottom: 36, lineHeight: 1.75, maxWidth: 500 }}>
-                Location de climatiseur mobile livré, installé et récupéré chez vous — pour particuliers et professionnels. Installation toujours incluse, livraison selon la distance.
-              </p>
-              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 40 }}>
-                <a href="tel:0783800070" className="btn-primary">📞 Appeler maintenant</a>
-                <a href="#tarifs" className="btn-ghost">Voir les forfaits →</a>
-              </div>
-              <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
-                {["🚚 Livraison 24h", "🔧 Installation comprise", "📄 Contrat de location écrit"].map(t => (
-                  <span key={t} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: "rgba(180,210,255,0.55)" }}>{t}</span>
-                ))}
+              <div className="lc-hero-photo">
+                <div className="lc-hero-halo" aria-hidden="true" />
+                <BoutonGivre className="lc-glace lc-carte-photo lc-flotte" libelle="Je veux de la fraîcheur : voir les prix et les modèles">
+                  <span className="lc-carte-photo-img">
+                    <img src="/images/climatiseur-carrera-tristar.webp" alt="Climatiseur mobile blanc avec sa télécommande, proposé à la location par LocationClim45" width={900} height={1368} />
+                  </span>
+                  <span className="lc-carte-photo-info">
+                    <span>
+                      <span className="lc-mini-etiquette">Climatiseur mobile</span>
+                      <span style={{ display: "block", fontSize: 15, fontWeight: 600, color: "#334155" }}>Silencieux · sans travaux</span>
+                    </span>
+                    <span style={{ textAlign: "right" }}>
+                      <span style={{ display: "block", fontSize: 12, fontWeight: 700, color: "#64748B" }}>dès</span>
+                      <span style={{ display: "block", fontSize: 26, fontWeight: 800, color: "#0B1B33", letterSpacing: -1, lineHeight: 1 }}>74 €</span>
+                    </span>
+                  </span>
+                  <span className="lc-carte-photo-bandeau lc-reflet"><Flocon couleur="#BAE6FD" taille={20} />Rafraîchir · voir les prix</span>
+                  <span className="lc-dispo">Disponible maintenant</span>
+                </BoutonGivre>
               </div>
             </div>
-            {/* Hero card */}
-            <div style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 24, padding: 28, backdropFilter: "blur(12px)", position: "relative" }}>
-              <span style={{ position: "absolute", top: -12, right: 20, background: "linear-gradient(135deg,#059669,#10B981)", color: "#fff", padding: "5px 14px", borderRadius: 50, fontSize: 12, fontWeight: 700, boxShadow: "0 4px 12px rgba(5,150,105,0.4)" }}>● Disponible maintenant</span>
-              <div style={{ borderRadius: 16, height: 380, background: "#ECE9E6", marginBottom: 20, border: "1px solid rgba(255,255,255,0.08)", overflow: "hidden", position: "relative" }}>
-                <img src="/images/climatiseur-carrera-tristar.webp" alt="Climatiseur mobile blanc avec sa télécommande, proposé à la location par LocationClim45" width={900} height={1368} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 62%" }} />
-              </div>
-              <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "1.5px", color: "#7DD3FC", marginBottom: 6 }}>Modèle standard</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: "#F0F6FF", marginBottom: 14 }}>Climatiseur mobile</div>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                {["Silencieux", "Jusqu'à 25m²", "Sans travaux"].map(t => (
-                  <span key={t} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)", color: "rgba(200,220,255,0.7)", padding: "4px 12px", borderRadius: 50, fontSize: 12, fontWeight: 600 }}>{t}</span>
+          </section>
+
+          {/* ===== 2. POURQUOI NOUS + 2 AVIS ===== */}
+          <section className="lc-section">
+            <div className="lc-conteneur">
+              <p className="lc-etiquette" style={{ textAlign: "center" }}>Pourquoi LocationClim45</p>
+              <h2 className="lc-h2" style={{ textAlign: "center" }}>Simple. Rapide. Fiable.</h2>
+              <p className="lc-chapeau">Vous n&apos;avez rien à porter, rien à installer, rien à bricoler.</p>
+              <div className="lc-g4">
+                {RAISONS.map(r => (
+                  <div key={r.titre} className="lc-glace lc-raison">
+                    <div className="lc-rond-icone"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0369A1" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{r.icone}</svg></div>
+                    <h3>{r.titre}</h3>
+                    <p>{r.texte}</p>
+                  </div>
                 ))}
               </div>
+              <div style={{ marginTop: 64 }}>
+                <AvisClients debut={0} fin={2} etiquette="Ce que nos clients en disent" />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* FEATURES */}
-        <section style={{ padding: "80px 24px", background: "linear-gradient(180deg,#EFF6FF,#F8FAFC)" }}>
-          <p className="section-label">Pourquoi LocationClim45</p>
-          <h2 style={{ textAlign: "center", fontSize: "clamp(28px,4vw,40px)", fontWeight: 800, color: "#1E293B", letterSpacing: "-1.2px", marginBottom: 52 }}>Simple. Rapide. Fiable.</h2>
-          <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }}>
-            {[
-              { icon: "🚚", title: "Livraison sous 24h", desc: "Nous livrons sur Orléans et tout le Loiret, au tarif indiqué dans votre devis. Vous choisissez le créneau, on s'occupe du reste." },
-              { icon: "🔧", title: "Installation incluse", desc: "Nous installons et mettons en service l'appareil chez vous, sans travaux. Pas besoin de bricoler." },
-              { icon: "❄️", title: "Appareils récents", desc: "Nos climatiseurs sont régulièrement entretenus, testés et nettoyés entre chaque location." },
-              { icon: "↩️", title: "Récupération à domicile", desc: "En fin de location, on vient récupérer l'appareil chez vous. Aucune contrainte." },
-            ].map(({ icon, title, desc }) => (
-              <div key={title} className="dark-card" style={{ padding: "32px 24px" }}>
-                <div style={{ width: 52, height: 52, background: "rgba(56,189,248,0.12)", border: "1px solid rgba(56,189,248,0.2)", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, marginBottom: 18 }}>{icon}</div>
-                <div style={{ fontSize: 16, fontWeight: 700, color: "#F0F6FF", marginBottom: 10 }}>{title}</div>
-                <p style={{ fontSize: 14, color: "rgba(180,210,255,0.55)", lineHeight: 1.65 }}>{desc}</p>
+          {/* ===== 3. CLIMATISEURS + TARIFS (destination du bouton fraîcheur) ===== */}
+          <section id="tarifs" className="lc-section">
+            <div className="lc-conteneur lc-etroit">
+              <p className="lc-etiquette" style={{ textAlign: "center" }}>Nos climatiseurs et nos forfaits</p>
+              <h2 className="lc-h2" style={{ textAlign: "center" }}>Des tarifs clairs, sans surprise.</h2>
+              <p className="lc-chapeau">Deux modèles, un seul prix. Nous vous conseillons le bon selon la taille de votre pièce.</p>
+
+              <div className="lc-g2" style={{ marginBottom: 64 }}>
+                {CLIMATISEURS.map(m => {
+                  const p = PASTILLES[m.id] ?? PASTILLES.essentiel;
+                  return (
+                    <article key={m.id} className="lc-glace lc-modele">
+                      {m.photo && <img src={m.photo.src} alt={m.photo.alt} width={m.photo.largeur} height={m.photo.hauteur} />}
+                      <div className="lc-modele-texte">
+                        <span className="lc-modele-etiquette" style={{ background: p.fond, color: p.couleur }}>{p.etiquette}</span>
+                        <h3>{m.nom}</h3>
+                        <p>{m.puissance} · {p.surface}</p>
+                        <div className="lc-puces">{p.puces.map(x => <span key={x}>{x}</span>)}</div>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
-            ))}
-          </div>
-        </section>
 
-        {/* AVIS (2 premiers) */}
-        <AvisClients debut={0} fin={2} titre="Ce que nos clients en disent" fond="#fff" />
-
-        {/* PRICING */}
-        <section id="tarifs" style={{ background: "linear-gradient(160deg,#07111F,#0F1F4A 60%,#1E3A8A 100%)", padding: "80px 24px" }}>
-          <p className="section-label section-label-light">Nos forfaits</p>
-          <h2 style={{ textAlign: "center", fontSize: "clamp(28px,4vw,40px)", fontWeight: 800, color: "#F0F6FF", letterSpacing: "-1.2px", marginBottom: 52 }}>Des tarifs clairs, sans surprise</h2>
-          <div style={{ maxWidth: 980, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
-            {[
-              { name: "Week-end", price: "74€", period: "3 jours minimum", feats: [TEXTES.installation, TEXTES.livraisonCourt, "Climatiseur 7 000 BTU"], featured: false },
-              { name: "Semaine Fraîcheur", price: "134€", period: "7 jours", feats: [TEXTES.installation, TEXTES.livraisonCourt, "Climatiseur 7 000 BTU", "Support 7j/7"], featured: true },
-              { name: "Mois Sérénité", price: "384€", period: "30 jours", feats: [TEXTES.installation, TEXTES.livraisonCourt, "Climatiseur 7 000 BTU", "Support 7j/7"], featured: false },
-            ].map(({ name, price, period, feats, featured }) => (
-              <div key={name} className="price-card" style={featured ? { background: "#fff", border: "none", boxShadow: "0 12px 48px rgba(0,0,0,0.4)" } : {}}>
-                {featured && <span style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "linear-gradient(135deg,#0EA5E9,#38BDF8)", color: "#0F172A", padding: "5px 16px", borderRadius: 50, fontSize: 11, fontWeight: 800, whiteSpace: "nowrap" }}>⭐ Le plus choisi</span>}
-                <div style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "1.5px", color: featured ? "#2563EB" : "rgba(255,255,255,0.45)", marginBottom: 10 }}>{name}</div>
-                <div style={{ fontSize: 48, fontWeight: 800, lineHeight: 1, color: featured ? "#1E293B" : "#F0F6FF", marginBottom: 4, letterSpacing: "-2px" }}>{price}</div>
-                <div style={{ fontSize: 14, color: featured ? "#94A3B8" : "rgba(255,255,255,0.4)", marginBottom: 24 }}>{period}</div>
-                <ul style={{ listStyle: "none" }}>
-                  {feats.map(f => (
-                    <li key={f} style={{ fontSize: 14, padding: "8px 0", borderBottom: featured ? "1px solid rgba(0,0,0,0.07)" : "1px solid rgba(255,255,255,0.07)", display: "flex", alignItems: "center", gap: 9, color: featured ? "#475569" : "rgba(255,255,255,0.7)" }}>
-                      <span style={{ color: featured ? "#2563EB" : "#38BDF8", fontWeight: 800 }}>✓</span> {f}
-                    </li>
-                  ))}
-                </ul>
-                <a href="tel:0783800070" style={{ display: "block", width: "100%", textAlign: "center", marginTop: 24, padding: "14px", borderRadius: 50, fontWeight: 700, fontSize: 15, background: featured ? "#1E293B" : "rgba(255,255,255,0.08)", color: "#fff", border: featured ? "none" : "1px solid rgba(255,255,255,0.15)", transition: "all .2s", cursor: "pointer" }}>Réserver</a>
+              <div className="lc-g3 lc-forfaits">
+                {FORFAITS.map(f => (
+                  <div key={f.nom} className={f.vedette ? "lc-forfait lc-forfait-vedette" : "lc-glace lc-forfait"}>
+                    {f.vedette && <span className="lc-badge-choisi"><span style={{ color: "#D97706" }}>★</span> Le plus choisi</span>}
+                    <div className="lc-forfait-nom">{f.nom}</div>
+                    <div className="lc-forfait-prix">{f.prix}</div>
+                    <div className="lc-forfait-duree">{f.duree}</div>
+                    <ul>
+                      {INCLUS.map(x => <li key={x}><span aria-hidden="true">✓</span>{x}</li>)}
+                    </ul>
+                    <a href={SITE.telephoneLien} className="lc-forfait-bouton">{f.bouton}</a>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <p style={{ textAlign: "center", marginTop: 28, fontSize: 14, color: "rgba(255,255,255,0.75)", lineHeight: 1.7 }}>🚚 {TEXTES.livraison} — précisée dans votre devis<br/>🔒 {TEXTES.caution} · 💼 Tarifs professionnels sur devis</p>
-        </section>
+              <p className="lc-note">Prix par appareil · modèle attribué selon les disponibilités · {TEXTES.caution.replace("Caution", "caution")}</p>
 
-        {/* HOW */}
-        <section style={{ padding: "80px 24px", background: "linear-gradient(160deg,#EBF4FF,#F0F7FF 50%,#E8F2FF 100%)", position: "relative" }}>
-          <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(37,99,235,0.05) 1px,transparent 1px)", backgroundSize: "28px 28px", pointerEvents: "none" }} />
-          <p className="section-label" style={{ position: "relative", zIndex: 1 }}>Processus</p>
-          <h2 style={{ textAlign: "center", fontSize: "clamp(28px,4vw,40px)", fontWeight: 800, color: "#1E293B", letterSpacing: "-1.2px", marginBottom: 52, position: "relative", zIndex: 1 }}>Comment ça marche ?</h2>
-          <div style={{ maxWidth: 980, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 4, position: "relative", zIndex: 1 }}>
-            {[
-              { n: 1, title: "Vous nous appelez", desc: "Un appel pour vérifier la disponibilité et choisir votre forfait." },
-              { n: 2, title: "On confirme", desc: "Créneau et tarif de livraison fixés, confirmation par SMS avec récapitulatif." },
-              { n: 3, title: "Livraison & install", desc: "On arrive chez vous sous 24h et on installe l'appareil." },
-              { n: 4, title: "Récupération", desc: "En fin de location, on vient reprendre l'appareil. Caution restituée." },
-            ].map(({ n, title, desc }) => (
-              <div key={n} style={{ textAlign: "center", padding: "0 12px" }}>
-                <div style={{ width: 68, height: 68, background: "linear-gradient(135deg,#2563EB,#1E40AF)", color: "#fff", borderRadius: "50%", fontSize: 22, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px", boxShadow: "0 0 0 6px rgba(37,99,235,0.10),0 4px 20px rgba(37,99,235,0.3)" }}>{n}</div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: "#1E293B", marginBottom: 10 }}>{title}</div>
-                <p style={{ fontSize: 13, color: "#64748B", lineHeight: 1.65 }}>{desc}</p>
+              {/* Bandeau professionnels -> page Professionnels */}
+              <div className="lc-bande-pro">
+                <span className="lc-bande-pro-icone"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0369A1" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 21h18" /><path d="M5 21V5l7-3v19" /><path d="M12 8h7v13" /><path d="M8 8h1M8 12h1M8 16h1M15 12h1M15 16h1" /></svg></span>
+                <div>
+                  <h3>Vous êtes une entreprise ?</h3>
+                  <p>Bureaux, commerces, ateliers, événements : plusieurs appareils, facture professionnelle, courte ou longue durée.</p>
+                </div>
+                <div className="lc-bande-pro-actions">
+                  <Link href="/contact" className="lc-bouton-glace">Devis professionnel</Link>
+                  <Link href="/professionnels" className="lc-lien">Découvrir l&apos;offre pro →</Link>
+                </div>
               </div>
-            ))}
-          </div>
-        </section>
+            </div>
+          </section>
 
-        {/* ZONE DE LIVRAISON */}
-        <ZoneLivraison />
+          {/* ===== 4. COMMENT ÇA MARCHE ===== */}
+          <section className="lc-section">
+            <div className="lc-conteneur lc-etroit">
+              <p className="lc-etiquette" style={{ textAlign: "center" }}>Comment ça marche</p>
+              <h2 className="lc-h2" style={{ textAlign: "center", marginBottom: 56 }}>Un appel. On s&apos;occupe du reste.</h2>
+              <ol className="lc-etapes">
+                {ETAPES.map((e, i) => (
+                  <li key={e.titre}>
+                    <span className="lc-glace lc-etape-num">{i + 1}</span>
+                    <div>
+                      <h3>{e.titre}</h3>
+                      <p>{e.texte}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
 
-        {/* AVIS (2 derniers) */}
-        <AvisClients debut={2} fin={4} titre="Ils nous font confiance" />
+          {/* ===== 5. ZONE DE LIVRAISON ===== */}
+          <ZoneLivraison fond="transparent" />
 
-        {/* FAQ */}
-        <FAQSection />
+          {/* ===== 6. AVIS (2 suivants) ===== */}
+          <section className="lc-section">
+            <div className="lc-conteneur lc-etroit">
+              <h2 className="lc-h2" style={{ textAlign: "center", fontSize: "clamp(28px,4vw,40px)", marginBottom: 40 }}>Ils nous font confiance</h2>
+              <AvisClients debut={2} fin={4} lienGoogle />
+            </div>
+          </section>
 
-        {/* CTA FINAL */}
-        <section style={{ background: "#0D1117", padding: "80px 24px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center,rgba(37,99,235,0.18),transparent 65%)", pointerEvents: "none" }} />
-          <h2 style={{ color: "#F0F6FF", fontSize: "clamp(28px,4vw,40px)", fontWeight: 800, letterSpacing: "-1.2px", marginBottom: 12, position: "relative", zIndex: 1 }}>Besoin d'un climatiseur rapidement ?</h2>
-          <p style={{ color: "rgba(255,255,255,0.75)", fontSize: 17, marginBottom: 40, position: "relative", zIndex: 1 }}>Réponse immédiate — livraison sous 24h sur Orléans et ses alentours.</p>
-          <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap", position: "relative", zIndex: 1 }}>
-            <a href="tel:0783800070" className="btn-cta-main">📞 07 83 80 00 70</a>
-            <a href="https://wa.me/33783800070" className="btn-cta-wa" target="_blank" rel="noopener">💬 WhatsApp</a>
-          </div>
-        </section>
-      </main>
-      <Footer />
+          {/* ===== 7. QUESTIONS FRÉQUENTES ===== */}
+          <FAQSection />
+
+          {/* ===== 8. APPEL FINAL ===== */}
+          <section className="lc-section" style={{ textAlign: "center", paddingTop: 110, paddingBottom: 120 }}>
+            <h2 className="lc-h2" style={{ fontSize: "clamp(32px,5vw,58px)" }}>Besoin de fraîcheur rapidement ?</h2>
+            <p className="lc-chapeau" style={{ marginBottom: 36 }}>Réponse immédiate, 7j/7 de 8 h à 20 h.</p>
+            <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+              <a href={SITE.telephoneLien} className="lc-bouton-ciel">{SITE.telephoneAffiche}</a>
+              <a href={SITE.whatsappLien} target="_blank" rel="noopener" className="lc-bouton-contour">WhatsApp</a>
+              <Link href="/contact" className="lc-bouton-contour">Demander un devis</Link>
+            </div>
+          </section>
+        </main>
+        <Footer />
+      </div>
       <FloatCTA />
-    </>
+    </div>
   );
 }
 
@@ -171,21 +245,22 @@ function FAQSection() {
     { q: "Comment fonctionne la caution ?", a: TEXTES.cautionDetail },
     { q: "Combien coûte la livraison ?", a: TEXTES.livraisonDetail },
     { q: "Livrez-vous en dehors d'Orléans ?", a: "Oui — nous desservons l'ensemble du Loiret : Olivet, Saran, Meung-sur-Loire, La Ferté-Saint-Aubin, Lamotte-Beuvron, Saint-Ay, Saint-Jean-le-Blanc, Ardon et bien d'autres communes." },
-    { q: "Faut-il faire des travaux pour installer un climatiseur mobile ?", a: "Non. Il suffit d'une fenêtre pour évacuer l'air chaud via le tuyau fourni. Notre technicien s'en charge lors de la livraison." },
+    { q: "Faut-il faire des travaux pour installer un climatiseur mobile ?", a: "Non. Il suffit d'une fenêtre pour évacuer l'air chaud via le tuyau fourni. Nous nous en chargeons lors de la livraison." },
     { q: "Proposez-vous des tarifs pour les professionnels ?", a: "Oui. Nous établissons des devis sur mesure pour les entreprises, chantiers, événements et locations longue durée, avec facture professionnelle. Demandez un devis par téléphone ou via le formulaire." },
   ];
   return (
-    <section style={{ padding: "80px 24px", background: "linear-gradient(160deg,#1a2744,#1e3055 60%,#162240 100%)", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: -150, right: -150, width: 400, height: 400, background: "radial-gradient(circle,rgba(56,189,248,0.08),transparent 65%)", pointerEvents: "none" }} />
-      <p className="section-label section-label-light" style={{ position: "relative", zIndex: 1 }}>Questions fréquentes</p>
-      <h2 style={{ textAlign: "center", fontSize: "clamp(28px,4vw,40px)", fontWeight: 800, color: "#F0F6FF", letterSpacing: "-1.2px", marginBottom: 40, position: "relative", zIndex: 1 }}>Tout ce que vous voulez savoir</h2>
-      <div style={{ maxWidth: 720, margin: "0 auto", position: "relative", zIndex: 1 }}>
-        {items.map(({ q, a }) => (
-          <details key={q} style={{ marginBottom: 10 }}>
-            <summary style={{ padding: "20px 24px", fontSize: 15, fontWeight: 700, color: "#E8F0FF", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, listStyle: "none", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, transition: "all .2s" }}>{q}</summary>
-            <div style={{ padding: "0 24px 20px", fontSize: 14, color: "rgba(180,210,255,0.6)", lineHeight: 1.75, background: "rgba(255,255,255,0.04)", borderLeft: "1px solid rgba(255,255,255,0.08)", borderRight: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)", borderRadius: "0 0 14px 14px" }}>{a}</div>
-          </details>
-        ))}
+    <section className="lc-section">
+      <div className="lc-conteneur" style={{ maxWidth: 760 }}>
+        <p className="lc-etiquette" style={{ textAlign: "center" }}>Questions fréquentes</p>
+        <h2 className="lc-h2" style={{ textAlign: "center", fontSize: "clamp(28px,4vw,40px)", marginBottom: 40 }}>Tout ce que vous voulez savoir</h2>
+        <div style={{ display: "grid", gap: 10 }}>
+          {items.map(({ q, a }) => (
+            <details key={q} className="lc-glace lc-faq">
+              <summary>{q}</summary>
+              <p>{a}</p>
+            </details>
+          ))}
+        </div>
       </div>
     </section>
   );

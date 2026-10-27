@@ -35,7 +35,9 @@ export const SITE = {
 
   // Lien vers la fiche Google (bouton « Voir tous nos avis sur Google »).
   // Laisser vide pour masquer le bouton.
-  lienAvisGoogle: "",
+  lienAvisGoogle: "https://maps.app.goo.gl/i64cHh3mY2i1TaeK8",
+  // Lien qui ouvre directement la fenêtre « Laisser un avis » sur Google.
+  lienLaisserAvis: "https://g.page/r/CewzYHGN_NL_EBM/review",
 };
 
 // Textes repris sur tout le site : les modifier ici les change partout.

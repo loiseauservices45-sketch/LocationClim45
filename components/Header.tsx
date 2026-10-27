@@ -2,15 +2,28 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { SITE } from "@/lib/site";
 
 const nav = [
-  { href: "/", label: "Accueil" },
-  { href: "/climatiseurs", label: "Nos climatiseurs" },
+  { href: "/climatiseurs", label: "Climatiseurs" },
   { href: "/particuliers", label: "Particuliers" },
   { href: "/professionnels", label: "Professionnels" },
-  { href: "/zone-livraison", label: "Zone livraison" },
+  { href: "/zone-livraison", label: "Zone de livraison" },
   { href: "/contact", label: "Contact" },
 ];
+
+const ICONE_TEL = "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z";
+
+export function Logo({ taille = 46 }: { taille?: number }) {
+  return (
+    <svg width={taille} height={Math.round(taille * 0.56)} viewBox="108 160 896 470" fill="none" stroke="#7DD3FC" strokeLinecap="round" aria-hidden="true">
+      <path d="M133 338 C 190 270, 245 230, 305 228 C 390 225, 450 280, 520 390 C 590 500, 640 560, 735 565 C 815 568, 880 525, 940 425" strokeWidth="26" opacity=".55" />
+      <path d="M133 338 C 175 300, 215 282, 258 280 C 340 276, 410 330, 480 440 C 550 550, 610 618, 705 620 C 785 620, 850 570, 900 502" strokeWidth="18" opacity=".32" />
+      <path d="M133 338 C 200 230, 270 176, 348 175 C 440 173, 500 230, 568 345 C 640 465, 700 510, 782 510 C 870 508, 940 440, 997 342" strokeWidth="44" />
+      <circle cx="132" cy="341" r="52" fill="#7DD3FC" stroke="none" />
+    </svg>
+  );
+}
 
 export default function Header() {
   const pathname = usePathname();
@@ -18,134 +31,42 @@ export default function Header() {
 
   return (
     <>
-      <header style={{
-        position: "sticky", top: 0, zIndex: 100,
-        background: "rgba(255,255,255,0.97)",
-        backdropFilter: "blur(16px)",
-        borderBottom: "1px solid rgba(0,0,0,0.07)",
-        padding: "0 20px",
-        width: "100%",
-        boxSizing: "border-box",
-      }}>
-        <div style={{
-          maxWidth: 1140, margin: "0 auto",
-          display: "flex", alignItems: "center",
-          justifyContent: "space-between",
-          height: 64, gap: 12,
-          width: "100%",
-        }}>
-          <Link href="/" style={{
-            fontSize: 18, fontWeight: 800,
-            color: "#1E293B", letterSpacing: "-0.5px",
-            whiteSpace: "nowrap", flexShrink: 0,
-          }}>
-            Location<em style={{ fontStyle: "normal", color: "#2563EB" }}>Clim</em>45
+      <header className="lc-entete">
+        <div className="lc-entete-int">
+          <Link href="/" className="lc-marque" onClick={() => setOpen(false)}>
+            <Logo />
+            <span>Location<span style={{ color: "#7DD3FC" }}>Clim</span><span style={{ color: "#94A3B8" }}>45</span></span>
           </Link>
 
-          <nav style={{
-            display: "flex", gap: 2,
-            flex: 1, justifyContent: "center",
-          }} className="desktop-nav">
+          <nav className="lc-nav" aria-label="Navigation principale">
             {nav.map(({ href, label }) => (
-              <Link key={href} href={href} style={{
-                fontSize: 13, fontWeight: 600,
-                padding: "6px 10px", borderRadius: 8,
-                transition: "all .15s", whiteSpace: "nowrap",
-                color: pathname === href ? "#2563EB" : "#64748B",
-                background: pathname === href ? "rgba(37,99,235,0.06)" : "transparent",
-              }}>{label}</Link>
+              <Link key={href} href={href} className={pathname === href ? "actif" : undefined}>{label}</Link>
             ))}
           </nav>
 
-          <div style={{
-            display: "flex", alignItems: "center",
-            gap: 10, flexShrink: 0,
-          }} className="desktop-right">
-            <a href="tel:0783800070" style={{
-              fontWeight: 700, fontSize: 14,
-              color: "#1E293B", display: "flex",
-              alignItems: "center", gap: 6,
-            }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2.5">
-                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.06 1.18a2 2 0 012-2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l1.06-1.34a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-              </svg>
-              <span>07 83 80 00 70</span>
-            </a>
-            <Link href="/contact" style={{
-              background: "#1E293B", color: "#fff",
-              padding: "9px 18px", borderRadius: 50,
-              fontWeight: 700, fontSize: 13,
-              whiteSpace: "nowrap",
-            }}>Devis gratuit</Link>
-          </div>
+          <a href={SITE.telephoneLien} className="lc-entete-tel">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={ICONE_TEL} /></svg>
+            {SITE.telephoneAffiche}
+          </a>
 
-          <button
-            onClick={() => setOpen(!open)}
-            className="hamburger"
-            style={{
-              display: "none",
-              background: "none", border: "none",
-              cursor: "pointer", padding: 8,
-              flexDirection: "column", gap: 5,
-              flexShrink: 0,
-            }}
-            aria-label="Menu"
-          >
-            <span style={{ width: 24, height: 2, background: "#1E293B", display: "block", transition: "all .2s", transform: open ? "rotate(45deg) translate(5px,5px)" : "none" }}/>
-            <span style={{ width: 24, height: 2, background: "#1E293B", display: "block", transition: "all .2s", opacity: open ? 0 : 1 }}/>
-            <span style={{ width: 24, height: 2, background: "#1E293B", display: "block", transition: "all .2s", transform: open ? "rotate(-45deg) translate(5px,-5px)" : "none" }}/>
+          <button type="button" onClick={() => setOpen(!open)} className="lc-hamburger" aria-label={open ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={open}>
+            <span style={{ transform: open ? "rotate(45deg) translate(5px,5px)" : "none" }} />
+            <span style={{ opacity: open ? 0 : 1 }} />
+            <span style={{ transform: open ? "rotate(-45deg) translate(5px,-5px)" : "none" }} />
           </button>
         </div>
-      </header>
 
-      {open && (
-        <div style={{
-          position: "fixed", top: 64, left: 0, right: 0,
-          background: "rgba(255,255,255,0.98)",
-          backdropFilter: "blur(16px)",
-          borderBottom: "1px solid rgba(0,0,0,0.07)",
-          zIndex: 99, padding: "16px 20px 24px",
-          display: "flex", flexDirection: "column", gap: 4,
-        }}>
+        {open && (
+        <div className="lc-menu-mobile">
+          <Link href="/" onClick={() => setOpen(false)} className={pathname === "/" ? "actif" : undefined}>Accueil</Link>
           {nav.map(({ href, label }) => (
-            <Link key={href} href={href}
-              onClick={() => setOpen(false)}
-              style={{
-                fontSize: 16, fontWeight: 600,
-                padding: "12px 16px", borderRadius: 10,
-                color: pathname === href ? "#2563EB" : "#1E293B",
-                background: pathname === href ? "rgba(37,99,235,0.06)" : "transparent",
-                display: "block",
-              }}
-            >{label}</Link>
+            <Link key={href} href={href} onClick={() => setOpen(false)} className={pathname === href ? "actif" : undefined}>{label}</Link>
           ))}
-          <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 10 }}>
-            <a href="tel:0783800070" style={{
-              background: "#2563EB", color: "#fff",
-              padding: "14px", borderRadius: 50,
-              fontWeight: 700, fontSize: 16,
-              textAlign: "center", display: "block",
-            }}>📞 07 83 80 00 70</a>
-            <a href="https://wa.me/33783800070" target="_blank" rel="noopener" style={{
-              background: "#25D366", color: "#fff",
-              padding: "14px", borderRadius: 50,
-              fontWeight: 700, fontSize: 16,
-              textAlign: "center", display: "block",
-            }}>💬 WhatsApp</a>
-          </div>
+          <a href={SITE.telephoneLien} className="lc-menu-appel">Appeler le {SITE.telephoneAffiche}</a>
+          <a href={SITE.whatsappLien} target="_blank" rel="noopener" className="lc-menu-wa">WhatsApp</a>
         </div>
-      )}
-
-      <style>{`
-        @media (max-width: 768px) {
-          .desktop-nav { display: none !important; }
-          .desktop-right { display: none !important; }
-          .hamburger { display: flex !important; }
-        }
-        @media (min-width: 769px) {
-          .hamburger { display: none !important; }
-        }
-      `}</style>
+        )}
+      </header>
     </>
   );
 }
