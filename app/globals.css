@@ -396,7 +396,7 @@ body { overflow-x: hidden !important; }
 @keyframes lcMsgG { 0%,38% { opacity: 0; transform: translateY(-50%) scale(1.07); filter: blur(10px); } 48%,62% { opacity: 1; transform: translateY(-50%) scale(1); filter: blur(0); } 70%,100% { opacity: 0; transform: translateY(-50%) scale(.97); filter: blur(8px); } }
 
 /* Téléphone et tablette */
-@media (max-width: 1020px) {
+@media (max-width: 1180px) {
   .lc-nav { display: none; }
   .lc-entete-tel { display: none; }
   .lc-hamburger { display: flex; }
@@ -543,3 +543,36 @@ body { overflow-x: hidden !important; }
 .lc-glace.lc-raison p { color: #F1F6FB; }
 .lc-glace.lc-raison .lc-rond-icone { background: radial-gradient(circle at 30% 30%, #FFFFFF, #BAE6FD 55%, #7DD3FC); box-shadow: 0 0 0 6px rgba(125,211,252,.14), 0 8px 24px rgba(56,189,248,.35); }
 .lc-glace.lc-raison .lc-rond-icone svg { stroke: #0B3B66; }
+
+/* Page déshumidificateurs */
+.lc-deshu-hero { border-radius: 36px; padding: 34px 30px 28px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.lc-deshu-jauge { width: 100%; }
+.lc-jauge { position: relative; height: 12px; border-radius: 999px; margin: 10px 0 8px; background: linear-gradient(90deg,#FDE68A,#BAE6FD 40%,#7DD3FC 50%,#BAE6FD 60%,#93C5FD); }
+.lc-jauge span { position: absolute; top: -4px; bottom: -4px; border-radius: 999px; border: 2.5px solid #0B3B66; background: rgba(255,255,255,.35); }
+.lc-jauge-legende { display: flex; justify-content: space-between; font-size: 13px; color: #475569; }
+.lc-jauge-legende strong { color: #0B3B66; }
+.lc-encart { display: flex; gap: 16px; align-items: flex-start; margin-top: 30px; padding: 22px 24px; border-radius: 22px; background: #F0F9FF; border: 2px solid #FFFFFF; color: #0B1B33; }
+.lc-encart p { font-size: 16px; line-height: 1.6; color: #1E293B; }
+.lc-encart-icone { width: 44px; height: 44px; border-radius: 50%; background: #BAE6FD; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.lc-deshu-grille { align-items: stretch; gap: 24px; }
+.lc-deshu { border-radius: 30px; overflow: hidden; display: flex; flex-direction: column; }
+.lc-deshu-visuel { position: relative; display: flex; align-items: center; justify-content: center; min-height: 270px; background: radial-gradient(circle at 50% 60%, #FFFFFF, #DCEBF7 70%); }
+.lc-deshu-visuel img { width: 100%; height: 300px; object-fit: cover; }
+.lc-deshu-texte { padding: 26px 30px 30px; display: flex; flex-direction: column; flex: 1; }
+.lc-deshu-texte h3 { font-size: 25px; font-weight: 800; color: #0B1B33; letter-spacing: -.6px; margin-bottom: 6px; }
+.lc-deshu-capacite { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 800; color: #0369A1; margin-bottom: 10px; }
+.lc-deshu-prix { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; margin: auto 0 12px; }
+.lc-deshu-prix div { padding: 14px 10px; border-radius: 16px; text-align: center; background: #E0F2FE; }
+.lc-deshu-prix span { display: block; font-size: 13.5px; font-weight: 700; color: #0369A1; }
+.lc-deshu-prix strong { display: block; font-size: 28px; font-weight: 800; color: #0B1B33; letter-spacing: -1px; }
+.lc-deshu-prix .lc-deshu-prix-vedette { background: linear-gradient(160deg,#0A2148,#1D4ED8); }
+.lc-deshu-prix .lc-deshu-prix-vedette span { color: #BAE6FD; }
+.lc-deshu-prix .lc-deshu-prix-vedette strong { color: #FFFFFF; }
+.lc-deshu-note { font-size: 13.5px; color: #475569; margin-bottom: 18px; }
+@media (max-width: 860px) {
+  .lc-deshu-hero { padding: 24px 18px; border-radius: 26px; }
+  .lc-deshu-texte { padding: 22px 18px 24px; }
+  .lc-deshu-prix strong { font-size: 24px; }
+  .lc-encart { padding: 18px; }
+  .lc-encart p { font-size: 15px; }
+}

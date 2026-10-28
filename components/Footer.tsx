@@ -12,7 +12,7 @@ export default function Footer() {
             <span>Location<span style={{ color: "#7DD3FC" }}>Clim</span><span style={{ color: "#94A3B8" }}>45</span></span>
           </div>
           <p style={{ fontSize: 14, lineHeight: 1.75, marginBottom: 16, maxWidth: 420 }}>
-            Location de climatiseurs mobiles à Orléans et dans le Loiret. Installation et mise en service incluses, livraison selon la distance. Disponible 7j/7 de 8 h à 20 h.
+            Location de climatiseurs mobiles et de déshumidificateurs à Orléans et dans le Loiret. Installation et mise en service incluses, livraison selon la distance. Disponible 7j/7 de 8 h à 20 h.
           </p>
           <a href={SITE.telephoneLien} style={{ fontSize: 18, fontWeight: 800, color: "#F8FAFC" }}>{SITE.telephoneAffiche}</a>
         </div>
@@ -22,6 +22,7 @@ export default function Footer() {
             {[
               ["/", "Accueil"],
               ["/climatiseurs", "Nos climatiseurs"],
+              ["/location-deshumidificateur", "Déshumidificateurs"],
               ["/particuliers", "Particuliers"],
               ["/professionnels", "Professionnels"],
               ["/zone-livraison", "Zone de livraison"],

@@ -3,7 +3,7 @@ import AvisClients from "@/components/AvisClients";
 import ZoneLivraison from "@/components/ZoneLivraison";
 import {
   PageGivre, DuoBoutons, Confiance, CartePhoto, TitreSection, CartesIcones, RAISONS,
-  CartesModeles, Forfaits, NOTE_TARIFS, BandePro, Etapes, FAQ, FAQ_GENERALE, AppelFinal,
+  CartesModeles, Forfaits, NOTE_TARIFS, BandePro, BandeDeshu, Etapes, FAQ, FAQ_GENERALE, AppelFinal,
 } from "@/components/Sections";
 
 export const metadata: Metadata = {
@@ -52,6 +52,9 @@ export default function Home() {
 
       {/* ===== 4. COMMENT ÇA MARCHE ===== */}
       <Etapes />
+
+      {/* Nouveau : déshumidificateurs */}
+      <BandeDeshu />
 
       {/* ===== 5. ZONE DE LIVRAISON ===== */}
       <ZoneLivraison fond="transparent" />

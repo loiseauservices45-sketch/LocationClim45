@@ -6,6 +6,7 @@ import { SITE } from "@/lib/site";
 
 const nav = [
   { href: "/climatiseurs", label: "Climatiseurs" },
+  { href: "/location-deshumidificateur", label: "Déshumidificateurs" },
   { href: "/particuliers", label: "Particuliers" },
   { href: "/professionnels", label: "Professionnels" },
   { href: "/zone-livraison", label: "Zone de livraison" },

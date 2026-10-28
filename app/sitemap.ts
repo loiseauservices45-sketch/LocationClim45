@@ -5,6 +5,7 @@ const BASE = "https://www.locationclim45.fr";
 const PAGES: [string, number][] = [
   ["", 1],
   ["/climatiseurs", 0.9],
+  ["/location-deshumidificateur", 0.9],
   ["/particuliers", 0.9],
   ["/professionnels", 0.9],
   ["/zone-livraison", 0.8],

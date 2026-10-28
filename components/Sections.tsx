@@ -219,6 +219,26 @@ export function BandePro() {
   );
 }
 
+/** Bandeau « Nouveau : déshumidificateurs » qui mène à la page dédiée. */
+export function BandeDeshu() {
+  return (
+    <section className="lc-section" style={{ paddingTop: 20, paddingBottom: 20 }}>
+      <div className="lc-conteneur lc-etroit">
+        <div className="lc-bande-pro lc-bande-deshu">
+          <span className="lc-bande-pro-icone"><Icone nom="goutte" taille={32} couleur="#0369A1" /></span>
+          <div>
+            <h3>Nouveau : location de déshumidificateurs</h3>
+            <p>Pièce humide, cave, dégât des eaux, chantier : livré, installé et récupéré, comme nos climatiseurs.</p>
+          </div>
+          <div className="lc-bande-pro-actions">
+            <Link href="/location-deshumidificateur" className="lc-bouton-glace">Découvrir</Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export const ETAPES = [
   { titre: "Vous nous appelez", texte: "On vérifie la disponibilité et on choisit votre forfait." },
   { titre: "On confirme", texte: "Créneau et prix de livraison fixés, récapitulatif par SMS." },
