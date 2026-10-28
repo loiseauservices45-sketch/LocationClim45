@@ -3,7 +3,7 @@
 // Modifier ici les noms, caractéristiques, prix et cautions :
 // la page se met à jour toute seule.
 //
-// ⚠ Prix PROVISOIRES (proposition du 28 oct. 2026) : à valider par le gérant.
+// Prix validés le 28 oct. 2026 (pro : semaine et mois en attente de confirmation).
 // ⚠ Caractéristiques à remplacer par celles des appareils réellement achetés.
 // ─────────────────────────────────────────────────────────────
 
@@ -29,15 +29,15 @@ export const DESHUMIDIFICATEURS: ModeleDeshu[] = [
     capacite: "20 à 30 L / jour",
     pourQui: "Pour une pièce humide, une chambre, une buanderie ou une petite cave.",
     points: [
+      "Livré, installé et réglé chez vous",
       "Discret, adapté aux pièces à vivre",
       "Réglage du taux d'humidité souhaité",
       "Arrêt automatique quand le bac est plein",
-      "Évacuation en continu possible par tuyau",
     ],
     prix: [
-      { duree: "1 semaine", prix: "49 €" },
-      { duree: "2 semaines", prix: "79 €" },
-      { duree: "1 mois", prix: "129 €" },
+      { duree: "1 semaine", prix: "89 €" },
+      { duree: "2 semaines", prix: "149 €" },
+      { duree: "1 mois", prix: "199 €" },
     ],
     caution: "150 €",
   },
@@ -54,9 +54,9 @@ export const DESHUMIDIFICATEURS: ModeleDeshu[] = [
       "Facture professionnelle sur demande",
     ],
     prix: [
-      { duree: "3 jours", prix: "89 €" },
-      { duree: "1 semaine", prix: "149 €" },
-      { duree: "1 mois", prix: "390 €" },
+      { duree: "3 jours", prix: "99 €" },
+      { duree: "1 semaine", prix: "164 €" },
+      { duree: "1 mois", prix: "449 €" },
     ],
     caution: "300 €",
   },

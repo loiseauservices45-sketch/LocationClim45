@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Icone from "@/components/Icones";
+import BoutonBuee from "@/components/BoutonBuee";
 import { PageGivre, EntetePage, TitreSection, CartesIcones, Etapes, FAQ, AppelFinal } from "@/components/Sections";
 import { DESHUMIDIFICATEURS, type ModeleDeshu } from "@/lib/deshumidificateurs";
 import { SITE, TEXTES } from "@/lib/site";
@@ -57,7 +58,7 @@ function CarteDeshu({ m }: { m: ModeleDeshu }) {
             </div>
           ))}
         </div>
-        <p className="lc-deshu-note">Installation et réglage inclus · {TEXTES.livraisonCourt} · caution {m.caution}</p>
+        <p className="lc-deshu-note">Conseil, installation et réglage inclus · {TEXTES.livraisonCourt} · caution {m.caution}</p>
         <div className="lc-fiche-actions">
           <a href={SITE.telephoneLien} className="lc-bouton-ciel lc-bouton-moyen"><Icone nom="telephone" taille={18} epaisseur={2.2} />Réserver</a>
           <Link href="/contact" className="lc-bouton-sombre">Demander un devis</Link>
@@ -66,6 +67,23 @@ function CarteDeshu({ m }: { m: ModeleDeshu }) {
     </article>
   );
 }
+
+// Ce qu'on compare : acheter seul en magasin, ou louer avec le service.
+const ACHAT = [
+  "Choisir seul le modèle et la puissance",
+  "Aller le chercher et le transporter",
+  "L'installer et trouver le bon réglage",
+  "Payer l'appareil en entier : environ 170 € à plus de 500 €",
+  "Le ranger quelque part une fois le problème réglé",
+];
+const LOCATION = [
+  "Un conseil gratuit pour choisir le bon appareil",
+  "Livré chez vous : rien à porter",
+  "Installé et réglé par nos soins",
+  "Vous payez seulement la durée utile, dès 89 € la semaine",
+  "On revient le chercher : rien à stocker",
+  "Joignables 7j/7, de 8 h à 20 h",
+];
 
 const SCHEMA = {
   "@context": "https://schema.org",
@@ -78,13 +96,13 @@ const SCHEMA = {
 
 export default function PageDeshumidificateurs() {
   return (
-    <PageGivre bandeau="Nouveau · Location de déshumidificateurs · Orléans & Loiret">
+    <PageGivre ambiance="eau" bandeau="Nouveau · Location de déshumidificateurs · Orléans & Loiret">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA) }} />
 
       <EntetePage
         etiquette="Nouveau · Orléans & Loiret"
-        titre={<>Location de déshumidificateur,<br /><span style={{ color: "#BAE6FD" }}>livré et installé chez vous.</span></>}
-        intro="Pièce humide, cave, dégât des eaux ou chantier : on vous apporte le bon appareil, on l'installe, on règle le taux d'humidité, et on vient le reprendre."
+        titre={<>Location de déshumidificateur,<br /><span className="lc-h1-accent">on s&apos;occupe de tout.</span></>}
+        intro="Pièce humide, cave, dégât des eaux ou chantier : rien à choisir seul, rien à porter, rien à régler. On vous conseille le bon appareil, on le livre, on l'installe, et on revient le chercher quand c'est sec."
         aside={
           <div className="lc-glace lc-deshu-hero">
             <IllustrationDeshu grand />
@@ -101,14 +119,14 @@ export default function PageDeshumidificateurs() {
             <span className="lc-gros-titre"><Icone nom="telephone" taille={22} epaisseur={2.2} />Nous appeler</span>
             <span className="lc-gros-sous">{SITE.telephoneAffiche}</span>
           </a>
-          <a href="#tarifs" className="lc-gros-bouton lc-gros-fraicheur">
-            <span className="lc-gros-titre"><Icone nom="goutte" taille={22} couleur="#0369A1" epaisseur={2.1} />Voir les appareils</span>
-            <span className="lc-gros-sous" style={{ color: "#0369A1" }}>et les prix ↓</span>
-          </a>
+          <BoutonBuee cible="#tarifs" className="lc-gros-bouton lc-gros-fraicheur lc-reflet lc-pulse">
+            <span className="lc-gros-titre"><Icone nom="goutte" taille={22} couleur="#0369A1" epaisseur={2.1} className="lc-flotte" />Voir les appareils</span>
+            <span className="lc-gros-sous" style={{ color: "#0369A1" }}>et les prix →</span>
+          </BoutonBuee>
         </div>
         <div className="lc-confiance">
           <span><span style={{ color: "#FBBF24", letterSpacing: 2 }}>★★★★★</span> 5/5 sur Google</span>
-          <span><Icone nom="coche" taille={17} couleur="#7DD3FC" epaisseur={2.4} /> Installation incluse</span>
+          <span><Icone nom="coche" taille={17} couleur="#7DD3FC" epaisseur={2.4} /> Livré, installé, récupéré</span>
           <span><Icone nom="coche" taille={17} couleur="#7DD3FC" epaisseur={2.4} /> Particuliers et pros</span>
         </div>
       </EntetePage>
@@ -120,7 +138,7 @@ export default function PageDeshumidificateurs() {
           <CartesIcones colonnes={3} cartes={[
             { icone: "fenetre", titre: "Pièce humide", texte: "Condensation sur les vitres, odeur de renfermé, linge qui ne sèche pas." },
             { icone: "garage", titre: "Cave et garage", texte: "Air chargé d'humidité, affaires et cartons à protéger." },
-            { icone: "vagues", titre: "Après un dégât des eaux", texte: "Fuite, inondation : on accélère le séchage des murs et des sols." },
+            { icone: "vagues", titre: "Après un dégât des eaux", texte: "Fuite, inondation : on accélère le séchage. Facture détaillée pour votre assurance." },
             { icone: "pinceau", titre: "Chantier et rénovation", texte: "Séchage plus rapide après plâtre, enduit, peinture ou chape." },
             { icone: "maison", titre: "Logement à remettre en état", texte: "Logement vacant ou à relouer, resté longtemps fermé." },
             { icone: "boite", titre: "Locaux et stockage", texte: "Réserves, archives, ateliers : un air plus sec pour vos stocks." },
@@ -128,6 +146,28 @@ export default function PageDeshumidificateurs() {
           <div className="lc-encart">
             <span className="lc-encart-icone"><Icone nom="info" taille={24} couleur="#0B3B66" epaisseur={2} /></span>
             <p><strong>Un conseil honnête :</strong> un déshumidificateur sèche l&apos;air et accélère le séchage, mais il ne répare pas une fuite, une infiltration ou des remontées d&apos;humidité par le sol. Dans ces cas-là, il faut aussi traiter la cause avec un professionnel du bâtiment. On vous le dira franchement.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* LE SERVICE FAIT LA DIFFÉRENCE */}
+      <section className="lc-section">
+        <div className="lc-conteneur lc-etroit">
+          <TitreSection etiquette="Louer plutôt qu'acheter" titre={<>Vous louez un appareil.<br />Vous gagnez la tranquillité.</>} chapeau="L'appareil compte, mais c'est tout le service autour qui fait la différence." />
+          <div className="lc-g2 lc-compare">
+            <div className="lc-compare-col lc-compare-achat">
+              <p className="lc-compare-titre">Acheter en magasin</p>
+              <ul>
+                {ACHAT.map(t => <li key={t}><Icone nom="croix" taille={18} couleur="#94A3B8" epaisseur={2.4} />{t}</li>)}
+              </ul>
+            </div>
+            <div className="lc-glace lc-compare-col lc-compare-location">
+              <p className="lc-compare-titre">Louer chez LocationClim45</p>
+              <ul>
+                {LOCATION.map(t => <li key={t}><Icone nom="coche" taille={18} couleur="#0284C7" epaisseur={2.6} />{t}</li>)}
+              </ul>
+              <a href={SITE.telephoneLien} className="lc-bouton-ciel lc-bouton-moyen"><Icone nom="telephone" taille={18} epaisseur={2.2} />Être conseillé gratuitement</a>
+            </div>
           </div>
         </div>
       </section>
@@ -143,19 +183,6 @@ export default function PageDeshumidificateurs() {
         </div>
       </section>
 
-      {/* POURQUOI LOUER */}
-      <section className="lc-section">
-        <div className="lc-conteneur">
-          <TitreSection etiquette="Louer plutôt qu'acheter" titre="Le bon appareil, sans rien acheter." />
-          <CartesIcones cartes={[
-            { icone: "eclair", titre: "Plus puissant", texte: "Un appareil pro retire bien plus d'eau qu'un modèle de magasin." },
-            { icone: "cle", titre: "Installé et réglé", texte: "On le place au bon endroit et on règle l'humidité visée." },
-            { icone: "goutte", titre: "Sans bac à vider", texte: "Évacuation en continu mise en place quand c'est possible." },
-            { icone: "retour", titre: "Rien à stocker", texte: "Le problème réglé, on reprend l'appareil." },
-          ]} />
-        </div>
-      </section>
-
       <Etapes etiquette="Comment ça marche" titre="Un appel, et l'air s'assèche." etapes={[
         { titre: "Vous nous appelez", texte: "Vous décrivez la pièce et la situation, on vous conseille le bon appareil." },
         { titre: "On confirme", texte: "Créneau, prix de livraison et durée, récapitulatif par SMS." },
@@ -164,15 +191,16 @@ export default function PageDeshumidificateurs() {
       ]} />
 
       <FAQ titre="Vos questions sur les déshumidificateurs" items={[
+        { q: "Pourquoi louer plutôt qu'acheter un déshumidificateur ?", a: "Parce que vous n'avez rien à gérer : on vous conseille le bon appareil, on le livre, on l'installe et on le règle, puis on le récupère quand le problème est réglé. Vous payez seulement la durée dont vous avez besoin, sans appareil à stocker ensuite." },
         { q: "Combien de temps faut-il le garder ?", a: "Cela dépend de la situation : quelques jours pour une pièce humide, souvent une à plusieurs semaines après un dégât des eaux ou sur un chantier. Nous vous conseillons la durée au moment du devis, et la location peut être prolongée." },
         { q: "Faut-il vider le bac d'eau ?", a: "Sur le modèle professionnel, l'eau peut être évacuée en continu par un tuyau, sans rien vider. Sur le modèle maison, le bac se vide simplement, ou un tuyau peut être branché quand c'est possible. L'appareil s'arrête tout seul quand le bac est plein." },
         { q: "Est-ce que ça consomme beaucoup ?", a: "L'appareil fonctionne sur une prise normale et consomme de l'électricité comme un petit appareil ménager. Il s'arrête de lui-même une fois le taux d'humidité réglé atteint." },
-        { q: "Mon assurance peut-elle prendre en charge la location après un dégât des eaux ?", a: "Selon votre contrat, certains frais d'assèchement peuvent être pris en charge. Renseignez-vous auprès de votre assureur : nous vous fournissons une facture détaillée." },
+        { q: "Mon assurance peut-elle prendre en charge la location après un dégât des eaux ?", a: "C'est possible : nous avons déjà eu une cliente dont l'assurance a pris en charge la location de nos appareils pour assécher son logement après un dégât des eaux. Cela dépend de votre contrat, donc vérifiez auprès de votre assureur avant la location. Nous vous fournissons une facture détaillée à lui transmettre." },
         { q: "Livrez-vous aussi les professionnels ?", a: "Oui : artisans, agences immobilières, syndics, entreprises. Plusieurs appareils et facture professionnelle sur devis." },
         { q: "Combien coûte la livraison ?", a: TEXTES.livraisonDetail },
       ]} />
 
-      <AppelFinal titre="Un problème d'humidité ?" texte="Appelez-nous : on vous conseille gratuitement, 7j/7 de 8 h à 20 h." />
+      <AppelFinal titre="Un problème d'humidité ? On s'en occupe." texte="Un appel suffit : conseil gratuit, livraison, installation et récupération. 7j/7 de 8 h à 20 h." />
     </PageGivre>
   );
 }

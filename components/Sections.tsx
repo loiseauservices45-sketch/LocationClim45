@@ -6,6 +6,7 @@ import Banner from "@/components/Banner";
 import FloatCTA from "@/components/FloatCTA";
 import FondGivre from "@/components/FondGivre";
 import TransitionGivre from "@/components/TransitionGivre";
+import TransitionBuee from "@/components/TransitionBuee";
 import BoutonGivre from "@/components/BoutonGivre";
 import Icone, { type NomIcone } from "@/components/Icones";
 import { CLIMATISEURS } from "@/lib/catalogue";
@@ -16,11 +17,12 @@ import { SITE, TEXTES } from "@/lib/site";
 // ─────────────────────────────────────────────────────────────
 
 /** Gabarit de page : fond continu, bandeau, en-tête, pied de page, barre téléphone. */
-export function PageGivre({ children, bandeau, givre = false }: { children: ReactNode; bandeau?: string; givre?: boolean }) {
+export function PageGivre({ children, bandeau, givre = false, ambiance }: { children: ReactNode; bandeau?: string; givre?: boolean; ambiance?: "eau" }) {
   return (
-    <div className="lc-page">
-      <FondGivre />
+    <div className={ambiance === "eau" ? "lc-page lc-page-eau" : "lc-page"}>
+      <FondGivre eau={ambiance === "eau"} />
       {givre && <TransitionGivre />}
+      {ambiance === "eau" && <TransitionBuee />}
       <div className="lc-contenu">
         <Banner text={bandeau} />
         <Header />

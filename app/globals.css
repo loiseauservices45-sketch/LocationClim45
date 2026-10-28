@@ -576,3 +576,66 @@ body { overflow-x: hidden !important; }
   .lc-encart { padding: 18px; }
   .lc-encart p { font-size: 15px; }
 }
+
+/* ─── Page déshumidificateurs : comparatif « acheter / louer » ─── */
+.lc-h1-accent { color: #BAE6FD; }
+.lc-compare { gap: 24px; align-items: stretch; }
+.lc-compare-col { border-radius: 28px; padding: 30px 30px 32px; display: flex; flex-direction: column; }
+.lc-compare-titre { margin: 0 0 20px; font-size: 22px; font-weight: 800; letter-spacing: -.4px; }
+.lc-compare ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 15px; }
+.lc-compare li { display: flex; gap: 12px; align-items: flex-start; font-size: 16.5px; line-height: 1.5; }
+.lc-compare li svg { margin-top: 2px; }
+.lc-compare-achat { background: rgba(6,18,36,.42); border: 2px dashed rgba(203,213,225,.38); }
+.lc-compare-achat .lc-compare-titre { color: #CBD5E1; }
+.lc-compare-achat li { color: #B6C2D1; }
+.lc-compare-location { border: 2px solid #FFFFFF; box-shadow: 0 0 18px rgba(255,255,255,.25), 0 24px 60px rgba(2,8,23,.45); }
+.lc-compare-location .lc-compare-titre { color: #0B1B33; }
+.lc-compare-location li { color: #1E293B; font-weight: 600; }
+.lc-compare-location .lc-bouton-ciel { margin-top: 28px; align-self: flex-start; }
+@media (max-width: 760px) {
+  .lc-compare-col { padding: 24px 18px 26px; border-radius: 22px; }
+  .lc-compare-titre { font-size: 19px; margin-bottom: 16px; }
+  .lc-compare li { font-size: 15.5px; }
+  .lc-compare-location .lc-bouton-ciel { align-self: stretch; }
+}
+
+/* ─── Transition « buée » ─── */
+.lc-buee { position: fixed; inset: 0; z-index: 300; pointer-events: none; overflow: hidden; animation: lcGivreFin 3.1s ease forwards; }
+.lc-msg-buee { color: #0E4A5C; }
+
+/* ─── Ambiance « eau » (page déshumidificateurs) : même cadre, teinte turquoise ─── */
+.lc-page-eau { background: linear-gradient(180deg,#0F3446 0%,#14485D 30%,#175367 62%,#113B4F 100%); }
+.lc-page-eau .lc-lueur { filter: hue-rotate(-28deg); }
+.lc-page-eau .lc-courant path { stroke: #CCFBF1; }
+.lc-page-eau .lc-courant .lc-voile-air { stroke: #5EEAD4; }
+.lc-goutte { background: none; box-shadow: none; }
+.lc-goutte::before { content: ""; position: absolute; inset: -35%; border-radius: 0 50% 50% 50%; transform: rotate(45deg); background: radial-gradient(circle at 62% 62%, #ECFEFF, #67E8F9 80%); box-shadow: 0 0 8px 1px rgba(103,232,249,.45); }
+.lc-page-eau .lc-bandeau { background: #08242F; color: #99F6E4; border-bottom-color: rgba(153,246,228,.14); }
+.lc-page-eau .lc-entete { background: rgba(9,35,47,.95); border-bottom-color: rgba(153,246,228,.12); }
+.lc-page-eau .lc-nav a:hover, .lc-page-eau .lc-nav a.actif { color: #5EEAD4; }
+.lc-page-eau .lc-pied { background: #071C25; }
+.lc-page-eau .lc-etiquette { color: #5EEAD4; }
+.lc-page-eau .lc-h1-accent { color: #99F6E4; }
+.lc-page-eau .lc-pastille-lieu { border-color: rgba(153,246,228,.35); background: rgba(153,246,228,.08); color: #CCFBF1; }
+.lc-page-eau .lc-pastille-lieu span { background: #5EEAD4; box-shadow: 0 0 0 4px rgba(94,234,212,.25); }
+.lc-page-eau .lc-confiance svg { stroke: #5EEAD4; }
+.lc-page-eau .lc-gros-appel, .lc-page-eau main .lc-bouton-ciel { background: linear-gradient(135deg,#5EEAD4,#22D3EE); color: #042F2E; box-shadow: 0 14px 40px rgba(34,211,238,.28); }
+.lc-page-eau .lc-gros-fraicheur { background: #F0FDFA; }
+.lc-page-eau .lc-gros-fraicheur svg { stroke: #0F766E; }
+.lc-page-eau .lc-gros-fraicheur .lc-gros-sous { color: #0F766E !important; }
+.lc-page-eau .lc-glace.lc-raison { background: linear-gradient(160deg, rgba(17,74,94,.8), rgba(7,36,50,.86)); }
+.lc-page-eau .lc-rond-icone { background: #CCFBF1; }
+.lc-page-eau .lc-rond-icone svg { stroke: #0F766E; }
+.lc-page-eau .lc-compare-achat { background: rgba(4,26,36,.42); }
+.lc-page-eau .lc-compare-location li svg, .lc-page-eau .lc-coches svg, .lc-page-eau .lc-deshu-capacite svg { stroke: #0D9488; }
+.lc-page-eau .lc-deshu-visuel { background: radial-gradient(circle at 50% 60%, #FFFFFF, #D3EFF0 70%); }
+.lc-page-eau .lc-deshu-capacite { color: #0F766E; }
+.lc-page-eau .lc-deshu-prix div { background: #DDF5F2; }
+.lc-page-eau .lc-deshu-prix span { color: #0F766E; }
+.lc-page-eau .lc-deshu-prix .lc-deshu-prix-vedette { background: linear-gradient(160deg,#0A3442,#0E7490); }
+.lc-page-eau .lc-deshu-prix .lc-deshu-prix-vedette span { color: #A5F3FC; }
+.lc-page-eau .lc-etape-num { color: #0F766E; }
+.lc-page-eau .lc-encart { background: #F0FDFA; }
+.lc-page-eau .lc-encart-icone { background: #99F6E4; }
+.lc-page-eau .lc-mini-etiquette { color: #0F766E; }
+@media (prefers-reduced-motion: reduce) { .lc-goutte { animation: none; } }

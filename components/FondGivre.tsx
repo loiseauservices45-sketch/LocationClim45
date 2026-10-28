@@ -1,5 +1,6 @@
 // Fond continu de la page : lueurs, courant d'air givré et flocons,
 // qui accompagnent le visiteur du haut jusqu'en bas de la page.
+// Ambiance « eau » (page déshumidificateurs) : gouttelettes à la place des flocons.
 // Les positions des flocons sont fixes (pas de hasard) pour un rendu identique côté serveur et navigateur.
 
 const TRACE =
@@ -21,7 +22,7 @@ const FLOCONS = Array.from({ length: 60 }, () => ({
   t: (10 + r() * 6).toFixed(1) + "s",
 }));
 
-export default function FondGivre() {
+export default function FondGivre({ eau = false }: { eau?: boolean }) {
   return (
     <div className="lc-fond" aria-hidden="true">
       <div className="lc-lueur" style={{ width: 1100, height: 700, right: "-10%", top: -160, background: "radial-gradient(ellipse,rgba(125,211,252,.20),rgba(125,211,252,0) 65%)" }} />
@@ -45,7 +46,7 @@ export default function FondGivre() {
       </svg>
 
       {FLOCONS.map((f, i) => (
-        <span key={i} className="lc-flocon" style={{ left: f.x, top: f.y, width: f.s, height: f.s, animationDelay: f.d, animationDuration: f.t }} />
+        <span key={i} className={eau ? "lc-flocon lc-goutte" : "lc-flocon"} style={{ left: f.x, top: f.y, width: f.s, height: f.s, animationDelay: f.d, animationDuration: f.t }} />
       ))}
     </div>
   );
