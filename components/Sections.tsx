@@ -17,12 +17,12 @@ import { SITE, TEXTES } from "@/lib/site";
 // ─────────────────────────────────────────────────────────────
 
 /** Gabarit de page : fond continu, bandeau, en-tête, pied de page, barre téléphone. */
-export function PageGivre({ children, bandeau, givre = false, ambiance }: { children: ReactNode; bandeau?: string; givre?: boolean; ambiance?: "eau" }) {
+export function PageGivre({ children, bandeau, givre = false, ambiance }: { children: ReactNode; bandeau?: string; givre?: boolean; ambiance?: "glace-a" | "glace-b" | "brume" }) {
   return (
-    <div className={ambiance === "eau" ? "lc-page lc-page-eau" : "lc-page"}>
-      <FondGivre eau={ambiance === "eau"} />
+    <div className={ambiance ? `lc-page lc-page-${ambiance}` : "lc-page"}>
+      <FondGivre eau={!!ambiance} />
       {givre && <TransitionGivre />}
-      {ambiance === "eau" && <TransitionBuee />}
+      {ambiance && <TransitionBuee />}
       <div className="lc-contenu">
         <Banner text={bandeau} />
         <Header />
@@ -222,18 +222,22 @@ export function BandePro() {
 }
 
 /** Bandeau « Nouveau : déshumidificateurs » qui mène à la page dédiée. */
-export function BandeDeshu() {
+export function BandeDeshu({
+  titre = "Nouveau : location de déshumidificateurs",
+  texte = "Pièce humide, cave, dégât des eaux, chantier : livré, installé et récupéré, comme nos climatiseurs.",
+  bouton = "Découvrir",
+}: { titre?: string; texte?: string; bouton?: string }) {
   return (
     <section className="lc-section" style={{ paddingTop: 20, paddingBottom: 20 }}>
       <div className="lc-conteneur lc-etroit">
         <div className="lc-bande-pro lc-bande-deshu">
           <span className="lc-bande-pro-icone"><Icone nom="goutte" taille={32} couleur="#0369A1" /></span>
           <div>
-            <h3>Nouveau : location de déshumidificateurs</h3>
-            <p>Pièce humide, cave, dégât des eaux, chantier : livré, installé et récupéré, comme nos climatiseurs.</p>
+            <h3>{titre}</h3>
+            <p>{texte}</p>
           </div>
           <div className="lc-bande-pro-actions">
-            <Link href="/location-deshumidificateur" className="lc-bouton-glace">Découvrir</Link>
+            <Link href="/location-deshumidificateur" className="lc-bouton-glace">{bouton}</Link>
           </div>
         </div>
       </div>

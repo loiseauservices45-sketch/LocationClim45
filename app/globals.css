@@ -603,39 +603,61 @@ body { overflow-x: hidden !important; }
 .lc-buee { position: fixed; inset: 0; z-index: 300; pointer-events: none; overflow: hidden; animation: lcGivreFin 3.1s ease forwards; }
 .lc-msg-buee { color: #0E4A5C; }
 
-/* ─── Ambiance « eau » (page déshumidificateurs) : même cadre, teinte turquoise ─── */
-.lc-page-eau { background: linear-gradient(180deg,#0F3446 0%,#14485D 30%,#175367 62%,#113B4F 100%); }
-.lc-page-eau .lc-lueur { filter: hue-rotate(-28deg); }
-.lc-page-eau .lc-courant path { stroke: #CCFBF1; }
-.lc-page-eau .lc-courant .lc-voile-air { stroke: #5EEAD4; }
+/* ─── Fiches déshumidificateurs (format des fiches climatiseurs) ─── */
+.lc-fiche-deshu .lc-fiche-photo { background: radial-gradient(circle at 50% 55%, #FFFFFF, #DCEBF7 72%); }
+.lc-fiche-dessin { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.lc-fiche-dessin svg { width: 190px; height: auto; }
+.lc-fiche-deshu .lc-deshu-capacite { margin-top: -2px; }
+.lc-fiche-deshu .lc-deshu-prix { margin: 4px 0 12px; }
+@media (max-width: 760px) { .lc-fiche-dessin svg { width: 140px; } }
+
+/* ─── Gouttelettes à la place des flocons ─── */
 .lc-goutte { background: none; box-shadow: none; }
-.lc-goutte::before { content: ""; position: absolute; inset: -35%; border-radius: 0 50% 50% 50%; transform: rotate(45deg); background: radial-gradient(circle at 62% 62%, #ECFEFF, #67E8F9 80%); box-shadow: 0 0 8px 1px rgba(103,232,249,.45); }
-.lc-page-eau .lc-bandeau { background: #08242F; color: #99F6E4; border-bottom-color: rgba(153,246,228,.14); }
-.lc-page-eau .lc-entete { background: rgba(9,35,47,.95); border-bottom-color: rgba(153,246,228,.12); }
-.lc-page-eau .lc-nav a:hover, .lc-page-eau .lc-nav a.actif { color: #5EEAD4; }
-.lc-page-eau .lc-pied { background: #071C25; }
-.lc-page-eau .lc-etiquette { color: #5EEAD4; }
-.lc-page-eau .lc-h1-accent { color: #99F6E4; }
-.lc-page-eau .lc-pastille-lieu { border-color: rgba(153,246,228,.35); background: rgba(153,246,228,.08); color: #CCFBF1; }
-.lc-page-eau .lc-pastille-lieu span { background: #5EEAD4; box-shadow: 0 0 0 4px rgba(94,234,212,.25); }
-.lc-page-eau .lc-confiance svg { stroke: #5EEAD4; }
-.lc-page-eau .lc-gros-appel, .lc-page-eau main .lc-bouton-ciel { background: linear-gradient(135deg,#5EEAD4,#22D3EE); color: #042F2E; box-shadow: 0 14px 40px rgba(34,211,238,.28); }
-.lc-page-eau .lc-gros-fraicheur { background: #F0FDFA; }
-.lc-page-eau .lc-gros-fraicheur svg { stroke: #0F766E; }
-.lc-page-eau .lc-gros-fraicheur .lc-gros-sous { color: #0F766E !important; }
-.lc-page-eau .lc-glace.lc-raison { background: linear-gradient(160deg, rgba(17,74,94,.8), rgba(7,36,50,.86)); }
-.lc-page-eau .lc-rond-icone { background: #CCFBF1; }
-.lc-page-eau .lc-rond-icone svg { stroke: #0F766E; }
-.lc-page-eau .lc-compare-achat { background: rgba(4,26,36,.42); }
-.lc-page-eau .lc-compare-location li svg, .lc-page-eau .lc-coches svg, .lc-page-eau .lc-deshu-capacite svg { stroke: #0D9488; }
-.lc-page-eau .lc-deshu-visuel { background: radial-gradient(circle at 50% 60%, #FFFFFF, #D3EFF0 70%); }
-.lc-page-eau .lc-deshu-capacite { color: #0F766E; }
-.lc-page-eau .lc-deshu-prix div { background: #DDF5F2; }
-.lc-page-eau .lc-deshu-prix span { color: #0F766E; }
-.lc-page-eau .lc-deshu-prix .lc-deshu-prix-vedette { background: linear-gradient(160deg,#0A3442,#0E7490); }
-.lc-page-eau .lc-deshu-prix .lc-deshu-prix-vedette span { color: #A5F3FC; }
-.lc-page-eau .lc-etape-num { color: #0F766E; }
-.lc-page-eau .lc-encart { background: #F0FDFA; }
-.lc-page-eau .lc-encart-icone { background: #99F6E4; }
-.lc-page-eau .lc-mini-etiquette { color: #0F766E; }
-@media (prefers-reduced-motion: reduce) { .lc-goutte { animation: none; } }
+.lc-goutte::before { content: ""; position: absolute; inset: -35%; border-radius: 0 50% 50% 50%; transform: rotate(45deg); background: radial-gradient(circle at 62% 62%, #F0F9FF, #93C5FD 85%); box-shadow: 0 0 8px 1px rgba(186,230,253,.55); }
+
+/* ─── Ambiance « bleu givré » (page déshumidificateurs) : même cadre que les clims, en plus clair ─── */
+/* Nuance A : bleu givré */
+.lc-page-glace-a { background: linear-gradient(180deg,#1A3E68 0%,#21508A 30%,#245891 62%,#1B4674 100%); }
+.lc-page-glace-a .lc-entete { background: rgba(19,48,86,.95); }
+.lc-page-glace-a .lc-bandeau { background: #142F55; }
+.lc-page-glace-a .lc-pied { background: #0D213D; }
+.lc-page-glace-a .lc-glace.lc-raison { background: linear-gradient(160deg, rgba(28,70,124,.8), rgba(13,40,78,.84)); }
+.lc-page-glace-a .lc-compare-achat { background: rgba(10,32,66,.42); }
+/* Nuance B : bleu glacier, plus lumineux, voile de givre en haut */
+.lc-page-glace-b { background: linear-gradient(180deg,#2B5D92 0%,#3570A8 30%,#3876AE 62%,#2B5F95 100%); }
+.lc-page-glace-b .lc-fond::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1200px; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255,255,255,.22), rgba(255,255,255,0) 70%); }
+.lc-page-glace-b .lc-entete { background: rgba(28,72,122,.95); }
+.lc-page-glace-b .lc-bandeau { background: #21497A; color: #E0F2FE; }
+.lc-page-glace-b .lc-pied { background: #102A4C; }
+.lc-page-glace-b .lc-intro, .lc-page-glace-b .lc-chapeau, .lc-page-glace-b .lc-note, .lc-page-glace-b .lc-confiance, .lc-page-glace-b .lc-nav a { color: #EAF4FD; }
+.lc-page-glace-b .lc-etiquette { color: #E0F2FE; }
+.lc-page-glace-b .lc-h1-accent { color: #E0F2FE; }
+.lc-page-glace-b .lc-glace.lc-raison { background: linear-gradient(160deg, rgba(34,84,140,.82), rgba(18,52,96,.86)); }
+.lc-page-glace-b .lc-compare-achat { background: rgba(14,42,82,.45); border-color: rgba(226,240,252,.5); }
+.lc-page-glace-b .lc-compare-achat li, .lc-page-glace-b .lc-compare-achat .lc-compare-titre { color: #E2EDF8; }
+.lc-page-glace-b .lc-etapes p, .lc-page-glace-b .lc-pied p { color: #E2EDF8; }
+/* Nuance C : « brume », entre A et B, avec de l'humidité dans l'air */
+.lc-page-brume { background: linear-gradient(180deg,#21497A 0%,#285A90 28%,#2B6098 60%,#204C7D 100%); }
+.lc-page-brume .lc-fond::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1100px; background: radial-gradient(ellipse 75% 55% at 50% 0%, rgba(230,242,252,.2), rgba(230,242,252,0) 70%); }
+.lc-brume-fond { position: absolute; left: -25%; width: 150%; height: 760px; pointer-events: none;
+  background: radial-gradient(ellipse 34% 38% at 28% 50%, rgba(226,240,252,.2), rgba(226,240,252,0) 72%),
+              radial-gradient(ellipse 30% 30% at 70% 42%, rgba(226,240,252,.16), rgba(226,240,252,0) 72%),
+              radial-gradient(ellipse 22% 26% at 50% 70%, rgba(255,255,255,.1), rgba(255,255,255,0) 72%);
+  animation: lcBrumeDerive 40s ease-in-out infinite alternate; }
+@keyframes lcBrumeDerive { from { transform: translateX(-5%); } to { transform: translateX(5%); } }
+.lc-page-brume .lc-entete { background: rgba(24,58,100,.95); }
+.lc-page-brume .lc-bandeau { background: #1A3F6B; color: #D6ECFB; }
+.lc-page-brume .lc-pied { background: #0F2645; }
+.lc-page-brume .lc-intro, .lc-page-brume .lc-chapeau, .lc-page-brume .lc-note, .lc-page-brume .lc-confiance { color: #E2EDF8; }
+.lc-page-brume .lc-h1-accent { color: #CFEAFB; }
+.lc-page-brume .lc-glace.lc-raison { background: linear-gradient(160deg, rgba(32,80,136,.8), rgba(16,48,92,.86)); }
+.lc-page-brume .lc-compare-achat { background: rgba(12,38,76,.42); border-color: rgba(226,240,252,.45); }
+.lc-page-brume .lc-compare-achat li, .lc-page-brume .lc-compare-achat .lc-compare-titre { color: #DCE8F5; }
+.lc-perle { position: absolute; border-radius: 50% 50% 50% 50% / 46% 46% 54% 54%; opacity: .8;
+  background: radial-gradient(circle at 34% 30%, rgba(255,255,255,.95) 0 14%, rgba(255,255,255,.18) 26%, rgba(190,225,250,.14) 62%, rgba(255,255,255,.55) 100%);
+  box-shadow: 0 1.5px 2px rgba(6,22,48,.35), inset 0 -1px 1px rgba(255,255,255,.35); }
+.lc-perle-coule { border-radius: 50% 50% 48% 48% / 42% 42% 58% 58%; height: auto !important; aspect-ratio: 1 / 1.25; }
+.lc-perle-coule::after { content: ""; position: absolute; left: 22%; right: 22%; bottom: 100%; height: 90%; border-radius: 999px 999px 0 0;
+  background: linear-gradient(0deg, rgba(226,240,252,.22), rgba(226,240,252,0)); }
+@media (max-width: 760px) { .lc-brume-fond { height: 520px; left: -60%; width: 220%; } .lc-perle { transform: scale(.75); } .lc-perle:not(.lc-perle-bord) { display: none; } }
+@media (prefers-reduced-motion: reduce) { .lc-goutte, .lc-brume-fond { animation: none; } }

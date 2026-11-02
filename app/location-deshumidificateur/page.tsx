@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Icone from "@/components/Icones";
 import BoutonBuee from "@/components/BoutonBuee";
-import { PageGivre, EntetePage, TitreSection, CartesIcones, Etapes, FAQ, AppelFinal } from "@/components/Sections";
+import { PageGivre, EntetePage, Confiance, TitreSection, CartesIcones, FAQ, AppelFinal } from "@/components/Sections";
 import { DESHUMIDIFICATEURS, type ModeleDeshu } from "@/lib/deshumidificateurs";
 import { SITE, TEXTES } from "@/lib/site";
 
@@ -34,16 +34,18 @@ function IllustrationDeshu({ grand = false }: { grand?: boolean }) {
   );
 }
 
-function CarteDeshu({ m }: { m: ModeleDeshu }) {
+// Fiche appareil, au même format que les fiches climatiseurs (photo d'un côté, texte de l'autre).
+function FicheDeshu({ m, inverse }: { m: ModeleDeshu; inverse: boolean }) {
   return (
-    <article id={m.id} className="lc-glace lc-deshu">
-      <div className="lc-deshu-visuel">
+    <article id={m.id} className={"lc-glace lc-fiche lc-fiche-deshu" + (inverse ? " lc-fiche-inverse" : "")}>
+      <div className="lc-fiche-photo">
         {m.photo
           ? <img src={m.photo.src} alt={m.photo.alt} width={m.photo.largeur} height={m.photo.hauteur} />
-          : <IllustrationDeshu grand={m.id === "pro"} />}
+          : <div className="lc-fiche-dessin"><IllustrationDeshu grand={m.id === "pro"} /></div>}
         <span className="lc-modele-etiquette lc-fiche-etiquette" style={{ background: m.id === "pro" ? "#EEF2FF" : "#E0F2FE", color: m.id === "pro" ? "#4338CA" : "#0369A1" }}>{m.etiquette}</span>
       </div>
-      <div className="lc-deshu-texte">
+      <div className="lc-fiche-texte">
+        <p className="lc-mini-etiquette">Déshumidificateur · location</p>
         <h3>{m.nom}</h3>
         <p className="lc-deshu-capacite"><Icone nom="goutte" taille={18} couleur="#0284C7" epaisseur={2.2} />{m.capacite}</p>
         <p className="lc-fiche-accroche">{m.pourQui}</p>
@@ -51,16 +53,16 @@ function CarteDeshu({ m }: { m: ModeleDeshu }) {
           {m.points.map(p => <li key={p}><Icone nom="coche" taille={18} couleur="#0284C7" epaisseur={2.6} />{p}</li>)}
         </ul>
         <div className="lc-deshu-prix">
-          {m.prix.map((p, i) => (
-            <div key={p.duree} className={i === 1 ? "lc-deshu-prix-vedette" : undefined}>
+          {m.prix.map((p, k) => (
+            <div key={p.duree} className={k === 1 ? "lc-deshu-prix-vedette" : undefined}>
               <span>{p.duree}</span>
               <strong>{p.prix}</strong>
             </div>
           ))}
         </div>
-        <p className="lc-deshu-note">Conseil, installation et réglage inclus · {TEXTES.livraisonCourt} · caution {m.caution}</p>
+        <p className="lc-deshu-note">✓ Conseil, installation et réglage inclus · ✓ {TEXTES.livraisonCourt} · caution {m.caution}</p>
         <div className="lc-fiche-actions">
-          <a href={SITE.telephoneLien} className="lc-bouton-ciel lc-bouton-moyen"><Icone nom="telephone" taille={18} epaisseur={2.2} />Réserver</a>
+          <a href={SITE.telephoneLien} className="lc-bouton-ciel lc-bouton-moyen"><Icone nom="telephone" taille={18} epaisseur={2.2} />Réserver cet appareil</a>
           <Link href="/contact" className="lc-bouton-sombre">Demander un devis</Link>
         </div>
       </div>
@@ -73,7 +75,7 @@ const ACHAT = [
   "Choisir seul le modèle et la puissance",
   "Aller le chercher et le transporter",
   "L'installer et trouver le bon réglage",
-  "Payer l'appareil en entier : environ 170 € à plus de 500 €",
+  "Avancer le prix d'un appareil neuf pour un besoin de quelques semaines",
   "Le ranger quelque part une fois le problème réglé",
 ];
 const LOCATION = [
@@ -96,25 +98,15 @@ const SCHEMA = {
 
 export default function PageDeshumidificateurs() {
   return (
-    <PageGivre ambiance="eau" bandeau="Nouveau · Location de déshumidificateurs · Orléans & Loiret">
+    <PageGivre ambiance="brume" bandeau="Nouveau · Location de déshumidificateurs · Orléans & Loiret">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA) }} />
 
       <EntetePage
         etiquette="Nouveau · Orléans & Loiret"
         titre={<>Location de déshumidificateur,<br /><span className="lc-h1-accent">on s&apos;occupe de tout.</span></>}
         intro="Pièce humide, cave, dégât des eaux ou chantier : rien à choisir seul, rien à porter, rien à régler. On vous conseille le bon appareil, on le livre, on l'installe, et on revient le chercher quand c'est sec."
-        aside={
-          <div className="lc-glace lc-deshu-hero">
-            <IllustrationDeshu grand />
-            <div className="lc-deshu-jauge">
-              <span className="lc-mini-etiquette">Taux d&apos;humidité conseillé</span>
-              <div className="lc-jauge"><span style={{ left: "40%", width: "20%" }} /></div>
-              <div className="lc-jauge-legende"><span>0 %</span><strong>40 à 60 %</strong><span>100 %</span></div>
-            </div>
-          </div>
-        }
       >
-        <div className="lc-g2 lc-duo">
+        <div className="lc-g2 lc-duo" style={{ marginLeft: "auto", marginRight: "auto" }}>
           <a href={SITE.telephoneLien} className="lc-gros-bouton lc-gros-appel">
             <span className="lc-gros-titre"><Icone nom="telephone" taille={22} epaisseur={2.2} />Nous appeler</span>
             <span className="lc-gros-sous">{SITE.telephoneAffiche}</span>
@@ -124,29 +116,17 @@ export default function PageDeshumidificateurs() {
             <span className="lc-gros-sous" style={{ color: "#0369A1" }}>et les prix →</span>
           </BoutonBuee>
         </div>
-        <div className="lc-confiance">
-          <span><span style={{ color: "#FBBF24", letterSpacing: 2 }}>★★★★★</span> 5/5 sur Google</span>
-          <span><Icone nom="coche" taille={17} couleur="#7DD3FC" epaisseur={2.4} /> Livré, installé, récupéré</span>
-          <span><Icone nom="coche" taille={17} couleur="#7DD3FC" epaisseur={2.4} /> Particuliers et pros</span>
-        </div>
+        <Confiance centre elements={["Livré, installé, récupéré", "Particuliers et pros"]} />
       </EntetePage>
 
-      {/* SITUATIONS */}
-      <section className="lc-section">
-        <div className="lc-conteneur lc-etroit">
-          <TitreSection etiquette="Pour quelles situations ?" titre="L'humidité, on l'évacue." chapeau="Un déshumidificateur retire l'eau de l'air : les murs, les sols et les affaires sèchent plus vite." />
-          <CartesIcones colonnes={3} cartes={[
-            { icone: "fenetre", titre: "Pièce humide", texte: "Condensation sur les vitres, odeur de renfermé, linge qui ne sèche pas." },
-            { icone: "garage", titre: "Cave et garage", texte: "Air chargé d'humidité, affaires et cartons à protéger." },
-            { icone: "vagues", titre: "Après un dégât des eaux", texte: "Fuite, inondation : on accélère le séchage. Facture détaillée pour votre assurance." },
-            { icone: "pinceau", titre: "Chantier et rénovation", texte: "Séchage plus rapide après plâtre, enduit, peinture ou chape." },
-            { icone: "maison", titre: "Logement à remettre en état", texte: "Logement vacant ou à relouer, resté longtemps fermé." },
-            { icone: "boite", titre: "Locaux et stockage", texte: "Réserves, archives, ateliers : un air plus sec pour vos stocks." },
-          ]} />
-          <div className="lc-encart">
-            <span className="lc-encart-icone"><Icone nom="info" taille={24} couleur="#0B3B66" epaisseur={2} /></span>
-            <p><strong>Un conseil honnête :</strong> un déshumidificateur sèche l&apos;air et accélère le séchage, mais il ne répare pas une fuite, une infiltration ou des remontées d&apos;humidité par le sol. Dans ces cas-là, il faut aussi traiter la cause avec un professionnel du bâtiment. On vous le dira franchement.</p>
+      {/* CATALOGUE + PRIX (destination de l'animation buée) */}
+      <section id="tarifs" className="lc-section">
+        <div className="lc-conteneur">
+          <TitreSection etiquette="Nos déshumidificateurs" titre="Le bon appareil pour chaque besoin." chapeau="Prix par appareil, installation toujours comprise. Nous vous conseillons le modèle adapté à la pièce et à la situation." />
+          <div style={{ display: "grid", gap: 32 }}>
+            {DESHUMIDIFICATEURS.map((m, i) => <FicheDeshu key={m.id} m={m} inverse={i % 2 === 1} />)}
           </div>
+          <p className="lc-note">L&apos;appareil consomme de l&apos;électricité sur votre installation · {TEXTES.livraison} — précisée dans votre devis</p>
         </div>
       </section>
 
@@ -172,23 +152,24 @@ export default function PageDeshumidificateurs() {
         </div>
       </section>
 
-      {/* APPAREILS + PRIX */}
-      <section id="tarifs" className="lc-section">
+      {/* SITUATIONS */}
+      <section className="lc-section">
         <div className="lc-conteneur lc-etroit">
-          <TitreSection etiquette="Nos déshumidificateurs et nos prix" titre="Deux appareils, selon votre besoin." chapeau="Prix par appareil. Nous vous conseillons le bon modèle selon la pièce et la situation." />
-          <div className="lc-g2 lc-deshu-grille">
-            {DESHUMIDIFICATEURS.map(m => <CarteDeshu key={m.id} m={m} />)}
+          <TitreSection etiquette="Pour quelles situations ?" titre="L'humidité, on l'évacue." chapeau="Un déshumidificateur retire l'eau de l'air : les murs, les sols et les affaires sèchent plus vite." />
+          <CartesIcones colonnes={3} cartes={[
+            { icone: "fenetre", titre: "Pièce humide", texte: "Condensation sur les vitres, odeur de renfermé, linge qui ne sèche pas." },
+            { icone: "garage", titre: "Cave et garage", texte: "Air chargé d'humidité, affaires et cartons à protéger." },
+            { icone: "vagues", titre: "Après un dégât des eaux", texte: "Fuite, inondation : on accélère le séchage. Facture détaillée pour votre assurance." },
+            { icone: "pinceau", titre: "Chantier et rénovation", texte: "Séchage plus rapide après plâtre, enduit, peinture ou chape." },
+            { icone: "maison", titre: "Logement à remettre en état", texte: "Logement vacant ou à relouer, resté longtemps fermé." },
+            { icone: "boite", titre: "Locaux et stockage", texte: "Réserves, archives, ateliers : un air plus sec pour vos stocks." },
+          ]} />
+          <div className="lc-encart">
+            <span className="lc-encart-icone"><Icone nom="info" taille={24} couleur="#0B3B66" epaisseur={2} /></span>
+            <p><strong>Un conseil honnête :</strong> un déshumidificateur sèche l&apos;air et accélère le séchage, mais il ne répare pas une fuite, une infiltration ou des remontées d&apos;humidité par le sol. Dans ces cas-là, il faut aussi traiter la cause avec un professionnel du bâtiment. On vous le dira franchement.</p>
           </div>
-          <p className="lc-note">L&apos;appareil consomme de l&apos;électricité sur votre installation · {TEXTES.livraison} — précisée dans votre devis</p>
         </div>
       </section>
-
-      <Etapes etiquette="Comment ça marche" titre="Un appel, et l'air s'assèche." etapes={[
-        { titre: "Vous nous appelez", texte: "Vous décrivez la pièce et la situation, on vous conseille le bon appareil." },
-        { titre: "On confirme", texte: "Créneau, prix de livraison et durée, récapitulatif par SMS." },
-        { titre: "Livraison et réglage", texte: "On installe l'appareil et on règle le taux d'humidité." },
-        { titre: "Récupération", texte: "Quand c'est sec, on reprend l'appareil et votre caution vous est rendue." },
-      ]} />
 
       <FAQ titre="Vos questions sur les déshumidificateurs" items={[
         { q: "Pourquoi louer plutôt qu'acheter un déshumidificateur ?", a: "Parce que vous n'avez rien à gérer : on vous conseille le bon appareil, on le livre, on l'installe et on le règle, puis on le récupère quand le problème est réglé. Vous payez seulement la durée dont vous avez besoin, sans appareil à stocker ensuite." },

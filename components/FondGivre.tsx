@@ -22,6 +22,22 @@ const FLOCONS = Array.from({ length: 60 }, () => ({
   t: (10 + r() * 6).toFixed(1) + "s",
 }));
 
+// Ambiance « eau » : perles de condensation posées comme sur une vitre,
+// surtout dans les marges pour ne jamais gêner la lecture.
+const r2 = suite(45451);
+const PERLES = Array.from({ length: 96 }, (_, i) => {
+  const haut = i < 64; // la majorité dans le haut de page
+  const cote = r2() < 0.5 ? r2() * 27 : 73 + r2() * 27;
+  const taille = 3 + Math.pow(r2(), 2) * 15;
+  return {
+    x: cote.toFixed(1) + "%",
+    y: (haut ? r2() * 13 : 13 + r2() * 85).toFixed(2) + "%",
+    s: taille.toFixed(1) + "px",
+    coule: taille > 11 && r2() < 0.5,
+    bord: cote < 7 || cote > 93, // seules perles gardées sur téléphone (hors du texte)
+  };
+});
+
 export default function FondGivre({ eau = false }: { eau?: boolean }) {
   return (
     <div className="lc-fond" aria-hidden="true">
@@ -44,6 +60,15 @@ export default function FondGivre({ eau = false }: { eau?: boolean }) {
       <svg className="lc-courant lc-courant-etroit" viewBox="0 0 390 8000" preserveAspectRatio="none">
         <path className="lc-flux" d="M -20 520 C 120 470, 260 560, 372 640 C 386 1600, 380 2600, 376 3600 C 372 4600, 384 5600, 378 6600 C 374 7200, 300 7700, 120 7900" fill="none" stroke="#E0F2FE" strokeWidth="2" opacity=".55" vectorEffect="non-scaling-stroke" />
       </svg>
+
+      {/* Ambiance « eau » : nappes de brume qui dérivent lentement */}
+      {eau && [6, 27, 49, 71, 90].map((y, i) => (
+        <div key={"b" + i} className="lc-brume-fond" style={{ top: y + "%", animationDelay: -i * 7 + "s", animationDuration: 34 + i * 5 + "s" }} />
+      ))}
+
+      {eau && PERLES.map((p, i) => (
+        <span key={"p" + i} className={"lc-perle" + (p.coule ? " lc-perle-coule" : "") + (p.bord ? " lc-perle-bord" : "")} style={{ left: p.x, top: p.y, width: p.s, height: p.s }} />
+      ))}
 
       {FLOCONS.map((f, i) => (
         <span key={i} className={eau ? "lc-flocon lc-goutte" : "lc-flocon"} style={{ left: f.x, top: f.y, width: f.s, height: f.s, animationDelay: f.d, animationDuration: f.t }} />

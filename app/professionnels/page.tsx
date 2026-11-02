@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Icone from "@/components/Icones";
-import { PageGivre, TitreSection, CartesIcones, CartesModeles, Forfaits, type Forfait, Etapes, FAQ, AppelFinal } from "@/components/Sections";
+import { PageGivre, TitreSection, CartesIcones, CartesModeles, Forfaits, type Forfait, Etapes, FAQ, AppelFinal, BandeDeshu } from "@/components/Sections";
 import { SITE, TEXTES } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -109,6 +109,12 @@ export default function Professionnels() {
         { titre: "Livraison et installation", texte: "On installe et on met en service sur votre site." },
         { titre: "Récupération", texte: "En fin de location, on reprend tout. Facture professionnelle fournie." },
       ]} />
+
+      <BandeDeshu
+        titre="Dégât des eaux, chantier, locaux humides ?"
+        texte="Nous louons aussi des déshumidificateurs professionnels : livrés, installés, avec facture pour votre entreprise ou l'assurance."
+        bouton="Voir les déshumidificateurs"
+      />
 
       <FAQ titre="Questions des professionnels" items={[
         { q: "Pouvez-vous équiper plusieurs pièces ou plusieurs sites ?", a: "Oui. Indiquez-nous le nombre de pièces et leur surface : nous vous proposons le nombre d'appareils adapté, selon nos disponibilités, dans un seul devis." },

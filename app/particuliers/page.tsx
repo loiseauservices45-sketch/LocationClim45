@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import AvisClients from "@/components/AvisClients";
-import { PageGivre, EntetePage, DuoBoutons, Confiance, CartePhoto, TitreSection, CartesIcones, CartesModeles, Forfaits, NOTE_TARIFS, Etapes, FAQ, FAQ_GENERALE, AppelFinal } from "@/components/Sections";
+import { PageGivre, EntetePage, DuoBoutons, Confiance, CartePhoto, TitreSection, CartesIcones, CartesModeles, Forfaits, NOTE_TARIFS, Etapes, FAQ, FAQ_GENERALE, AppelFinal, BandeDeshu } from "@/components/Sections";
 
 export const metadata: Metadata = {
   title: "Location Climatiseur Particuliers — Orléans & Loiret",
@@ -61,6 +61,12 @@ export default function Particuliers() {
       </section>
 
       <Etapes etiquette="En 4 étapes" titre="Simple comme un appel." />
+      <BandeDeshu
+        titre="Une pièce trop humide cet hiver ?"
+        texte="Cave, chambre, linge qui ne sèche pas : nous louons aussi des déshumidificateurs, livrés, installés et récupérés chez vous."
+        bouton="Voir les déshumidificateurs"
+      />
+
       <FAQ items={FAQ_GENERALE.slice(0, 5)} />
       <AppelFinal titre="Prêt à retrouver la fraîcheur chez vous ?" />
     </PageGivre>
