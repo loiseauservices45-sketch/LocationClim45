@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SITE } from "@/lib/site";
 
 // Formulaire de demande de devis.
@@ -12,7 +12,8 @@ type Champs = { nom: string; phone: string; email: string; commune: string; prof
 type Erreurs = Partial<Record<keyof Champs, string>>;
 type Etat = "saisie" | "envoi" | "envoye" | "messagerie" | "erreur";
 
-const DUREES = ["Week-end (3j)", "1 semaine", "1 mois", "Plus long / sur devis"];
+const DUREES = ["Quelques jours", "1 semaine", "2 semaines", "1 mois", "Plus long / sur devis"];
+const APPAREILS = ["Climatiseur", "Déshumidificateur"];
 
 function verifier(c: Champs): Erreurs {
   const e: Erreurs = {};
@@ -29,6 +30,19 @@ export default function FormulaireDevis() {
   const [duree, setDuree] = useState("1 semaine");
   const [etat, setEtat] = useState<Etat>("saisie");
   const [erreurs, setErreurs] = useState<Erreurs>({});
+  const [appareils, setAppareils] = useState<string[]>([]);
+  const [erreurAppareil, setErreurAppareil] = useState(false);
+
+  // Le lien « Demander un devis » de la page déshumidificateurs coche directement le bon appareil.
+  useEffect(() => {
+    const a = new URLSearchParams(window.location.search).get("appareil");
+    if (a === "deshumidificateur") setAppareils(["Déshumidificateur"]);
+    if (a === "climatiseur") setAppareils(["Climatiseur"]);
+  }, []);
+  const basculer = (a: string) => {
+    setErreurAppareil(false);
+    setAppareils(l => (l.includes(a) ? l.filter(x => x !== a) : [...l, a]));
+  };
 
   async function envoyer(ev: React.FormEvent<HTMLFormElement>) {
     ev.preventDefault();
@@ -44,6 +58,11 @@ export default function FormulaireDevis() {
     };
     const e = verifier(c);
     setErreurs(e);
+    setErreurAppareil(appareils.length === 0);
+    if (appareils.length === 0 && Object.keys(e).length === 0) {
+      document.getElementById("appareil-climatiseur")?.focus();
+      return;
+    }
     if (Object.keys(e).length > 0) {
       const premier = ev.currentTarget.querySelector<HTMLElement>(`#${Object.keys(e)[0]}`);
       premier?.focus();
@@ -59,6 +78,7 @@ export default function FormulaireDevis() {
       `E-mail : ${c.email || "—"}`,
       `Commune : ${c.commune}`,
       `Profil : ${c.profil}`,
+      `Appareil(s) : ${appareils.join(" + ")}`,
       `Durée : ${duree}`,
       `Date souhaitée : ${c.date || "—"}`,
       `Message : ${c.message || "—"}`,
@@ -78,7 +98,7 @@ export default function FormulaireDevis() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: SITE.web3formsCle,
-          subject: `Demande de devis — ${c.nom} (${c.commune})`,
+          subject: `Demande de devis ${appareils.join(" + ").toLowerCase()} — ${c.nom} (${c.commune})`,
           from_name: "Site LocationClim45",
           replyto: c.email || undefined,
           Nom: c.nom,
@@ -86,6 +106,7 @@ export default function FormulaireDevis() {
           "E-mail": c.email || "—",
           Commune: c.commune,
           Profil: c.profil,
+          "Appareil(s)": appareils.join(" + "),
           Durée: duree,
           "Date souhaitée": c.date || "—",
           Message: c.message || "—",
@@ -149,6 +170,21 @@ export default function FormulaireDevis() {
           </div>
         </div>
         <fieldset style={{ border: "none", padding: 0, margin: "0 0 16px" }}>
+          <legend style={lbl}>Vous souhaitez louer * <span style={{ fontWeight: 600, color: "#64748B" }}>(un ou les deux)</span></legend>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+            {APPAREILS.map(a => {
+              const coche = appareils.includes(a);
+              return (
+                <button type="button" key={a} id={"appareil-" + (a === "Climatiseur" ? "climatiseur" : "deshumidificateur")} onClick={() => basculer(a)} aria-pressed={coche} style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 18px", border: coche ? "2px solid #2563EB" : erreurAppareil ? "1.5px solid #DC2626" : "1.5px solid rgba(37,99,235,0.18)", borderRadius: 50, fontFamily: "inherit", fontSize: 15, fontWeight: 700, color: coche ? "#fff" : "#334155", background: coche ? "#2563EB" : "#fff", cursor: "pointer", transition: "all .2s" }}>
+                  <span aria-hidden="true" style={{ width: 18, height: 18, borderRadius: 5, border: coche ? "2px solid #fff" : "2px solid #94A3B8", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: 12, lineHeight: 1 }}>{coche ? "✓" : ""}</span>
+                  {a}
+                </button>
+              );
+            })}
+          </div>
+          {erreurAppareil && <p role="alert" style={{ color: "#B91C1C", fontSize: 12.5, fontWeight: 600, marginTop: 6 }}>Choisissez au moins un appareil.</p>}
+        </fieldset>
+        <fieldset style={{ border: "none", padding: 0, margin: "0 0 16px" }}>
           <legend style={lbl}>Durée souhaitée</legend>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
             {DUREES.map(d => (
@@ -157,7 +193,7 @@ export default function FormulaireDevis() {
           </div>
         </fieldset>
         <div style={{ marginBottom: 16 }}><label style={lbl} htmlFor="date">Date de début souhaitée</label><input style={inp("date")} type="date" id="date" name="date" /></div>
-        <div style={{ marginBottom: 20 }}><label style={lbl} htmlFor="message">Message (optionnel)</label><textarea style={{ ...inp("message"), resize: "vertical", minHeight: 100 }} id="message" name="message" placeholder="Taille de la pièce, nombre d'appareils, étage…" /></div>
+        <div style={{ marginBottom: 20 }}><label style={lbl} htmlFor="message">Message (optionnel)</label><textarea style={{ ...inp("message"), resize: "vertical", minHeight: 100 }} id="message" name="message" placeholder="Taille de la pièce, situation (cave, dégât des eaux…), nombre d'appareils, étage…" /></div>
 
         {etat === "erreur" && (
           <div role="alert" style={{ background: "#FEF2F2", border: "1px solid #FECACA", color: "#991B1B", borderRadius: 12, padding: "14px 16px", fontSize: 14, marginBottom: 16, lineHeight: 1.6 }}>

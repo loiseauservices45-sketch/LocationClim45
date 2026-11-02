@@ -3,7 +3,7 @@
 // Modifier ici les noms, caractéristiques, prix et cautions :
 // la page se met à jour toute seule.
 //
-// Prix validés le 28 oct. 2026 (pro : semaine et mois en attente de confirmation).
+// Prix validés par le gérant (28 oct. et 2 nov. 2026).
 // ⚠ Caractéristiques à remplacer par celles des appareils réellement achetés.
 // ─────────────────────────────────────────────────────────────
 
@@ -18,6 +18,7 @@ export type ModeleDeshu = {
   points: string[];        // liste à coches
   prix: PrixDeshu[];       // 3 durées, celle du milieu mise en avant
   caution: string;
+  complement?: string;     // phrase en plus sous les prix (facultatif)
   photo?: { src: string; alt: string; largeur: number; hauteur: number }; // à ajouter après l'achat
 };
 
@@ -59,5 +60,14 @@ export const DESHUMIDIFICATEURS: ModeleDeshu[] = [
       { duree: "1 mois", prix: "449 €" },
     ],
     caution: "300 €",
+    complement: "Plusieurs appareils ? Tarif sur devis pour les artisans, agences immobilières et syndics.",
   },
 ];
+
+// Offre de lancement (à retirer ou modifier ici quand elle se termine).
+export const OFFRE_DESHU = {
+  active: true,
+  bandeau: "Offre de lancement : livraison offerte pour 1 mois de location · jusqu'à 25 km de La Ferté-Saint-Aubin",
+  tuile: "livraison offerte",          // petite mention sous le prix « 1 mois »
+  detail: "Offre de lancement : livraison offerte pour toute location d'un mois, jusqu'à 25 km de La Ferté-Saint-Aubin (jusqu'au centre d'Orléans).",
+};

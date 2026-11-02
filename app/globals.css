@@ -661,3 +661,10 @@ body { overflow-x: hidden !important; }
   background: linear-gradient(0deg, rgba(226,240,252,.22), rgba(226,240,252,0)); }
 @media (max-width: 760px) { .lc-brume-fond { height: 520px; left: -60%; width: 220%; } .lc-perle { transform: scale(.75); } .lc-perle:not(.lc-perle-bord) { display: none; } }
 @media (prefers-reduced-motion: reduce) { .lc-goutte, .lc-brume-fond { animation: none; } }
+
+/* Offre de lancement, complément pro, conseil photo */
+.lc-deshu-offre { display: block; margin-top: 2px; font-style: normal; font-size: 12px; font-weight: 800; color: #047857; letter-spacing: .2px; }
+.lc-deshu-complement { display: flex; gap: 10px; align-items: flex-start; margin: -6px 0 18px; padding: 12px 14px; border-radius: 14px; background: #EEF2FF; font-size: 14.5px; line-height: 1.5; font-weight: 600; color: #1E3A8A; }
+.lc-deshu-complement svg { margin-top: 1px; }
+.lc-note-offre { color: #FFFFFF; font-weight: 800; }
+.lc-bande-photo { margin-top: 40px; }

@@ -3,13 +3,20 @@ import Link from "next/link";
 import Icone from "@/components/Icones";
 import BoutonBuee from "@/components/BoutonBuee";
 import { PageGivre, EntetePage, Confiance, TitreSection, CartesIcones, FAQ, AppelFinal } from "@/components/Sections";
-import { DESHUMIDIFICATEURS, type ModeleDeshu } from "@/lib/deshumidificateurs";
+import { DESHUMIDIFICATEURS, OFFRE_DESHU, type ModeleDeshu } from "@/lib/deshumidificateurs";
 import { SITE, TEXTES } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Location Déshumidificateur Orléans & Loiret — Livré et installé",
-  description: "Location de déshumidificateur à Orléans et dans le Loiret : pièce humide, cave, dégât des eaux, chantier. Appareils livrés, installés et récupérés. Particuliers et professionnels.",
+  description: "Location de déshumidificateur à Orléans et dans le Loiret dès 89 € la semaine : pièce humide, cave, dégât des eaux, chantier. Livré, installé et récupéré. Particuliers et professionnels.",
   alternates: { canonical: "/location-deshumidificateur" },
+  openGraph: {
+    title: "Location de déshumidificateur à Orléans et dans le Loiret",
+    description: "Livré, installé, réglé et récupéré. Particuliers et professionnels, dès 89 € la semaine.",
+    url: "/location-deshumidificateur",
+    locale: "fr_FR",
+    type: "website",
+  },
 };
 
 // Dessin provisoire d'un déshumidificateur, en attendant les vraies photos.
@@ -57,13 +64,15 @@ function FicheDeshu({ m, inverse }: { m: ModeleDeshu; inverse: boolean }) {
             <div key={p.duree} className={k === 1 ? "lc-deshu-prix-vedette" : undefined}>
               <span>{p.duree}</span>
               <strong>{p.prix}</strong>
+              {OFFRE_DESHU.active && p.duree === "1 mois" && <em className="lc-deshu-offre">+ {OFFRE_DESHU.tuile}</em>}
             </div>
           ))}
         </div>
-        <p className="lc-deshu-note">✓ Conseil, installation et réglage inclus · ✓ {TEXTES.livraisonCourt} · caution {m.caution}</p>
+        <p className="lc-deshu-note">✓ Conseil, installation et réglage inclus · ✓ Nettoyé et contrôlé entre chaque location · caution {m.caution}</p>
+        {m.complement && <p className="lc-deshu-complement"><Icone nom="immeuble" taille={18} couleur="#0369A1" epaisseur={2} />{m.complement}</p>}
         <div className="lc-fiche-actions">
           <a href={SITE.telephoneLien} className="lc-bouton-ciel lc-bouton-moyen"><Icone nom="telephone" taille={18} epaisseur={2.2} />Réserver cet appareil</a>
-          <Link href="/contact" className="lc-bouton-sombre">Demander un devis</Link>
+          <Link href="/contact?appareil=deshumidificateur" className="lc-bouton-sombre">Demander un devis</Link>
         </div>
       </div>
     </article>
@@ -84,7 +93,19 @@ const LOCATION = [
   "Installé et réglé par nos soins",
   "Vous payez seulement la durée utile, dès 89 € la semaine",
   "On revient le chercher : rien à stocker",
+  "Un appareil nettoyé et contrôlé entre chaque location",
   "Joignables 7j/7, de 8 h à 20 h",
+];
+
+const QUESTIONS = [
+  { q: "Pourquoi louer plutôt qu'acheter un déshumidificateur ?", a: "Parce que vous n'avez rien à gérer : on vous conseille le bon appareil, on le livre, on l'installe et on le règle, puis on le récupère quand le problème est réglé. Vous payez seulement la durée dont vous avez besoin, sans appareil à stocker ensuite." },
+  { q: "Combien de temps faut-il le garder ?", a: "Cela dépend de la situation : quelques jours pour une pièce humide, souvent une à plusieurs semaines après un dégât des eaux ou sur un chantier. Nous vous conseillons la durée au moment du devis, et la location peut être prolongée." },
+  { q: "Faut-il vider le bac d'eau ?", a: "Sur le modèle professionnel, l'eau peut être évacuée en continu par un tuyau, sans rien vider. Sur le modèle maison, le bac se vide simplement, ou un tuyau peut être branché quand c'est possible. L'appareil s'arrête tout seul quand le bac est plein." },
+  { q: "Est-ce que ça consomme beaucoup ?", a: "L'appareil fonctionne sur une prise normale et consomme de l'électricité comme un petit appareil ménager. Il s'arrête de lui-même une fois le taux d'humidité réglé atteint." },
+  { q: "Mon assurance peut-elle prendre en charge la location après un dégât des eaux ?", a: "C'est possible : nous avons déjà eu une cliente dont l'assurance a pris en charge la location de nos appareils pour assécher son logement après un dégât des eaux. Cela dépend de votre contrat, donc vérifiez auprès de votre assureur avant la location. Nous vous fournissons une facture détaillée à lui transmettre." },
+  { q: "Livrez-vous aussi les professionnels ?", a: "Oui : artisans, agences immobilières, syndics, entreprises. Plusieurs appareils et facture professionnelle sur devis." },
+  { q: "Dans quelles communes livrez-vous les déshumidificateurs ?", a: "Nous livrons depuis La Ferté-Saint-Aubin dans tout le Loiret : Orléans (dont La Source), Olivet, Saint-Jean-le-Blanc, Saint-Cyr-en-Val, Ardon, Marcilly-en-Villette, Saran, Fleury-les-Aubrais, Saint-Jean-de-Braye, Lamotte-Beuvron et bien d'autres communes. Appelez-nous pour vérifier votre adresse." },
+  { q: "Combien coûte la livraison ?", a: (OFFRE_DESHU.active ? OFFRE_DESHU.detail + " " : "") + TEXTES.livraisonDetail },
 ];
 
 const SCHEMA = {
@@ -94,12 +115,25 @@ const SCHEMA = {
   provider: { "@type": "LocalBusiness", name: SITE.nom, telephone: "+33783800070", url: SITE.url },
   areaServed: ["Orléans", "La Ferté-Saint-Aubin", "Loiret"],
   description: "Location de déshumidificateurs livrés, installés et récupérés, pour particuliers et professionnels.",
+  offers: DESHUMIDIFICATEURS.flatMap(m => m.prix.map(p => ({
+    "@type": "Offer",
+    name: `${m.nom} — ${p.duree}`,
+    price: p.prix.replace(/[^0-9]/g, ""),
+    priceCurrency: "EUR",
+  }))),
+};
+
+const SCHEMA_FAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: QUESTIONS.map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
 };
 
 export default function PageDeshumidificateurs() {
   return (
-    <PageGivre ambiance="brume" bandeau="Nouveau · Location de déshumidificateurs · Orléans & Loiret">
+    <PageGivre ambiance="brume" bandeau={OFFRE_DESHU.active ? OFFRE_DESHU.bandeau : "Location de déshumidificateurs · Orléans & Loiret"}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA_FAQ) }} />
 
       <EntetePage
         etiquette="Nouveau · Orléans & Loiret"
@@ -116,7 +150,7 @@ export default function PageDeshumidificateurs() {
             <span className="lc-gros-sous" style={{ color: "#0369A1" }}>et les prix →</span>
           </BoutonBuee>
         </div>
-        <Confiance centre elements={["Livré, installé, récupéré", "Particuliers et pros"]} />
+        <Confiance centre elements={["Livré, installé, récupéré", "Nettoyé entre chaque location"]} />
       </EntetePage>
 
       {/* CATALOGUE + PRIX (destination de l'animation buée) */}
@@ -126,7 +160,19 @@ export default function PageDeshumidificateurs() {
           <div style={{ display: "grid", gap: 32 }}>
             {DESHUMIDIFICATEURS.map((m, i) => <FicheDeshu key={m.id} m={m} inverse={i % 2 === 1} />)}
           </div>
-          <p className="lc-note">L&apos;appareil consomme de l&apos;électricité sur votre installation · {TEXTES.livraison} — précisée dans votre devis</p>
+          <p className="lc-note">{OFFRE_DESHU.active && <><strong className="lc-note-offre">{OFFRE_DESHU.detail}</strong><br /></>}{TEXTES.livraison}, précisée dans votre devis.</p>
+
+          {/* Conseil par photo WhatsApp */}
+          <div className="lc-bande-pro lc-bande-photo">
+            <span className="lc-bande-pro-icone"><Icone nom="message" taille={30} couleur="#0369A1" /></span>
+            <div>
+              <h3>Pas sûr du bon appareil ?</h3>
+              <p>Envoyez-nous une photo de la pièce sur WhatsApp : on vous conseille gratuitement, sans engagement.</p>
+            </div>
+            <div className="lc-bande-pro-actions">
+              <a href={`${SITE.whatsappLien}?text=${encodeURIComponent("Bonjour, je vous envoie une photo de ma pièce pour être conseillé sur un déshumidificateur.")}`} target="_blank" rel="noopener" className="lc-bouton-glace">Envoyer une photo</a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -171,15 +217,7 @@ export default function PageDeshumidificateurs() {
         </div>
       </section>
 
-      <FAQ titre="Vos questions sur les déshumidificateurs" items={[
-        { q: "Pourquoi louer plutôt qu'acheter un déshumidificateur ?", a: "Parce que vous n'avez rien à gérer : on vous conseille le bon appareil, on le livre, on l'installe et on le règle, puis on le récupère quand le problème est réglé. Vous payez seulement la durée dont vous avez besoin, sans appareil à stocker ensuite." },
-        { q: "Combien de temps faut-il le garder ?", a: "Cela dépend de la situation : quelques jours pour une pièce humide, souvent une à plusieurs semaines après un dégât des eaux ou sur un chantier. Nous vous conseillons la durée au moment du devis, et la location peut être prolongée." },
-        { q: "Faut-il vider le bac d'eau ?", a: "Sur le modèle professionnel, l'eau peut être évacuée en continu par un tuyau, sans rien vider. Sur le modèle maison, le bac se vide simplement, ou un tuyau peut être branché quand c'est possible. L'appareil s'arrête tout seul quand le bac est plein." },
-        { q: "Est-ce que ça consomme beaucoup ?", a: "L'appareil fonctionne sur une prise normale et consomme de l'électricité comme un petit appareil ménager. Il s'arrête de lui-même une fois le taux d'humidité réglé atteint." },
-        { q: "Mon assurance peut-elle prendre en charge la location après un dégât des eaux ?", a: "C'est possible : nous avons déjà eu une cliente dont l'assurance a pris en charge la location de nos appareils pour assécher son logement après un dégât des eaux. Cela dépend de votre contrat, donc vérifiez auprès de votre assureur avant la location. Nous vous fournissons une facture détaillée à lui transmettre." },
-        { q: "Livrez-vous aussi les professionnels ?", a: "Oui : artisans, agences immobilières, syndics, entreprises. Plusieurs appareils et facture professionnelle sur devis." },
-        { q: "Combien coûte la livraison ?", a: TEXTES.livraisonDetail },
-      ]} />
+      <FAQ titre="Vos questions sur les déshumidificateurs" items={QUESTIONS} />
 
       <AppelFinal titre="Un problème d'humidité ? On s'en occupe." texte="Un appel suffit : conseil gratuit, livraison, installation et récupération. 7j/7 de 8 h à 20 h." />
     </PageGivre>
