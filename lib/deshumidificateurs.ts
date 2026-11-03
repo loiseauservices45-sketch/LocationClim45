@@ -67,7 +67,7 @@ export const DESHUMIDIFICATEURS: ModeleDeshu[] = [
 // Offre de lancement (à retirer ou modifier ici quand elle se termine).
 export const OFFRE_DESHU = {
   active: true,
-  bandeau: "Offre de lancement : livraison offerte pour 1 mois de location · jusqu'à 25 km de La Ferté-Saint-Aubin",
-  tuile: "livraison offerte",          // petite mention sous le prix « 1 mois »
-  detail: "Offre de lancement : livraison offerte pour toute location d'un mois, jusqu'à 25 km de La Ferté-Saint-Aubin (jusqu'au centre d'Orléans).",
+  bandeau: "Offre de lancement : livraison et récupération offertes pour 1 mois de location · jusqu'à 25 km de La Ferté-Saint-Aubin",
+  tuile: "aller-retour offert",        // petite mention sous le prix « 1 mois » (livraison + récupération)
+  detail: "Offre de lancement : livraison et récupération offertes pour une location d'un mois, jusqu'à 25 km de La Ferté-Saint-Aubin (jusqu'au centre d'Orléans). Valable uniquement sur la formule 1 mois.",
 };

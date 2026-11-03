@@ -160,7 +160,7 @@ export default function PageDeshumidificateurs() {
           <div style={{ display: "grid", gap: 32 }}>
             {DESHUMIDIFICATEURS.map((m, i) => <FicheDeshu key={m.id} m={m} inverse={i % 2 === 1} />)}
           </div>
-          <p className="lc-note">{OFFRE_DESHU.active && <><strong className="lc-note-offre">{OFFRE_DESHU.detail}</strong><br /></>}{TEXTES.livraison}, précisée dans votre devis.</p>
+          <p className="lc-note">{OFFRE_DESHU.active && <><strong className="lc-note-offre">{OFFRE_DESHU.detail}</strong><br /></>}Pour les autres durées : {TEXTES.livraison.charAt(0).toLowerCase() + TEXTES.livraison.slice(1)}, précisée dans votre devis.</p>
 
           {/* Conseil par photo WhatsApp */}
           <div className="lc-bande-pro lc-bande-photo">
