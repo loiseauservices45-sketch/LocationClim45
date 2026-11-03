@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
 // AVIS CLIENTS — uniquement de vrais avis, copiés depuis la fiche Google.
 // Les 2 premiers s'affichent en haut de la page d'accueil,
-// les 2 suivants en bas. Tant que la liste est vide, la section
+// les 2 suivants en bas, les 2 derniers sur la page déshumidificateurs. Tant que la liste est vide, la section
 // ne s'affiche pas.
 //
 // Modèle à copier pour chaque avis :
@@ -42,5 +42,18 @@ export const AVIS: Avis[] = [
     etoiles: 5,
     texte: "Personne très sympathique, très professionnel, vous pouvez aller les yeux fermés sans soucis.",
     detail: "Avis Google · juin 2026",
+  },
+  // ── 2 suivants : page déshumidificateurs (avis sur le service)
+  {
+    nom: "C. C.",
+    etoiles: 5,
+    texte: "Une expérience parfaite, service et réactivité irréprochables, tout s'est parfaitement déroulé. Et les déshumidificateurs nous ont fortement soulagés. Je recommande les yeux fermés. Au top !",
+    detail: "Avis Google · octobre 2026",
+  },
+  {
+    nom: "S.",
+    etoiles: 5,
+    texte: "Rapide, efficace et très professionnel ! Rien à ajouter, je les recommande à 100 %.",
+    detail: "Avis Google · juillet 2026 · traduit de l'anglais",
   },
 ];

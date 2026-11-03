@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Icone from "@/components/Icones";
 import BoutonBuee from "@/components/BoutonBuee";
+import AvisClients from "@/components/AvisClients";
 import { PageGivre, EntetePage, Confiance, TitreSection, CartesIcones, FAQ, AppelFinal } from "@/components/Sections";
 import { DESHUMIDIFICATEURS, OFFRE_DESHU, type ModeleDeshu } from "@/lib/deshumidificateurs";
 import { SITE, TEXTES } from "@/lib/site";
@@ -194,6 +195,9 @@ export default function PageDeshumidificateurs() {
               </ul>
               <a href={SITE.telephoneLien} className="lc-bouton-ciel lc-bouton-moyen"><Icone nom="telephone" taille={18} epaisseur={2.2} />Être conseillé gratuitement</a>
             </div>
+          </div>
+          <div style={{ marginTop: 64 }}>
+            <AvisClients debut={4} fin={6} etiquette="Ce que nos clients disent de notre service" lienGoogle />
           </div>
         </div>
       </section>
