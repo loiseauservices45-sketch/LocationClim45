@@ -17,7 +17,7 @@ import { SITE, TEXTES } from "@/lib/site";
 // ─────────────────────────────────────────────────────────────
 
 /** Gabarit de page : fond continu, bandeau, en-tête, pied de page, barre téléphone. */
-export function PageGivre({ children, bandeau, givre = false, ambiance }: { children: ReactNode; bandeau?: string; givre?: boolean; ambiance?: "glace-a" | "glace-b" | "brume" }) {
+export function PageGivre({ children, bandeau, givre = false, ambiance }: { children: ReactNode; bandeau?: string; givre?: boolean; ambiance?: "brume" }) {
   return (
     <div className={ambiance ? `lc-page lc-page-${ambiance}` : "lc-page"}>
       <FondGivre eau={!!ambiance} />

@@ -47,7 +47,7 @@ export const DESHUMIDIFICATEURS: ModeleDeshu[] = [
     etiquette: "GROS VOLUMES · PROS",
     nom: "Déshumidificateur professionnel",
     capacite: "Jusqu'à 50 L / jour",
-    pourQui: "Pour un dégât des eaux, un chantier, un logement très humide ou des locaux jusqu'à 150 m².",
+    pourQui: "Pour un dégât des eaux, un chantier, un logement très humide ou de grands locaux.",
     points: [
       "Matériel professionnel, plus puissant qu'en magasin",
       "Évacuation de l'eau en continu, sans bac à vider",

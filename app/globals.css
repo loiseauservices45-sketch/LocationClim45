@@ -615,28 +615,7 @@ body { overflow-x: hidden !important; }
 .lc-goutte { background: none; box-shadow: none; }
 .lc-goutte::before { content: ""; position: absolute; inset: -35%; border-radius: 0 50% 50% 50%; transform: rotate(45deg); background: radial-gradient(circle at 62% 62%, #F0F9FF, #93C5FD 85%); box-shadow: 0 0 8px 1px rgba(186,230,253,.55); }
 
-/* ─── Ambiance « bleu givré » (page déshumidificateurs) : même cadre que les clims, en plus clair ─── */
-/* Nuance A : bleu givré */
-.lc-page-glace-a { background: linear-gradient(180deg,#1A3E68 0%,#21508A 30%,#245891 62%,#1B4674 100%); }
-.lc-page-glace-a .lc-entete { background: rgba(19,48,86,.95); }
-.lc-page-glace-a .lc-bandeau { background: #142F55; }
-.lc-page-glace-a .lc-pied { background: #0D213D; }
-.lc-page-glace-a .lc-glace.lc-raison { background: linear-gradient(160deg, rgba(28,70,124,.8), rgba(13,40,78,.84)); }
-.lc-page-glace-a .lc-compare-achat { background: rgba(10,32,66,.42); }
-/* Nuance B : bleu glacier, plus lumineux, voile de givre en haut */
-.lc-page-glace-b { background: linear-gradient(180deg,#2B5D92 0%,#3570A8 30%,#3876AE 62%,#2B5F95 100%); }
-.lc-page-glace-b .lc-fond::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1200px; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255,255,255,.22), rgba(255,255,255,0) 70%); }
-.lc-page-glace-b .lc-entete { background: rgba(28,72,122,.95); }
-.lc-page-glace-b .lc-bandeau { background: #21497A; color: #E0F2FE; }
-.lc-page-glace-b .lc-pied { background: #102A4C; }
-.lc-page-glace-b .lc-intro, .lc-page-glace-b .lc-chapeau, .lc-page-glace-b .lc-note, .lc-page-glace-b .lc-confiance, .lc-page-glace-b .lc-nav a { color: #EAF4FD; }
-.lc-page-glace-b .lc-etiquette { color: #E0F2FE; }
-.lc-page-glace-b .lc-h1-accent { color: #E0F2FE; }
-.lc-page-glace-b .lc-glace.lc-raison { background: linear-gradient(160deg, rgba(34,84,140,.82), rgba(18,52,96,.86)); }
-.lc-page-glace-b .lc-compare-achat { background: rgba(14,42,82,.45); border-color: rgba(226,240,252,.5); }
-.lc-page-glace-b .lc-compare-achat li, .lc-page-glace-b .lc-compare-achat .lc-compare-titre { color: #E2EDF8; }
-.lc-page-glace-b .lc-etapes p, .lc-page-glace-b .lc-pied p { color: #E2EDF8; }
-/* Nuance C : « brume », entre A et B, avec de l'humidité dans l'air */
+/* ─── Ambiance « brume » (page déshumidificateurs) : le cadre des clims, en plus clair, avec de l'humidité dans l'air ─── */
 .lc-page-brume { background: linear-gradient(180deg,#21497A 0%,#285A90 28%,#2B6098 60%,#204C7D 100%); }
 .lc-page-brume .lc-fond::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1100px; background: radial-gradient(ellipse 75% 55% at 50% 0%, rgba(230,242,252,.2), rgba(230,242,252,0) 70%); }
 .lc-brume-fond { position: absolute; left: -25%; width: 150%; height: 760px; pointer-events: none;
